@@ -2,8 +2,8 @@ import React from "react";
 import { IconStyles } from "./css";
 import { node, bool } from "prop-types";
 
-const Icon = ({ children, primaryIcon }) => {
-  return <IconStyles primaryIcon={primaryIcon}>{children}</IconStyles>;
+const Icon = ({ children, iconColor }) => {
+  return <IconStyles iconColor={iconColor}>{children}</IconStyles>;
 };
 
 Icon.proptypes = {

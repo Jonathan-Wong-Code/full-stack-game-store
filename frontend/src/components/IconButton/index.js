@@ -3,11 +3,14 @@ import ScreenReaderOnly from "../ScreenReaderOnly";
 import IconComponent from "../Icon";
 import { Button } from "./css";
 import { func, string } from "prop-types";
-const IconButton = ({ Icon, onClick = () => {}, description }) => {
+import { defaultTheme } from "../../../theme/themes";
+
+//Look in ./css.js for variants = the modifiers.
+const IconButton = ({ Icon, onClick = () => {}, description, variants }) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} modifiers={variants}>
       <ScreenReaderOnly>{description}</ScreenReaderOnly>
-      <IconComponent>
+      <IconComponent iconColor={defaultTheme.textInverted}>
         <Icon />
       </IconComponent>
     </Button>
@@ -18,6 +21,10 @@ IconButton.proptypes = {
   Icon: func.isRequired,
   onClick: func.isRequired,
   description: string.isRequired,
+  variant: string,
 };
 
+IconButton.defaultProps = {
+  variant: "",
+};
 export default IconButton;

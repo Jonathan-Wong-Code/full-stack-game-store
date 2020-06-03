@@ -7,6 +7,8 @@ import {
   SecondaryButton,
 } from "../src/components/Buttons";
 
+import CarouselPanel from "../src/components/CarouselPanel";
+
 import GameCard from "../src/components/GameCard";
 
 import { PriceHighlight } from "../src/components/PriceHighlight";
@@ -18,6 +20,8 @@ import {
   PrimaryIconButton,
   SecondaryIconButton,
 } from "../src/components/ButtonWithIcons";
+
+import IconButton from "../src/components/IconButton";
 
 export default function ComponentRenderer(props) {
   return (
@@ -37,7 +41,9 @@ export default function ComponentRenderer(props) {
       />
       <PrimaryIconButton Icon={HeartUnfilled} primaryIcon buttonText="Button" />
       <SecondaryIconButton Icon={Cart} buttonText="Button" />
-      <div></div>Hi I am a component
+      <IconButton Icon={HeartUnfilled} description="A Heart" />
+      <IconButton Icon={Cart} description="Add to Cart" variants="secondary" />
+      <CarouselPanel />
     </>
   );
 }

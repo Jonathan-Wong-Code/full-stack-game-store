@@ -6,7 +6,7 @@ import { applyStyleModifiers } from "styled-components-modifiers";
 const MODIFIERS = {
   large: () => `
     font-size:${typeScale.header1};
-    padding: ${spacing[3]} ${spacing[7]};
+    padding: ${spacing[2]} ${spacing[6]};
   `,
 };
 

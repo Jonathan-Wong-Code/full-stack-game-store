@@ -25,13 +25,13 @@ PrimaryIconButton.defaultProps = {
   primaryIcon: false,
 };
 
-export const SecondaryIconButton = ({ Icon, buttonText }) => {
+export const SecondaryIconButton = ({ Icon, buttonText, variants }) => {
   return (
-    <SecondaryStyles>
+    <SecondaryStyles modifiers={variants}>
       <IconComponent>
         <Icon />
       </IconComponent>
-      {buttonText}
+      <span>{buttonText}</span>
     </SecondaryStyles>
   );
 };

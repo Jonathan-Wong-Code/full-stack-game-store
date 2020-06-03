@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${primaryFont};
     background: ${defaultTheme.bodyBackground};
     color: ${defaultTheme.textColor};
+    line-height: 1.5;
   }
 
   ul, li {

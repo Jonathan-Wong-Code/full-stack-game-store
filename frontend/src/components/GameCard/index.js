@@ -1,6 +1,5 @@
 import React from "react";
-import { PriceHighlight } from "../PriceHighlight";
-import ScreenReaderOnly from "../ScreenReaderOnly";
+
 import { Cart } from "../../assets/icons";
 import { number, string } from "prop-types";
 
@@ -9,7 +8,9 @@ import { Container, GameInformation, GameTitle, PriceInformation } from "./css";
 import IconButton from "../IconButton";
 
 import { formatPercentage } from "../../utils/utils";
-import PriceDiscount from "../PriceDiscount";
+import PriceInfo from "../PriceInfo";
+import GamePrice from "../GamePrice";
+import PriceHighlight from "../PriceHighlight";
 
 const GameCard = ({
   gameDiscount,
@@ -30,7 +31,7 @@ const GameCard = ({
         <GameTitle id="game-title">{gameTitle}</GameTitle>
 
         <PriceInformation>
-          <PriceDiscount
+          <PriceInfo
             gamePrice={gamePrice}
             discount={discount}
             gameDiscount={gameDiscount}
@@ -40,6 +41,8 @@ const GameCard = ({
           <IconButton
             description={`Click to add ${gameTitle} to cart`}
             Icon={Cart}
+            variants="secondary"
+            onClick={undefined}
           />
         </PriceInformation>
       </GameInformation>

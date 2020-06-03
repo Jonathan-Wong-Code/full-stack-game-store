@@ -1,7 +1,7 @@
 import React from "react";
 import { formatPercentage } from "../../utils/utils";
 import { Container, ButtonContainer } from "./css";
-import PriceDiscount from "../PriceDiscount";
+import PriceInfo from "../PriceInfo";
 import { Cart, HeartUnfilled } from "../../assets/icons";
 import { PrimaryIconButton, SecondaryIconButton } from "../ButtonWithIcons";
 import { string, number } from "prop-types";
@@ -18,7 +18,7 @@ const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
         </h2>
       </ScreenReaderOnly>
 
-      <PriceDiscount
+      <PriceInfo
         gamePrice={gamePrice}
         gameDiscount={gameDiscount}
         gameTitle={gameTitle}

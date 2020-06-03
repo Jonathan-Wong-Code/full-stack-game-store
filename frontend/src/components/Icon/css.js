@@ -19,23 +19,16 @@ const ICON_MODIFIERS = {
   `,
 };
 
-// background-color: ${({ theme, primaryIcon }) =>
-// primaryIcon ? theme.primaryLight : theme.secondaryLight};
-
-// &:hover {
-//   background-color: ${({ theme, primaryIcon }) =>
-//     primaryIcon ? theme.primaryDark : theme.secondaryDark};
-// }
 export const IconStyles = styled.div`
   border-radius: 5px;
-
+  display: inline-block;
   & svg {
     width: 40px;
     height: 35px;
 
     border-radius: 5px;
     padding: ${spacing[1]};
-    fill: white;
+    fill: ${({ theme }) => theme.textInverted};
   }
 
   ${applyStyleModifiers(ICON_MODIFIERS)}

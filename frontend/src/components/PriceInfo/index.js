@@ -4,13 +4,14 @@ import { PriceHighlight } from "../PriceHighlight";
 import ScreenReaderOnly from "../ScreenReaderOnly";
 import { PriceFlexBox, Prices, OriginalGamePrice, FinalGamePrice } from "./css";
 import { number, string } from "prop-types";
-
-const PriceDiscount = ({
+import GamePrice from "../GamePrice";
+const PriceInfo = ({
   gameTitle,
   gameDiscount,
   discount,
   gamePrice,
   isLarge,
+  discountColor,
 }) => (
   <PriceFlexBox style={{ display: "flex" }}>
     {gameDiscount && (
@@ -20,35 +21,20 @@ const PriceDiscount = ({
       </PriceHighlight>
     )}
 
-    <Prices gameDiscount={gameDiscount} isLarge={isLarge}>
-      {gameDiscount && (
-        <>
-          <ScreenReaderOnly>Original price is:</ScreenReaderOnly>{" "}
-          <OriginalGamePrice isLarge={isLarge}>
-            {formatPricing(gamePrice, 2)}
-          </OriginalGamePrice>
-        </>
-      )}
-
-      <ScreenReaderOnly>Current price is:</ScreenReaderOnly>
-      <FinalGamePrice isLarge={isLarge}>
-        {gameDiscount ? (
-          formatPricing(gameDiscount, 2)
-        ) : (
-          <PriceHighlight isLarge={isLarge}>
-            {formatPricing(gamePrice, 2)}
-          </PriceHighlight>
-        )}
-      </FinalGamePrice>
-    </Prices>
+    <GamePrice
+      gameDiscount={gameDiscount}
+      gamePrice={gamePrice}
+      isLarge={isLarge}
+      discountColor={discountColor}
+    />
   </PriceFlexBox>
 );
 
-PriceDiscount.proptypes = {
+PriceInfo.proptypes = {
   gameDiscount: number.isRequired,
   gamePrice: number.isRequired,
   discount: number.isRequired,
   gameTitle: string.isRequired,
 };
 
-export default PriceDiscount;
+export default PriceInfo;
