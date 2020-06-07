@@ -16,7 +16,7 @@ import PriceInfo from "../PriceInfo";
 import { formatPercentage } from "../../utils/utils";
 
 import { PrimaryButton } from "../Buttons";
-import { SecondaryIconButton } from "../ButtonWithIcons";
+import { SecondaryBtnWithIcon } from "../ButtonWithIcons";
 
 const CarouselPanel = ({
   promoText,
@@ -33,7 +33,7 @@ const CarouselPanel = ({
 
   const renderButtons = (isAddToCart) =>
     isAddToCart ? (
-      <SecondaryIconButton
+      <SecondaryBtnWithIcon
         Icon={Cart}
         buttonText={buttonText}
         variants="large fullWidth"

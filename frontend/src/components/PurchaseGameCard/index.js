@@ -3,7 +3,7 @@ import { formatPercentage } from "../../utils/utils";
 import { Container, ButtonContainer } from "./css";
 import PriceInfo from "../PriceInfo";
 import { Cart, HeartUnfilled } from "../../assets/icons";
-import { PrimaryIconButton, SecondaryIconButton } from "../ButtonWithIcons";
+import { PrimaryBtnWithIcon, SecondaryBtnWithIcon } from "../ButtonWithIcons";
 import { string, number } from "prop-types";
 import ScreenReaderOnly from "../ScreenReaderOnly";
 
@@ -26,8 +26,8 @@ const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
         isLarge
       />
       <ButtonContainer>
-        <SecondaryIconButton Icon={Cart} buttonText="Add to Cart" />
-        <PrimaryIconButton
+        <SecondaryBtnWithIcon Icon={Cart} buttonText="Add to Cart" />
+        <PrimaryBtnWithIcon
           Icon={HeartUnfilled}
           primaryIcon
           buttonText="Add to Wishlist"

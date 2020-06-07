@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { func, string, bool } from "prop-types";
 
 import { PrimaryStyles, SecondaryStyles } from "./css";
 import IconComponent from "../Icon";
-import { useThemeContext } from "../../context/themeContext";
-// Todo props with theme...darkMode ? use defaultTheme else use darkMode
-export const PrimaryIconButton = ({ Icon, buttonText }) => {
-  const theme = useThemeContext();
+import { ThemeContext } from "styled-components";
+
+export const PrimaryBtnWithIcon = ({ Icon, buttonText }) => {
+  const theme = useContext(ThemeContext);
 
   return (
     <PrimaryStyles>
@@ -18,17 +18,17 @@ export const PrimaryIconButton = ({ Icon, buttonText }) => {
   );
 };
 
-PrimaryIconButton.proptypes = {
+PrimaryBtnWithIcon.proptypes = {
   Icon: func.isRequired,
   primaryIcon: bool,
   buttonText: string.isRequired,
 };
 
-PrimaryIconButton.defaultProps = {
+PrimaryBtnWithIcon.defaultProps = {
   primaryIcon: false,
 };
 
-export const SecondaryIconButton = ({ Icon, buttonText, variants }) => {
+export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
   return (
     <SecondaryStyles modifiers={variants}>
       <IconComponent>
@@ -39,7 +39,7 @@ export const SecondaryIconButton = ({ Icon, buttonText, variants }) => {
   );
 };
 
-SecondaryIconButton.propTypes = {
+SecondaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
 };

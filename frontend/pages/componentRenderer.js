@@ -17,8 +17,8 @@ import PurchaseGameCard from "../src/components/PurchaseGameCard";
 import { Cart, HeartUnfilled } from "../src/assets/icons";
 
 import {
-  PrimaryIconButton,
-  SecondaryIconButton,
+  PrimaryBtnWithIcon,
+  SecondaryBtnWithIcon,
 } from "../src/components/ButtonWithIcons";
 
 import IconButton from "../src/components/IconButton";
@@ -43,8 +43,12 @@ export default function ComponentRenderer(props) {
         gamePrice={60}
         gameDiscount={40}
       />
-      <PrimaryIconButton Icon={HeartUnfilled} primaryIcon buttonText="Button" />
-      <SecondaryIconButton Icon={Cart} buttonText="Button" />
+      <PrimaryBtnWithIcon
+        Icon={HeartUnfilled}
+        primaryIcon
+        buttonText="Button"
+      />
+      <SecondaryBtnWithIcon Icon={Cart} buttonText="Button" />
       <IconButton Icon={HeartUnfilled} description="A Heart" />
       <IconButton Icon={Cart} description="Add to Cart" variants="secondary" />
       <CarouselPanel
