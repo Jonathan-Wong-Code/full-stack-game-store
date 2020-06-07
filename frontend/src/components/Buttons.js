@@ -31,6 +31,7 @@ export const BaseButton = styled.button`
   &:disabled {
     background-color: ${({ theme }) => theme.grey};
     color: ${({ theme }) => theme.darkGrey};
+    border: ${({ theme }) => theme.darkGrey};
   }
 `;
 
