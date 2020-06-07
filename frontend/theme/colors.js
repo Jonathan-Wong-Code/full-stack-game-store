@@ -13,9 +13,8 @@ export const purple = {
 // };
 
 export const green = {
-  100: "#529e66",
-  200: "#367b48",
-  300: "#276738",
+  100: "#29A0B1",
+  200: "#167D7F",
 };
 
 export const neutral = {

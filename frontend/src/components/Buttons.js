@@ -42,14 +42,14 @@ const PrimaryBaseButton = styled(BaseButton)`
   &:active,
   &:focus {
     color: ${({ theme }) => theme.textInverted};
-    background-color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.primaryLight};
   }
 `;
 
 export const PrimaryButton = styled(PrimaryBaseButton)`
   color: ${({ theme }) => theme.textInverted};
 
-  background-color: ${({ theme }) => theme.primaryLight};
+  background-color: ${({ theme }) => theme.primaryColor};
   ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
@@ -59,24 +59,25 @@ export const PrimaryInvertedButton = styled(PrimaryBaseButton)`
 `;
 
 const SecondaryBaseButton = styled(BaseButton)`
-  border: 1px solid ${({ theme }) => theme.secondaryLight};
+  border: 1px solid ${({ theme }) => theme.secondaryColor};
 
   &:hover,
   &:active,
   &:focus {
     color: ${({ theme }) => theme.textInverted};
-    background-color: ${({ theme }) => theme.secondaryDark};
+    border: 1px solid ${({ theme }) => theme.secondaryLight};
+    background-color: ${({ theme }) => theme.secondaryLight};
   }
 `;
 
 export const SecondaryButton = styled(SecondaryBaseButton)`
   color: ${({ theme }) => theme.textInverted};
 
-  background-color: ${({ theme }) => theme.secondaryLight};
+  background-color: ${({ theme }) => theme.secondaryColor};
   ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
 export const SecondaryInvertedButton = styled(SecondaryBaseButton)`
-  color: ${({ theme }) => theme.secondaryLight};
+  color: ${({ theme }) => theme.secondaryColor};
   ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
