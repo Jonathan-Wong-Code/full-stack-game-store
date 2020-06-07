@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { breakpoints } from "../../../theme/breakpoints";
 import spacing from "../../../theme/spacing";
 import { typeScale, typeWeight } from "../../../theme/typography";
-import { SecondaryIconButton } from "../ButtonWithIcons";
 
 export const Container = styled.section`
   width: 100%;
@@ -74,10 +73,6 @@ export const PromoText = styled.p`
 
 export const ButtonContainer = styled.div`
   margin-top: ${spacing[6]};
-
-  & button {
-    width: 100%;
-  }
 
   @media screen and (min-width: ${breakpoints[0]}px) {
     margin: 0;

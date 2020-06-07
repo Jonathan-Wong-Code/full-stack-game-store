@@ -3,11 +3,14 @@ import { func, string, bool } from "prop-types";
 
 import { PrimaryStyles, SecondaryStyles } from "./css";
 import IconComponent from "../Icon";
+import { useThemeContext } from "../../context/themeContext";
+// Todo props with theme...darkMode ? use defaultTheme else use darkMode
+export const PrimaryIconButton = ({ Icon, buttonText }) => {
+  const theme = useThemeContext();
 
-export const PrimaryIconButton = ({ Icon, primaryIcon, buttonText }) => {
   return (
     <PrimaryStyles>
-      <IconComponent primaryIcon={primaryIcon}>
+      <IconComponent iconColor={theme.textInverted}>
         <Icon />
       </IconComponent>
       {buttonText}

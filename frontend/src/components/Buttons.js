@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { typeScale, typeWeight } from "../../theme/typography";
 import spacing from "../../theme/spacing";
 import { applyStyleModifiers } from "styled-components-modifiers";
-import { breakpoints } from "../../theme/breakpoints";
 
 const BUTTON_MODIFIERS = {
+  fullWidth: () => `
+    width: 100%;
+  `,
+
   large: () => `
     font-size: ${typeScale.header4};
   `,

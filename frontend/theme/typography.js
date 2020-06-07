@@ -7,11 +7,12 @@ export const typeScale = {
   header4: "1.2rem",
   header5: "1.1rem",
   paragraph: "1rem",
-  helperText: "0.8rem",
+  helperText: "0.9rem",
   smallText: "0.7rem",
 };
 
 export const typeWeight = {
+  light: 300,
   normal: 400,
   bold: 700,
 };

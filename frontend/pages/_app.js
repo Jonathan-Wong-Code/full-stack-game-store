@@ -3,6 +3,9 @@ import { GlobalStyle } from "../theme/Global";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "../theme/themes";
+import { ThemeContextProvider } from "../src/context/themeContext";
+import { Wrapper } from "../src/components/Wrapper";
+
 function MyApp({ Component, pageProps }) {
   return (
     <>
@@ -12,12 +15,16 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <ThemeProvider theme={defaultTheme}>
-        <GlobalStyle />
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </ThemeProvider>
+      <ThemeContextProvider theme={defaultTheme}>
+        <ThemeProvider theme={defaultTheme}>
+          <GlobalStyle />
+          <main>
+            <Wrapper>
+              <Component {...pageProps} />
+            </Wrapper>
+          </main>
+        </ThemeProvider>
+      </ThemeContextProvider>
     </>
   );
 }

@@ -1,4 +1,3 @@
-//https://eskipaper.com/images/skyrim-wallpaper-3.jpg
 import {
   Container,
   ContentFlexbox,
@@ -11,6 +10,8 @@ import {
 
 import { Cart } from "../../assets/icons";
 
+import { bool, string, number } from "prop-types";
+
 import PriceInfo from "../PriceInfo";
 import { formatPercentage } from "../../utils/utils";
 
@@ -18,16 +19,15 @@ import { PrimaryButton } from "../Buttons";
 import { SecondaryIconButton } from "../ButtonWithIcons";
 
 const CarouselPanel = ({
-  promoText = "Now available",
-  offerDescription = "The Elder Scrolls 5: Skyrim Available Now!",
-  gamePrice = 60,
-  gameDiscount = 40,
-  gameImage = '"https://eskipaper.com/images/skyrim-wallpaper-3.jpg"',
-  isAddToCart = true,
-  buttonText = "Add to Cart",
-  hasButton = true,
-  textColorLight = true,
-  gameTitle = "The Elder Scrolls 5: Skyrim",
+  promoText,
+  offerDescription,
+  gamePrice,
+  gameDiscount,
+  gameImage,
+  isAddToCart,
+  buttonText,
+  textColorLight,
+  gameTitle,
 }) => {
   const discount = formatPercentage(gamePrice - gameDiscount, gamePrice);
 
@@ -36,7 +36,7 @@ const CarouselPanel = ({
       <SecondaryIconButton
         Icon={Cart}
         buttonText={buttonText}
-        variants="large"
+        variants="large fullWidth"
       />
     ) : (
       <PrimaryButton>{buttonText}</PrimaryButton>
@@ -59,12 +59,34 @@ const CarouselPanel = ({
             discountColor="inherit"
           />
           <ButtonContainer>
-            {hasButton && renderButtons(isAddToCart)}
+            {buttonText && renderButtons(isAddToCart)}
           </ButtonContainer>
         </RightSide>
       </ContentFlexbox>
     </Container>
   );
+};
+
+CarouselPanel.proptypes = {
+  buttonText: string,
+  gamePrice: number,
+  gameDiscount: number,
+  gameTitle: string,
+  isAddToCart: bool,
+  gameImage: string.isRequired,
+  offerDescription: string.isRequired,
+  promoText: string,
+  textColorLight: bool,
+};
+
+CarouselPanel.defaultProps = {
+  buttonText: "",
+  gamePrice: null,
+  gameDiscount: null,
+  gameTitle: "",
+  isAddToCart: true,
+  promoText: "",
+  textColorLight: true,
 };
 
 export default CarouselPanel;

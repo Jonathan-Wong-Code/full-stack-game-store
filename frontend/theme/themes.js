@@ -1,4 +1,4 @@
-import { green, purple, neutral, black } from "./colors";
+import { green, purple, neutral, black, white } from "./colors";
 export const defaultTheme = {
   primaryColor: purple[200],
   primaryLight: purple[100],
@@ -11,7 +11,12 @@ export const defaultTheme = {
   textInverted: neutral[100],
   contentBackgroundLight: neutral[100],
   contentBackground: neutral[300],
+  lightGrey: neutral[200],
+  grey: neutral[300],
   darkGrey: neutral[400],
+
   bodyBackground: neutral[200],
   black,
+  white,
+  dividerColor: neutral[300],
 };

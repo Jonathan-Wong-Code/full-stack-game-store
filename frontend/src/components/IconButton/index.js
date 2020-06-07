@@ -3,14 +3,14 @@ import ScreenReaderOnly from "../ScreenReaderOnly";
 import IconComponent from "../Icon";
 import { Button } from "./css";
 import { func, string } from "prop-types";
-import { defaultTheme } from "../../../theme/themes";
-
+import { useThemeContext } from "../../context/themeContext";
 //Look in ./css.js for variants = the modifiers.
 const IconButton = ({ Icon, onClick = () => {}, description, variants }) => {
+  const theme = useThemeContext();
   return (
     <Button onClick={onClick} modifiers={variants}>
       <ScreenReaderOnly>{description}</ScreenReaderOnly>
-      <IconComponent iconColor={defaultTheme.textInverted}>
+      <IconComponent iconColor={theme.textInverted}>
         <Icon />
       </IconComponent>
     </Button>

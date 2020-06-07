@@ -13,8 +13,9 @@ const ICON_MODIFIERS = {
 `,
   small: () => `
     & svg {
-      width: 35px;
+      width: 25px;
       height: 30px;
+      padding: 2px;
     }  
   `,
 };
@@ -22,13 +23,15 @@ const ICON_MODIFIERS = {
 export const IconStyles = styled.div`
   border-radius: 5px;
   display: inline-block;
+
   & svg {
     width: 40px;
     height: 35px;
 
     border-radius: 5px;
     padding: ${spacing[1]};
-    fill: ${({ theme }) => theme.textInverted};
+    fill: ${({ iconColor, theme }) =>
+      iconColor ? iconColor : theme.textInverted};
   }
 
   ${applyStyleModifiers(ICON_MODIFIERS)}
