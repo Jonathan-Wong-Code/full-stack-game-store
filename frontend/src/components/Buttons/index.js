@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { typeScale, typeWeight } from "../../theme/typography";
-import spacing from "../../theme/spacing";
+import { typeScale, typeWeight } from "../../../theme/typography";
+import spacing from "../../../theme/spacing";
 import { applyStyleModifiers } from "styled-components-modifiers";
 
 const BUTTON_MODIFIERS = {
@@ -55,6 +55,7 @@ export const PrimaryButton = styled(PrimaryBaseButton)`
 
 export const PrimaryInvertedButton = styled(PrimaryBaseButton)`
   color: ${({ theme }) => theme.primaryLight};
+  background-color: ${({ theme }) => theme.white};
   ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
@@ -79,5 +80,7 @@ export const SecondaryButton = styled(SecondaryBaseButton)`
 
 export const SecondaryInvertedButton = styled(SecondaryBaseButton)`
   color: ${({ theme }) => theme.secondaryColor};
+  background-color: ${({ theme }) => theme.white};
+
   ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
