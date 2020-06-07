@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   stories: ["../src/**/*.stories.(js|mdx)"],
   addons: [
@@ -15,4 +17,16 @@ module.exports = {
       },
     },
   ],
+
+  webpackFinal: async (baseConfig) => {
+    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+    // You can change the configuration based on that.
+    // 'PRODUCTION' is used when building the static version of storybook.
+
+    // Make whatever fine-grained changes you need
+    const nextConfig = require("../next.config");
+
+    // Return the altered config
+    return { ...nextConfig, ...baseConfig };
+  },
 };

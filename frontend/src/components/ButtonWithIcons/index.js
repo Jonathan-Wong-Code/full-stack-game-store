@@ -5,11 +5,11 @@ import { PrimaryStyles, SecondaryStyles } from "./css";
 import IconComponent from "../Icon";
 import { ThemeContext } from "styled-components";
 
-export const PrimaryBtnWithIcon = ({ Icon, buttonText }) => {
+export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
   const theme = useContext(ThemeContext);
 
   return (
-    <PrimaryStyles>
+    <PrimaryStyles modifiers={variants}>
       <IconComponent iconColor={theme.textInverted}>
         <Icon />
       </IconComponent>

@@ -1,0 +1,34 @@
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import { PrimaryBtnWithIcon } from "./index";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import { Cart } from '../../assets/icons/index';
+
+<Meta title="Design System|Buttons With Icons" component={PrimaryBtnWithIcon} />
+
+# Buttons
+
+Buttons are used to trigger actions within an application.
+
+## Usage
+
+Buttons are used to trigger internal actions within your web applications.
+
+## Primary Buttons With Icons
+
+Primary buttons are used as a call to action and indicate the most important action on a page.
+
+<Preview withToolbar>
+  <Story name="primary-btn-with-icon">
+    <PrimaryBtnWithIcon 
+      onClick={action('button-click')} 
+      disabled={boolean('Disabled', false)}
+      buttonText="Add to Cart"
+      Icon={Cart}
+    >
+      Hello world
+    </PrimaryBtnWithIcon>
+  </Story>
+</Preview>
+
+
