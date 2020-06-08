@@ -1,0 +1,22 @@
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import GameCard from "./index";
+
+<Meta title="Design System|Components" component={GameCard} />
+
+# GameCard Component
+
+## Usage
+
+The Game Card Component shows the pricing and title of the game as well as an image.
+It includes an Icon Button with a cart on it that allows you add it to your cart.
+
+<Preview withToolBar>
+  <Story name="GameCard">
+    <GameCard
+      gameDiscount={40}
+      gameTitle="Fallout 3"
+      gamePrice={60}
+      imgSource="https://www.retromags.com/applications/core/interface/imageproxy/imageproxy.php?img=https://www.slowdown.vg/images/Fallout-3.jpg&key=1f48366a2299af9586a93bd371e404ea4e92f88496b5252d821ea2ab171a6261"
+    />
+  </Story>
+</Preview>

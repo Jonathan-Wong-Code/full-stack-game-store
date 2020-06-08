@@ -8,8 +8,6 @@ import { string, number } from "prop-types";
 import ScreenReaderOnly from "../ScreenReaderOnly";
 
 const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
-  const discount = formatPercentage(gamePrice - gameDiscount, gamePrice);
-
   return (
     <Container aria-labelledby="purchase-game-information">
       <ScreenReaderOnly>
@@ -22,7 +20,6 @@ const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
         gamePrice={gamePrice}
         gameDiscount={gameDiscount}
         gameTitle={gameTitle}
-        discount={discount}
         isLarge
       />
       <ButtonContainer>

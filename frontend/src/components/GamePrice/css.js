@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { typeScale, typeWeight } from "../../../theme/typography";
+import { typeScale } from "../../../theme/typography";
 import spacing from "../../../theme/spacing";
 
 export const Prices = styled.div`
   margin-left: ${({ gameDiscount }) => (gameDiscount ? spacing[2] : null)};
   margin-left: ${({ isLarge }) => (isLarge ? spacing[7] : null)};
+  display: inline-block;
 `;
 
 export const OriginalGamePrice = styled.p`

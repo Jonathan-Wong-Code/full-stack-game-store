@@ -4,13 +4,15 @@ import Icon from "../Icon";
 import { StarFilled, StarUnfilled } from "../../assets/icons";
 import { StarsContainer } from "./css";
 import { useThemeContext } from "../../context/themeContext";
+import { v4 as uuidv4 } from "uuid";
+
 const Stars = ({ rating }) => {
   const theme = useThemeContext();
   const getFilledStars = () => {
     let stars = [];
     for (let i = 0; i < rating; i++) {
       stars.push(
-        <Icon iconColor={theme.primaryLight} variants="small">
+        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
           <StarFilled />
         </Icon>
       );
@@ -26,7 +28,7 @@ const Stars = ({ rating }) => {
 
     for (let i = 0; i < unfilledStars; i++) {
       stars.push(
-        <Icon iconColor={theme.primaryLight} variants="small">
+        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
           <StarUnfilled />
         </Icon>
       );

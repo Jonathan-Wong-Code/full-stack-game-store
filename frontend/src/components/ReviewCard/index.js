@@ -7,15 +7,14 @@ import {
   Feedback,
   FeedbackButton,
   FeedbackText,
-  Img,
-  ImgContainer,
-  LeftSide,
   RightSide,
   ReviewContainer,
   ReviewTitleRating,
   ReviewTitle,
   ReviewFeedbackContainer,
 } from "./css";
+
+import UserProfile from "../UserProfile";
 
 const ReviewCard = ({
   title = "Review title",
@@ -30,12 +29,7 @@ const ReviewCard = ({
   const totalLikes = reviewDislikes + reviewLikes;
   return (
     <ReviewContainer>
-      <LeftSide className="leftSide">
-        <ImgContainer className="user">
-          <Img src={userPhoto} alt={`A profile picture for ${userName}`} />
-        </ImgContainer>
-        <p>{userName}</p>
-      </LeftSide>
+      <UserProfile userName={userName} userPhoto={userPhoto} />
       <RightSide className="rightSide">
         <ReviewTitleRating className="Title">
           <ReviewTitle>{title}</ReviewTitle>

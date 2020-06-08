@@ -6,10 +6,10 @@ import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale } from "../../../theme/typography";
 const BUTTON_MODIFIERS = {
   large: () => `
-    font-size: ${typeScale.header4};
+    font-size: ${typeScale.paragraph};
 
-    @media screen and (min-width:${breakpoints[0]}) {
-      font-size: ${typeScale.paragraph};
+    @media screen and (min-width:${breakpoints[0]}px) {
+      font-size: ${typeScale.header4};
     }
   `,
 };
@@ -28,10 +28,8 @@ const BaseIconButtonStyles = () => `
 
 export const SecondaryStyles = styled(SecondaryButton)`
   ${BaseIconButtonStyles()};
-  ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `;
 
 export const PrimaryStyles = styled(PrimaryButton)`
   ${BaseIconButtonStyles()};
-  ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `;

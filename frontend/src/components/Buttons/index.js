@@ -9,7 +9,7 @@ const BUTTON_MODIFIERS = {
   `,
 
   large: () => `
-    font-size: ${typeScale.header4};
+    font-size: ${typeScale.header3};
   `,
 };
 

@@ -37,7 +37,12 @@ export default function ComponentRenderer(props) {
       <SecondaryInvertedButton>Button</SecondaryInvertedButton>
       <PriceHighlight>-70%</PriceHighlight>
       <PriceHighlight modifiers="large">-70%</PriceHighlight>
-      <GameCard gameDiscount={40} />
+      <GameCard
+        gameDiscount={20}
+        gameTitle="Fallout 3"
+        gamePrice={60}
+        imgSource="https://www.retromags.com/applications/core/interface/imageproxy/imageproxy.php?img=https://www.slowdown.vg/images/Fallout-3.jpg&key=1f48366a2299af9586a93bd371e404ea4e92f88496b5252d821ea2ab171a6261"
+      />
       <PurchaseGameCard
         gameTitle="Fallout 3"
         gamePrice={60}

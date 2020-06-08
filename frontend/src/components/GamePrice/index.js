@@ -2,28 +2,33 @@ import React from "react";
 import { Prices, OriginalGamePrice, FinalGamePrice } from "./css";
 import ScreenReaderOnly from "../ScreenReaderOnly";
 import { formatPricing } from "../../utils/utils";
-const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => (
-  <Prices gameDiscount={gameDiscount} isLarge={isLarge}>
-    {gameDiscount && (
-      <>
-        <ScreenReaderOnly>Original price is:</ScreenReaderOnly>{" "}
-        <OriginalGamePrice isLarge={isLarge} discountColor={discountColor}>
-          {formatPricing(gamePrice, 2)}
-        </OriginalGamePrice>
-      </>
-    )}
+import { PriceHighlight } from "../PriceHighlight";
+const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
+  const finalPrice = gamePrice - gameDiscount;
 
-    <ScreenReaderOnly>Current price is:</ScreenReaderOnly>
-    <FinalGamePrice isLarge={isLarge}>
-      {gameDiscount ? (
-        formatPricing(gameDiscount, 2)
-      ) : (
-        <PriceHighlight isLarge={isLarge}>
-          {formatPricing(gamePrice, 2)}
-        </PriceHighlight>
+  return (
+    <Prices gameDiscount={gameDiscount} isLarge={isLarge}>
+      {gameDiscount && (
+        <>
+          <ScreenReaderOnly>Original price is:</ScreenReaderOnly>{" "}
+          <OriginalGamePrice isLarge={isLarge} discountColor={discountColor}>
+            {formatPricing(gamePrice, 2)}
+          </OriginalGamePrice>
+        </>
       )}
-    </FinalGamePrice>
-  </Prices>
-);
+
+      <ScreenReaderOnly>Current price is:</ScreenReaderOnly>
+      <FinalGamePrice isLarge={isLarge}>
+        {gameDiscount ? (
+          formatPricing(finalPrice, 2)
+        ) : (
+          <PriceHighlight isLarge={isLarge}>
+            {formatPricing(gamePrice, 2)}
+          </PriceHighlight>
+        )}
+      </FinalGamePrice>
+    </Prices>
+  );
+};
 
 export default GamePrice;

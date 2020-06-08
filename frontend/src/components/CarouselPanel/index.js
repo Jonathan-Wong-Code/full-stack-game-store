@@ -29,14 +29,12 @@ const CarouselPanel = ({
   textColorLight,
   gameTitle,
 }) => {
-  const discount = formatPercentage(gamePrice - gameDiscount, gamePrice);
-
   const renderButtons = (isAddToCart) =>
     isAddToCart ? (
       <SecondaryBtnWithIcon
         Icon={Cart}
         buttonText={buttonText}
-        variants="large fullWidth"
+        variants={["large", "fullWidth"]}
       />
     ) : (
       <PrimaryButton>{buttonText}</PrimaryButton>
@@ -53,7 +51,6 @@ const CarouselPanel = ({
           <PriceInfo
             gameDiscount={gameDiscount}
             gamePrice={gamePrice}
-            discount={discount}
             gameTitle={gameTitle}
             isLarge
             discountColor="inherit"

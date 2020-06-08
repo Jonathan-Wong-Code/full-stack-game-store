@@ -13,6 +13,8 @@ export const Container = styled.li`
   font-size: ${typeScale.paragraph};
   font-weight: ${typeWeight.bold};
 
+  list-style-type: none;
+
   max-width: 350px;
   border-radius: 2px;
 
@@ -53,4 +55,11 @@ export const OriginalGamePrice = styled.p`
 
   margin-bottom: ${spacing[1]};
   color: ${({ theme }) => theme.primaryColor};
+`;
+
+export const Img = styled.img`
+  height: 100%;
+  width: 100%;
+  display: block;
+  object-fit: cover;
 `;
