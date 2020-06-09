@@ -3,11 +3,10 @@ import ScreenReaderOnly from "../ScreenReaderOnly";
 import Icon from "../Icon";
 import { StarFilled, StarUnfilled } from "../../assets/icons";
 import { StarsContainer } from "./css";
-import { useThemeContext } from "../../context/themeContext";
 import { v4 as uuidv4 } from "uuid";
-
+import useTheme from "../../hooks/useTheme";
 const Stars = ({ rating }) => {
-  const theme = useThemeContext();
+  const theme = useTheme();
   const getFilledStars = () => {
     let stars = [];
     for (let i = 0; i < rating; i++) {

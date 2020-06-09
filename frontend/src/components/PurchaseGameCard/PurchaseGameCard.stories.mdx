@@ -1,0 +1,16 @@
+import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
+import PurchaseGameCard from "./index";
+
+<Meta title="Design System|Components" component={PurchaseGameCard} />
+
+# PurchaseGameCard
+
+# Usage
+
+The Purchase Game Card shows on the Single Game Page. It allows the user to view the summary of the pricing inforation, add the game to the cart or add it to the wishlist.
+
+<Preview>
+  <Story name="PurchaseGameCard">
+    <PurchaseGameCard gameTitle="Fallout 3" gamePrice={60} gameDiscount={40} />
+  </Story>
+</Preview>

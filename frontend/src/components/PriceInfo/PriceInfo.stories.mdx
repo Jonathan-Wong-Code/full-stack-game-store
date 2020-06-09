@@ -1,0 +1,39 @@
+import { Preview, Story, Meta } from "@storybook/addon-docs/blocks";
+import PriceInfo from "./index";
+
+<Meta title="Design System|Components" component={PriceInfo} />
+
+# Price Info
+
+# Usage
+
+# Price Info
+
+Combines the Price Highlight and Game Price components to show the price next to the % discount.
+
+<Preview>
+  <Story name="PriceInfo">
+    <PriceInfo
+      gamePrice={50}
+      discountColor="red"
+      gameDiscount={25}
+      gameTitle="Hunt for Red October"
+    />
+  </Story>
+</Preview>
+
+# Price Info Large
+
+Adds an isLarge boolean to increase the size.
+
+<Preview>
+  <Story name="PriceInfo-large">
+    <PriceInfo
+      gamePrice={50}
+      discountColor="red"
+      gameDiscount={25}
+      gameTitle="Hunt for Red October"
+      isLarge
+    />
+  </Story>
+</Preview>

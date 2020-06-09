@@ -1,0 +1,41 @@
+import { Preview, Meta, Story } from "@storybook/addon-docs/blocks";
+import Icon from "./index";
+import { HeartFilled } from "../../assets//icons";
+
+<Meta title="Design System|Icons" component={Icon} />
+
+# Icon
+
+# Usage
+
+An Icon component is used to render and style SVGs of variable color.
+
+# Base Icon
+
+<Preview>
+  <Story name="Icon-base">
+    <Icon iconColor="black">
+      <HeartFilled />
+    </Icon>
+  </Story>
+</Preview>
+
+# Large Icon
+
+<Preview>
+  <Story name="Icon-large">
+    <Icon iconColor="black" variants={['large']}>
+      <HeartFilled />
+    </Icon>
+  </Story>
+</Preview>
+
+# Small Icon
+
+<Preview>
+  <Story name="Icon-small">
+    <Icon iconColor="black" variants={['small']}>
+      <HeartFilled />
+    </Icon>
+  </Story>
+</Preview>

@@ -21,7 +21,6 @@ export const ImgContainer = styled.div`
   margin-right: ${spacing[3]};
 
   @media screen and (min-width: ${breakpoints[0]}px) {
-    width: 100px;
     margin-right: 0;
     height: 80px;
     width: 80px;

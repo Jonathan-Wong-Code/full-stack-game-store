@@ -1,0 +1,41 @@
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import IconButton from "./index";
+import { action } from "@storybook/addon-actions";
+import { Cart } from "../../assets/icons/";
+
+<Meta title="Design System|Icon Buttons" />
+
+# Icon Buttons
+
+# Usage
+
+An Icon Button triggers an action. It is a button represented by an Icon
+
+# Icon Button Primary
+
+An Icon button themed with the primary color.
+
+<Preview>
+  <Story name="IconButton-primary">
+    <IconButton
+      description="Accessibility description"
+      onClick={action("button-click")}
+      Icon={Cart}
+    />
+  </Story>
+</Preview>
+
+# Icon Button Secondary
+
+An Icon button themed with the primary color.
+
+<Preview>
+  <Story name="IconButton-secondary">
+    <IconButton
+      description="Accessibility description"
+      onClick={action("button-click")}
+      Icon={Cart}
+      variants="secondary"
+    />
+  </Story>
+</Preview>

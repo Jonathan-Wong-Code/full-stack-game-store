@@ -1,0 +1,16 @@
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import StarsRating from "./index";
+
+<Meta title="Design System| StarsRating" component={StarsRating} />
+
+# StarsRating component
+
+# Usage
+
+Displays a rating out of 5 with unfilled and filled stars svgs. Uses the Icon component to render the Stars.
+
+<Preview withToolbar>
+  <Story name="StarsRating">
+    <StarsRating rating={4} />
+  </Story>
+</Preview>

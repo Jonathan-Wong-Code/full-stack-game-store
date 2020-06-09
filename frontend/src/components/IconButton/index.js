@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
+import { func, string } from "prop-types";
+
 import ScreenReaderOnly from "../ScreenReaderOnly";
 import IconComponent from "../Icon";
 import { Button } from "./css";
-import { func, string } from "prop-types";
-import { ThemeContext, ThemeConsumer } from "styled-components";
+
+import useTheme from "../../hooks/useTheme";
 
 //Look in ./css.js for variants = the modifiers.
 const IconButton = ({ Icon, onClick = () => {}, description, variants }) => {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme();
   return (
     <Button onClick={onClick} modifiers={variants}>
       <ScreenReaderOnly>{description}</ScreenReaderOnly>

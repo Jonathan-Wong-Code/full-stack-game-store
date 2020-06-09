@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { func, string, bool } from "prop-types";
 
 import { PrimaryStyles, SecondaryStyles } from "./css";
 import IconComponent from "../Icon";
-import { ThemeContext } from "styled-components";
+
+import useTheme from "../../hooks/useTheme";
 
 export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
-  const theme = useContext(ThemeContext);
-
+  const theme = useTheme();
   return (
     <PrimaryStyles modifiers={variants}>
       <IconComponent iconColor={theme.textInverted}>

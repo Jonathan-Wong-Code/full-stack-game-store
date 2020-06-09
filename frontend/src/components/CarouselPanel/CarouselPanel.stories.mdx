@@ -1,0 +1,27 @@
+import { Preview, Meta, Story } from "@storybook/addon-docs/blocks";
+import CarouselPanel from "./index";
+
+<Meta title="Design System|Components" component={CarouselPanel} />
+
+# Carousel Panel
+
+# Usage
+
+The Carousel Panel is used in the Carousel. It displays a large picture with the description, price, and CTA.
+
+<Preview>
+  <Story name="CarouselPanel">
+    <CarouselPanel
+      promoText="Now available"
+      offerDescription="The Elder Scrolls 5: Skyrim Available Now!"
+      gamePrice={60}
+      gameDiscount={40}
+      gameImage='"https://eskipaper.com/images/skyrim-wallpaper-3.jpg"'
+      isAddToCart={true}
+      buttonText="Add to Cart"
+      hasButton={true}
+      textColorLight={true}
+      gameTitle="The Elder Scrolls 5: Skyrim"
+    />
+  </Story>
+</Preview>

@@ -1,0 +1,25 @@
+import { Preview, Story, Meta } from "@storybook/addon-docs/blocks";
+import ReviewCard from "./index";
+
+<Meta title="Design System|Components|ReviewCard" />
+
+# Review Card
+
+# Usage
+
+The Review card shows user reviews. It shows the rating, the user's profile information and allows the user to select whether or not the review was helpful
+
+<Preview>
+  <Story name="ReviewCard">
+    <ReviewCard
+      title="WOW!"
+      description="I keep this rather short. This is the one game, when it was released that came very close to its great ancestor in terms of modern RPGs, Baldur's Gate II. The best thing you can do is to buy this great package and enjoy hundreds of hours this gem has to offer. But why does it only almost top BG? Well it lacks the depth of the original in my opinion. The Story has its flaws and the character system is a bit overburdened, it also focuses a bit too much on items. And the characters, while excellent on its own, don't have the same depth to it. Only few games that followed can claim the same thing and of course it is by far still the best Dragon Age of the series because it focus on the core mechanics of the genre and not on the eye candy."
+      rating={3}
+      reviewLikes={100}
+      reviewDislikes={20}
+      date="Jan 16th 2009"
+      userName="Random Joe"
+      userPhoto="http://www.fillmurray.com/200/300"
+    />
+  </Story>
+</Preview>
