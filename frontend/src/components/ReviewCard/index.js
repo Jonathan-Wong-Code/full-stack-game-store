@@ -15,16 +15,17 @@ import {
 } from "./css";
 
 import UserProfile from "../UserProfile";
+import { string, number } from "prop-types";
 
 const ReviewCard = ({
-  title = "Review title",
-  description = "This is why my review is graet",
-  rating = 4,
-  reviewLikes = 100,
-  reviewDislikes = 20,
-  date = "Jan 16th 2009",
-  userName = "Random Joe",
-  userPhoto = "http://www.fillmurray.com/200/300",
+  date,
+  description,
+  rating,
+  reviewDislikes,
+  reviewLikes,
+  title,
+  userName,
+  userPhoto,
 }) => {
   const totalLikes = reviewDislikes + reviewLikes;
   return (
@@ -50,6 +51,16 @@ const ReviewCard = ({
       </RightSide>
     </ReviewContainer>
   );
+};
+
+ReviewCard.propTypes = {
+  date: string.isRequired,
+  description: string.isRequired,
+  rating: number.isRequired,
+  reviewDislikes: number.isRequired,
+  reviewLikes: number.isRequired,
+  userName: string.isRequired,
+  userPhoto: string.isRequired,
 };
 
 export default ReviewCard;

@@ -1,7 +1,7 @@
-import { Preview, Story, Meta } from "@storybook/addon-docs/blocks";
+import { Preview, Story, Meta, Props } from "@storybook/addon-docs/blocks";
 import ReviewCard from "./index";
 
-<Meta title="Design System|Components|ReviewCard" />
+<Meta title="Design System|Components" component={ReviewCard} />
 
 # Review Card
 
@@ -23,3 +23,7 @@ The Review card shows user reviews. It shows the rating, the user's profile info
     />
   </Story>
 </Preview>
+
+## Props
+
+<Props of={ReviewCard} />

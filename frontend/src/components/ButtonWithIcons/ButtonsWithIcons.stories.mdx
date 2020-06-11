@@ -1,10 +1,10 @@
-import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import { PrimaryBtnWithIcon, SecondaryBtnWithIcon } from "./index";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { Cart } from '../../assets/icons/index';
 
-<Meta title="Design System|Buttons With Icons" component={PrimaryBtnWithIcon} />
+<Meta title="Design System|Buttons" component={PrimaryBtnWithIcon} />
 
 # Buttons With Icons
 
@@ -12,14 +12,14 @@ Renders a Button with an Icon. Combine the Button Component and Icon Component.
 
 ## Usage
 
-For Buttons that have Icons inside that denote some purpose.
+For Buttons that have Icons inside that denote some purpose. 
 
 ## Primary Buttons With Icons
 
-Styled with the Primary Color with the Icon on the left and button text on the right
+Styled with the Primary Color with the Icon on the left and button text on the right. Can add two variants of either "large" for larger text or "fullWidth" to make the button width 100% of it's container.
 
 <Preview withToolbar>
-  <Story name="primary-btn-with-icon">
+  <Story name="PrimaryBtnWithIcon">
     <PrimaryBtnWithIcon 
       onClick={action('button-click')} 
       disabled={boolean('Disabled', false)}
@@ -33,10 +33,10 @@ Styled with the Primary Color with the Icon on the left and button text on the r
 
 ## Secondary Buttons With Icons
 
-Styled with the Secondary Color with the Icon on the left and button text on the right
+Styled with the Secondary Color with the Icon on the left and button text on the right. Can add two variants of either "large" for larger text or "fullWidth" to make the button width 100% of it's container.
 
 <Preview withToolbar>
-  <Story name="secondary-btn-with-icon">
+  <Story name="SecondaryBtnWithIcon">
     <SecondaryBtnWithIcon 
       buttonText="Add to Cart"
       Icon={Cart}
@@ -45,5 +45,9 @@ Styled with the Secondary Color with the Icon on the left and button text on the
     </SecondaryBtnWithIcon>
   </Story>
 </Preview>
+
+## Props
+
+<Props of={SecondaryBtnWithIcon} />
 
 

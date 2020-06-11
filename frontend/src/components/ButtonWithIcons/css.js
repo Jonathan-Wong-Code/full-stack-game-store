@@ -2,17 +2,6 @@ import styled from "styled-components";
 import { SecondaryButton, PrimaryButton } from "../Buttons";
 import spacing from "../../../theme/spacing";
 import { breakpoints } from "../../../theme/breakpoints";
-import { applyStyleModifiers } from "styled-components-modifiers";
-import { typeScale } from "../../../theme/typography";
-const BUTTON_MODIFIERS = {
-  large: () => `
-    font-size: ${typeScale.paragraph};
-
-    @media screen and (min-width:${breakpoints[0]}px) {
-      font-size: ${typeScale.header4};
-    }
-  `,
-};
 
 const BaseIconButtonStyles = () => `
   display: flex;

@@ -1,5 +1,5 @@
 import React from "react";
-import { func, string, bool } from "prop-types";
+import { func, string, array, oneOfType } from "prop-types";
 
 import { PrimaryStyles, SecondaryStyles } from "./css";
 import IconComponent from "../Icon";
@@ -18,14 +18,14 @@ export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
   );
 };
 
-PrimaryBtnWithIcon.proptypes = {
+PrimaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
-  primaryIcon: bool,
   buttonText: string.isRequired,
+  variants: oneOfType([string, array]),
 };
 
 PrimaryBtnWithIcon.defaultProps = {
-  primaryIcon: false,
+  variants: null,
 };
 
 export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
@@ -42,4 +42,9 @@ export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
 SecondaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
+  variants: oneOfType([string, array]),
+};
+
+SecondaryBtnWithIcon.defaultProps = {
+  variants: null,
 };

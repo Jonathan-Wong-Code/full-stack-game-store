@@ -1,6 +1,6 @@
 import React from "react";
 import { IconStyles } from "./css";
-import { node, bool } from "prop-types";
+import { node, oneOfType, array, string } from "prop-types";
 
 // Variants can be "small" or "large" refer to .css for stylings
 const Icon = ({ children, iconColor, variants }) => {
@@ -11,13 +11,14 @@ const Icon = ({ children, iconColor, variants }) => {
   );
 };
 
-Icon.proptypes = {
+Icon.propTypes = {
   children: node.isRequired,
-  primaryIcon: bool,
+  iconColor: string,
+  variants: oneOfType([string, array]),
 };
 
 Icon.defaultProps = {
-  primaryIcon: false,
+  iconColor: null,
 };
 
 export default Icon;

@@ -1,4 +1,4 @@
-import { Preview, Meta, Story } from "@storybook/addon-docs/blocks";
+import { Preview, Meta, Story, Props } from "@storybook/addon-docs/blocks";
 import Icon from "./index";
 import { HeartFilled } from "../../assets//icons";
 
@@ -8,7 +8,7 @@ import { HeartFilled } from "../../assets//icons";
 
 # Usage
 
-An Icon component is used to render and style SVGs of variable color.
+An Icon component is used to render and style SVGs of variable color. Variants come in "large" and "small" which give us larger and smaller variants.
 
 # Base Icon
 
@@ -39,3 +39,7 @@ An Icon component is used to render and style SVGs of variable color.
     </Icon>
   </Story>
 </Preview>
+
+## Props
+
+<Props of={Icon} />

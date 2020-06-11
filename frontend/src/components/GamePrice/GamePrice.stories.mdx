@@ -1,4 +1,4 @@
-import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import GamePrice from "./index";
 
 <Meta title="Design System|Components" component={GamePrice} />
@@ -27,3 +27,7 @@ The Game Price component shows the original price or in the event of a discount 
     <GamePrice gamePrice={60} isLarge={false} discountColor="blue" />
   </Story>
 </Preview>
+
+## Props
+
+<Props of={GamePrice} />

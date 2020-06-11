@@ -1,11 +1,14 @@
 import React from "react";
+import { number } from "prop-types";
+
 import ScreenReaderOnly from "../ScreenReaderOnly";
 import Icon from "../Icon";
 import { StarFilled, StarUnfilled } from "../../assets/icons";
 import { StarsContainer } from "./css";
 import { v4 as uuidv4 } from "uuid";
 import useTheme from "../../hooks/useTheme";
-const Stars = ({ rating }) => {
+
+const StarsRating = ({ rating }) => {
   const theme = useTheme();
   const getFilledStars = () => {
     let stars = [];
@@ -47,4 +50,8 @@ const Stars = ({ rating }) => {
   );
 };
 
-export default Stars;
+StarsRating.propTypes = {
+  rating: number.isRequired,
+};
+
+export default StarsRating;

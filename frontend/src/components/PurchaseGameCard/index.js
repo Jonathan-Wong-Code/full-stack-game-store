@@ -34,7 +34,7 @@ const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
   );
 };
 
-PurchaseGameCard.proptypes = {
+PurchaseGameCard.propTypes = {
   gameTitle: string.isRequired,
   gamePrice: number.isRequired,
   gameDiscount: number.isRequired,

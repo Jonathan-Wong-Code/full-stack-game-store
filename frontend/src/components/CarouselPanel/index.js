@@ -64,13 +64,15 @@ const CarouselPanel = ({
   );
 };
 
-CarouselPanel.proptypes = {
+CarouselPanel.propTypes = {
+  /* Will render a button if there is buttonText */
   buttonText: string,
-  gamePrice: number,
-  gameDiscount: number,
-  gameTitle: string,
-  isAddToCart: bool,
   gameImage: string.isRequired,
+  gameDiscount: number,
+  gamePrice: number,
+  gameTitle: string,
+  /* Dictates if the button should be an Add to Cart or regular button */
+  isAddToCart: bool,
   offerDescription: string.isRequired,
   promoText: string,
   textColorLight: bool,

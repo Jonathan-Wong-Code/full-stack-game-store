@@ -49,7 +49,7 @@ const GameCard = ({ gameDiscount, gameTitle, gamePrice, imgSource }) => {
   );
 };
 
-GameCard.proptypes = {
+GameCard.propTypes = {
   gameTitle: string.isRequired,
   gamePrice: number.isRequired,
   gameDiscount: number,

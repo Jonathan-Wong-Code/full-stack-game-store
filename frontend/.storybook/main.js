@@ -11,7 +11,7 @@ module.exports = {
     "@storybook/addon-a11y/register",
 
     {
-      name: "@storybook/addon-docs",
+      name: "@storybook/addon-docs/preset",
       options: {
         configureJSX: true,
       },

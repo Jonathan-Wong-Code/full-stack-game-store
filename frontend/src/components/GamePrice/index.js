@@ -3,6 +3,7 @@ import { Prices, OriginalGamePrice, FinalGamePrice } from "./css";
 import ScreenReaderOnly from "../ScreenReaderOnly";
 import { formatPricing } from "../../utils/utils";
 import { PriceHighlight } from "../PriceHighlight";
+import { number, bool, string } from "prop-types";
 const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
   const finalPrice = gamePrice - gameDiscount;
 
@@ -29,6 +30,19 @@ const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
       </FinalGamePrice>
     </Prices>
   );
+};
+
+GamePrice.propTypes = {
+  gameDiscount: number,
+  gamePrice: number.isRequired,
+  isLarge: bool,
+  discountColor: string,
+};
+
+GamePrice.defaultProps = {
+  gameDiscount: null,
+  isLarge: false,
+  discountColor: "inherit",
 };
 
 export default GamePrice;
