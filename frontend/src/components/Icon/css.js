@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { applyStyleModifiers } from "styled-components-modifiers";
+import styled from 'styled-components';
+import { applyStyleModifiers } from 'styled-components-modifiers';
 
-import spacing from "../../../theme/spacing";
+import spacing from '../../../theme/spacing';
 
 const ICON_MODIFIERS = {
   large: () => `
@@ -17,7 +17,7 @@ const ICON_MODIFIERS = {
       height: 30px;
       padding: 2px;
     }  
-  `,
+  `
 };
 
 export const IconStyles = styled.div`
@@ -30,8 +30,7 @@ export const IconStyles = styled.div`
 
     border-radius: 5px;
     padding: ${spacing[1]};
-    fill: ${({ iconColor, theme }) =>
-      iconColor ? iconColor : theme.textInverted};
+    fill: ${({ iconColor, theme }) => iconColor || theme.textInverted};
   }
 
   ${applyStyleModifiers(ICON_MODIFIERS)}

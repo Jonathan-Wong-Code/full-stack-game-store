@@ -1,18 +1,19 @@
-import React from "react";
-import { number } from "prop-types";
+import React from 'react';
+import { number } from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
-import ScreenReaderOnly from "../ScreenReaderOnly";
-import Icon from "../Icon";
-import { StarFilled, StarUnfilled } from "../../assets/icons";
-import { StarsContainer } from "./css";
-import { v4 as uuidv4 } from "uuid";
-import useTheme from "../../hooks/useTheme";
+import ScreenReaderOnly from '../ScreenReaderOnly';
+import Icon from '../Icon';
+
+import { StarFilled, StarUnfilled } from '../../assets/icons';
+import { StarsContainer } from './css';
+import useTheme from '../../hooks/useTheme';
 
 const StarsRating = ({ rating }) => {
   const theme = useTheme();
   const getFilledStars = () => {
-    let stars = [];
-    for (let i = 0; i < rating; i++) {
+    const stars = [];
+    for (let i = 0; i < rating; i += 1) {
       stars.push(
         <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
           <StarFilled />
@@ -20,7 +21,7 @@ const StarsRating = ({ rating }) => {
       );
     }
 
-    return stars.map((star) => star);
+    return stars.map(star => star);
   };
 
   const getUnfilledStars = () => {
@@ -28,7 +29,7 @@ const StarsRating = ({ rating }) => {
 
     const stars = [];
 
-    for (let i = 0; i < unfilledStars; i++) {
+    for (let i = 0; i < unfilledStars; i += 1) {
       stars.push(
         <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
           <StarUnfilled />
@@ -36,7 +37,7 @@ const StarsRating = ({ rating }) => {
       );
     }
 
-    return stars.map((star) => star);
+    return stars.map(star => star);
   };
 
   return (
@@ -51,7 +52,7 @@ const StarsRating = ({ rating }) => {
 };
 
 StarsRating.propTypes = {
-  rating: number.isRequired,
+  rating: number.isRequired
 };
 
 export default StarsRating;

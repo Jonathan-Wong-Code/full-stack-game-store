@@ -1,3 +1,6 @@
+import React from 'react';
+import { bool, string, number } from 'prop-types';
+
 import {
   Container,
   ContentFlexbox,
@@ -6,17 +9,14 @@ import {
   RightSide,
   PromoText,
   ButtonContainer,
-} from "./css";
+} from './css';
 
-import { Cart } from "../../assets/icons";
+import { Cart } from '../../assets/icons';
 
-import { bool, string, number } from "prop-types";
+import PriceInfo from '../PriceInfo';
 
-import PriceInfo from "../PriceInfo";
-import { formatPercentage } from "../../utils/utils";
-
-import { PrimaryButton } from "../Buttons";
-import { SecondaryBtnWithIcon } from "../ButtonWithIcons";
+import { PrimaryButton } from '../Buttons';
+import { SecondaryBtnWithIcon } from '../ButtonWithIcons';
 
 const CarouselPanel = ({
   promoText,
@@ -29,12 +29,12 @@ const CarouselPanel = ({
   textColorLight,
   gameTitle,
 }) => {
-  const renderButtons = (isAddToCart) =>
+  const renderButtons = isAddToCart =>
     isAddToCart ? (
       <SecondaryBtnWithIcon
         Icon={Cart}
         buttonText={buttonText}
-        variants={["large", "fullWidth"]}
+        variants={['large', 'fullWidth']}
       />
     ) : (
       <PrimaryButton>{buttonText}</PrimaryButton>
@@ -79,12 +79,12 @@ CarouselPanel.propTypes = {
 };
 
 CarouselPanel.defaultProps = {
-  buttonText: "",
+  buttonText: '',
   gamePrice: null,
   gameDiscount: null,
-  gameTitle: "",
+  gameTitle: '',
   isAddToCart: true,
-  promoText: "",
+  promoText: '',
   textColorLight: true,
 };
 

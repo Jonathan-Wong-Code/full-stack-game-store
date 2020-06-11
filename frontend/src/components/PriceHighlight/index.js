@@ -1,13 +1,14 @@
-import styled from "styled-components";
-import { typeScale, typeWeight } from "../../../theme/typography";
-import spacing from "../../../theme/spacing";
-import { applyStyleModifiers } from "styled-components-modifiers";
+import styled from 'styled-components';
+import { applyStyleModifiers } from 'styled-components-modifiers';
+
+import { typeScale, typeWeight } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
 
 const MODIFIERS = {
   large: () => `
     font-size:${typeScale.header1};
     padding: ${spacing[2]} ${spacing[6]};
-  `,
+  `
 };
 
 export const PriceHighlight = styled.p`

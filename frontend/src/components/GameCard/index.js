@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
+import { number, string } from 'prop-types';
 
-import { Cart } from "../../assets/icons";
-import { number, string } from "prop-types";
+import { Cart } from '../../assets/icons';
 
 import {
   Container,
@@ -9,12 +9,12 @@ import {
   GameTitle,
   PriceInformation,
   Img,
-} from "./css";
+} from './css';
 
-import IconButton from "../IconButton";
+import IconButton from '../IconButton';
 
-import { formatPercentage } from "../../utils/utils";
-import PriceInfo from "../PriceInfo";
+import { formatPercentage } from '../../utils/utils';
+import PriceInfo from '../PriceInfo';
 
 const GameCard = ({ gameDiscount, gameTitle, gamePrice, imgSource }) => {
   const discount = gameDiscount

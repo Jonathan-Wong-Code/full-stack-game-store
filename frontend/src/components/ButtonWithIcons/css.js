@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { SecondaryButton, PrimaryButton } from "../Buttons";
-import spacing from "../../../theme/spacing";
-import { breakpoints } from "../../../theme/breakpoints";
+import styled from 'styled-components';
+import { SecondaryButton, PrimaryButton } from '../Buttons';
+import spacing from '../../../theme/spacing';
+import { breakpoints } from '../../../theme/breakpoints';
 
 const BaseIconButtonStyles = () => `
   display: flex;

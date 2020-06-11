@@ -1,11 +1,11 @@
-import React from "react";
-import { formatPercentage } from "../../utils/utils";
-import { Container, ButtonContainer } from "./css";
-import PriceInfo from "../PriceInfo";
-import { Cart, HeartUnfilled } from "../../assets/icons";
-import { PrimaryBtnWithIcon, SecondaryBtnWithIcon } from "../ButtonWithIcons";
-import { string, number } from "prop-types";
-import ScreenReaderOnly from "../ScreenReaderOnly";
+import React from 'react';
+import { string, number } from 'prop-types';
+
+import { Container, ButtonContainer } from './css';
+import PriceInfo from '../PriceInfo';
+import { Cart, HeartUnfilled } from '../../assets/icons';
+import { PrimaryBtnWithIcon, SecondaryBtnWithIcon } from '../ButtonWithIcons';
+import ScreenReaderOnly from '../ScreenReaderOnly';
 
 const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
   return (

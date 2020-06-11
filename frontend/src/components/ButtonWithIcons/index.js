@@ -1,10 +1,10 @@
-import React from "react";
-import { func, string, array, oneOfType } from "prop-types";
+import React from 'react';
+import { func, string, array, oneOfType } from 'prop-types';
 
-import { PrimaryStyles, SecondaryStyles } from "./css";
-import IconComponent from "../Icon";
+import { PrimaryStyles, SecondaryStyles } from './css';
+import IconComponent from '../Icon';
 
-import useTheme from "../../hooks/useTheme";
+import useTheme from '../../hooks/useTheme';
 
 export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
   const theme = useTheme();

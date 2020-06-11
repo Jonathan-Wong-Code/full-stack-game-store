@@ -1,6 +1,6 @@
-import React from "react";
-import { string } from "prop-types";
-import { Img, ImgContainer, ProfileContainer } from "./css";
+import React from 'react';
+import { string } from 'prop-types';
+import { Img, ImgContainer, ProfileContainer } from './css';
 
 const UserProfile = ({ userPhoto, userName }) => (
   <ProfileContainer>

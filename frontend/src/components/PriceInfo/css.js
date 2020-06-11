@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { typeScale, typeWeight } from "../../../theme/typography";
-import spacing from "../../../theme/spacing";
+import styled from 'styled-components';
+import { typeScale, typeWeight } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
 
 export const PriceFlexBox = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const OriginalGamePrice = styled.p`
   text-align: right;
   text-decoration: line-through;
 
-  color: ${({ theme, isLarge }) => (!isLarge ? theme.primaryColor : "inherit")};
+  color: ${({ theme, isLarge }) => (!isLarge ? theme.primaryColor : 'inherit')};
 `;
 
 export const FinalGamePrice = styled.p`

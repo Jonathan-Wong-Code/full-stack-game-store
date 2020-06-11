@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { typeScale } from "../../../theme/typography";
-import spacing from "../../../theme/spacing";
+import styled from 'styled-components';
+import { typeScale } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
 
 export const Prices = styled.div`
   margin-left: ${({ gameDiscount }) => (gameDiscount ? spacing[2] : null)};
@@ -14,8 +14,7 @@ export const OriginalGamePrice = styled.p`
   text-align: right;
   text-decoration: line-through;
 
-  color: ${({ discountColor, theme }) =>
-    discountColor ? discountColor : theme.primaryColor};
+  color: ${({ discountColor, theme }) => discountColor || theme.primaryColor};
 `;
 
 export const FinalGamePrice = styled.p`

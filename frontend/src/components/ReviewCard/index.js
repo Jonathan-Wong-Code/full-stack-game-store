@@ -1,5 +1,7 @@
-import React from "react";
-import StarRating from "../StarsRating/";
+import React from 'react';
+import { string, number } from 'prop-types';
+
+import StarRating from '../StarsRating';
 
 import {
   Date,
@@ -12,10 +14,9 @@ import {
   ReviewTitleRating,
   ReviewTitle,
   ReviewFeedbackContainer,
-} from "./css";
+} from './css';
 
-import UserProfile from "../UserProfile";
-import { string, number } from "prop-types";
+import UserProfile from '../UserProfile';
 
 const ReviewCard = ({
   date,
@@ -59,6 +60,7 @@ ReviewCard.propTypes = {
   rating: number.isRequired,
   reviewDislikes: number.isRequired,
   reviewLikes: number.isRequired,
+  title: string.isRequired,
   userName: string.isRequired,
   userPhoto: string.isRequired,
 };

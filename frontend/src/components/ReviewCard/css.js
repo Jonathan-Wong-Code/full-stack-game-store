@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import { typeScale, typeWeight } from "../../../theme/typography";
-import spacing from "../../../theme/spacing";
-import { breakpoints } from "../../../theme/breakpoints";
+import styled from 'styled-components';
+import { typeScale, typeWeight } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
+import { breakpoints } from '../../../theme/breakpoints';
 
 export const RightSide = styled.div`
   width: 100%;
 `;
 
-export const ReviewContainer = styled.li`
+export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${spacing[6]};

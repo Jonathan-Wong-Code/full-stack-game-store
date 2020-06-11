@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import spacing from "../../../theme/spacing";
-import { breakpoints } from "../../../theme/breakpoints";
+import styled from 'styled-components';
+import spacing from '../../../theme/spacing';
+import { breakpoints } from '../../../theme/breakpoints';
 
 export const ProfileContainer = styled.div`
   width: 100%;

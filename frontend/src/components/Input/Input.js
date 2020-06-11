@@ -1,7 +1,6 @@
-import styled from "styled-components";
-import { typeScale } from "../../../theme/typography";
-import spacing from "../../../theme/spacing";
-import { applyStyleModifiers } from "styled-components-modifiers";
+import styled from 'styled-components';
+import { typeScale } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
 
 export const Input = styled.input`
   border-radius: 5px;

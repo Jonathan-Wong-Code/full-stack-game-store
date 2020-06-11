@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { breakpoints } from "../../../theme/breakpoints";
-import spacing from "../../../theme/spacing";
-import { typeScale, typeWeight } from "../../../theme/typography";
+import styled from 'styled-components';
+import { breakpoints } from '../../../theme/breakpoints';
+import spacing from '../../../theme/spacing';
+import { typeScale, typeWeight } from '../../../theme/typography';
 
 export const Container = styled.section`
   width: 100%;

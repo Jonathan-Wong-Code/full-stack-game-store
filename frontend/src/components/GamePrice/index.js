@@ -1,9 +1,10 @@
-import React from "react";
-import { Prices, OriginalGamePrice, FinalGamePrice } from "./css";
-import ScreenReaderOnly from "../ScreenReaderOnly";
-import { formatPricing } from "../../utils/utils";
-import { PriceHighlight } from "../PriceHighlight";
-import { number, bool, string } from "prop-types";
+import React from 'react';
+import { number, bool, string } from 'prop-types';
+
+import { Prices, OriginalGamePrice, FinalGamePrice } from './css';
+import ScreenReaderOnly from '../ScreenReaderOnly';
+import { formatPricing } from '../../utils/utils';
+import { PriceHighlight } from '../PriceHighlight';
 const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
   const finalPrice = gamePrice - gameDiscount;
 
@@ -11,7 +12,7 @@ const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
     <Prices gameDiscount={gameDiscount} isLarge={isLarge}>
       {gameDiscount && (
         <>
-          <ScreenReaderOnly>Original price is:</ScreenReaderOnly>{" "}
+          <ScreenReaderOnly>Original price is:</ScreenReaderOnly>
           <OriginalGamePrice isLarge={isLarge} discountColor={discountColor}>
             {formatPricing(gamePrice, 2)}
           </OriginalGamePrice>
@@ -42,7 +43,7 @@ GamePrice.propTypes = {
 GamePrice.defaultProps = {
   gameDiscount: null,
   isLarge: false,
-  discountColor: "inherit",
+  discountColor: null,
 };
 
 export default GamePrice;

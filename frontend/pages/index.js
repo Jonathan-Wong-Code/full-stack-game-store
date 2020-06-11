@@ -1,6 +1,6 @@
-import Head from "next/head";
-import ComponentRenderer from "./componentRenderer.js";
-export default function Home(props) {
+import Head from 'next/head';
+import ComponentRenderer from './componentRenderer.js';
+export default function Home() {
   return (
     <div>
       <Head>

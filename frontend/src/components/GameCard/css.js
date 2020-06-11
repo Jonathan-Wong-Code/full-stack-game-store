@@ -1,15 +1,16 @@
-import styled from "styled-components";
-import { typeScale, typeWeight } from "../../../theme/typography";
-import spacing from "../../../theme/spacing";
-import { applyStyleModifiers } from "styled-components-modifiers";
+import styled from 'styled-components';
+import { applyStyleModifiers } from 'styled-components-modifiers';
+
+import { typeScale, typeWeight } from '../../../theme/typography';
+import spacing from '../../../theme/spacing';
 
 const CONTAINER_MODIFIERS = {
   smallCard: () => `
     max-width: 250px;
-  `,
+  `
 };
 
-export const Container = styled.li`
+export const Container = styled.div`
   font-size: ${typeScale.paragraph};
   font-weight: ${typeWeight.bold};
 

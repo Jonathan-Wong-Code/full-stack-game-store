@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { applyStyleModifiers } from "styled-components-modifiers";
+import styled from 'styled-components';
+import { applyStyleModifiers } from 'styled-components-modifiers';
 
 const BUTTON_MODIFIERS = {
   secondary: ({ theme }) => `
@@ -8,7 +8,7 @@ const BUTTON_MODIFIERS = {
     &:hover {
       background-color: ${theme.secondaryLight};
     }
-    `,
+    `
 };
 
 export const Button = styled.button`

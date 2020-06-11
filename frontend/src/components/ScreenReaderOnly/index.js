@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { hideVisually } from "polished";
+import styled from 'styled-components';
+import { hideVisually } from 'polished';
 const ScreenReaderOnly = styled.span`
   ${hideVisually()};
 `;
