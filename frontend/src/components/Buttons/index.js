@@ -11,7 +11,7 @@ const BUTTON_MODIFIERS = {
 
   large: () => `
     font-size: ${typeScale.header3};
-  `,
+  `
 };
 
 export const BaseButton = styled.button`

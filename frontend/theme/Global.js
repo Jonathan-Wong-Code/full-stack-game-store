@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import { primaryFont } from "./typography";
-import { normalize } from "polished";
-import { defaultTheme } from "../theme/themes";
+import { createGlobalStyle } from 'styled-components';
+import { primaryFont } from './typography';
+import { normalize } from 'polished';
+import { defaultTheme } from '../theme/themes';
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize()}
@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   *, *:before, *:after {
-    box-sizing: inherit;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
   }

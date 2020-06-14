@@ -25,7 +25,7 @@ import IconButton from '../src/components/IconButton';
 
 import ReviewCard from '../src/components/ReviewCard';
 
-import { Input } from '../src/components/Input/Input';
+import { Input } from '../src/components/Input';
 
 export default function ComponentRenderer() {
   return (
@@ -78,7 +78,6 @@ export default function ComponentRenderer() {
         reviewLikes={100}
         reviewDislikes={20}
       />
-      <Input />
     </>
   );
 }

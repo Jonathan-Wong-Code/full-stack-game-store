@@ -12,15 +12,21 @@
   },
   "dependencies": {
     "@svgr/webpack": "^5.4.0",
+    "formik": "^2.1.4",
     "next": "9.4.4",
     "next-react-svg": "^1.1.1",
     "polished": "^3.6.3",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "redux": "^4.0.5",
+    "redux-actions": "^2.6.5",
+    "redux-selectors": "^0.0.2",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1",
     "styled-components-modifiers": "^1.2.5",
-    "uuid": "^8.1.0"
+    "uuid": "^8.1.0",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
