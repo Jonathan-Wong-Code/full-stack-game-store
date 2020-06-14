@@ -1,13 +1,12 @@
-const catchAsync = require("../utils/catchAsync");
-const Order = require("../models/orderModel");
+const catchAsync = require('../utils/catchAsync');
+const Order = require('../models/orderModel');
 
 exports.createOrder = catchAsync(async (req, res, next) => {
-  console.log(req.user);
   if (!req.body.user) req.body.user = req.user.id;
   const order = await Order.create(req.body);
 
   res.status(201).json({
-    status: "success",
+    status: 'success',
     data: {
       order,
     },
@@ -16,12 +15,12 @@ exports.createOrder = catchAsync(async (req, res, next) => {
 
 exports.getOrders = catchAsync(async (req, res, next) => {
   const orders = await Order.find().populate({
-    path: "games",
-    select: "title total totalWithTax tax cardPhoto _id",
+    path: 'games',
+    select: 'title total totalWithTax tax cardPhoto _id',
   });
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       orders,
     },

@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
+const compression = require('compression');
 
 const app = express();
 
@@ -34,6 +35,8 @@ const limiter = rateLimit({
 app.use(mongoSanitize());
 // Data sanitization against XSS attacks
 app.use(xss());
+
+app.use(compression());
 
 app.use('/api', limiter);
 

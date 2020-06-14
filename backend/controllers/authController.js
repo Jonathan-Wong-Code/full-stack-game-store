@@ -76,12 +76,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }://${req.get(
     'host'
   )}/api/v1/resetPassword/${resetToken} to reset password. This expires in 10 minutes`;
-  // console.log(user);
-  // await sendEmail({
-  //   email: user.email,
-  //   subject: "Forgot your password?",
-  //   message,
-  // });
 
   const newEmail = new Email(user, message);
 
