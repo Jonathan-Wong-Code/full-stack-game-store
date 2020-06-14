@@ -7,8 +7,6 @@ const xss = require('xss-clean');
 const cors = require('cors');
 const compression = require('compression');
 
-const app = express();
-
 const gameRouter = require('./routes/gameRouter');
 const userRouter = require('./routes/userRouter');
 const reviewRouter = require('./routes/reviewRouter');
@@ -21,6 +19,8 @@ const AppError = require('./utils/appError');
 
 const { cloudinaryConfig } = require('./middleware/cloudinary');
 
+const app = express();
+app.enable('trust proxy');
 //Set  Security HTTP Headers
 app.use(helmet());
 

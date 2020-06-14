@@ -7,7 +7,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const Email = require('../utils/email');
 
-const createSendToken = (user, res, statusCode) => {
+const createSendToken = (user, res, statusCode, req) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_SECRET_EXPIRES_IN,
   });
@@ -17,9 +17,8 @@ const createSendToken = (user, res, statusCode) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
   };
-
-  if (process.env_NODE_ENV === 'production') jwtOptions.secure = true;
 
   res.cookie('jwt', token, jwtOptions);
 
@@ -44,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   const newEmail = new Email(newUser, 'Welcome and thanks for joining!');
   await newEmail.sendWelcome();
 
-  createSendToken(newUser, res, 201);
+  createSendToken(newUser, res, 201, req);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -58,7 +57,7 @@ exports.login = catchAsync(async (req, res, next) => {
     );
   }
 
-  createSendToken(user, res, 200);
+  createSendToken(user, res, 200, req);
 });
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
@@ -104,7 +103,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetExpires = undefined;
   await user.save();
 
-  createSendToken(user, res, 200);
+  createSendToken(user, res, 200, req);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -119,5 +118,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   req.user.passwordConfirm = updatedPasswordConfirm;
   await req.user.save();
 
-  createSendToken(req.user, res, 200);
+  createSendToken(req.user, res, 200, req);
 });
