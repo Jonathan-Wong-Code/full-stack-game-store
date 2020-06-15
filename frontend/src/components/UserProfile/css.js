@@ -3,7 +3,6 @@ import spacing from '../../../theme/spacing';
 import { breakpoints } from '../../../theme/breakpoints';
 
 export const ProfileContainer = styled.div`
-  width: 100%;
   margin-bottom: ${spacing[5]};
   display: flex;
   align-items: center;

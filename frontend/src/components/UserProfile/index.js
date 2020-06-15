@@ -13,7 +13,7 @@ const UserProfile = ({ userPhoto, userName }) => (
 
 UserProfile.propTypes = {
   userName: string.isRequired,
-  userPhoto: string.isRequired,
+  userPhoto: string.isRequired
 };
 
 export default UserProfile;

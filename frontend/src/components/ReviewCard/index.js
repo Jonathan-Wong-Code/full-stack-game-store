@@ -13,7 +13,7 @@ import {
   ReviewContainer,
   ReviewTitleRating,
   ReviewTitle,
-  ReviewFeedbackContainer,
+  ReviewFeedbackContainer
 } from './css';
 
 import UserProfile from '../UserProfile';
@@ -26,7 +26,7 @@ const ReviewCard = ({
   reviewLikes,
   title,
   userName,
-  userPhoto,
+  userPhoto
 }) => {
   const totalLikes = reviewDislikes + reviewLikes;
   return (
@@ -62,7 +62,7 @@ ReviewCard.propTypes = {
   reviewLikes: number.isRequired,
   title: string.isRequired,
   userName: string.isRequired,
-  userPhoto: string.isRequired,
+  userPhoto: string.isRequired
 };
 
 export default ReviewCard;

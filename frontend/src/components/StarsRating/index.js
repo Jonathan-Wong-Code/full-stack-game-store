@@ -11,6 +11,7 @@ import useTheme from '../../hooks/useTheme';
 
 const StarsRating = ({ rating }) => {
   const theme = useTheme();
+
   const getFilledStars = () => {
     const stars = [];
     for (let i = 0; i < rating; i += 1) {

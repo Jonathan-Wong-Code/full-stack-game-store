@@ -11,4 +11,8 @@ export const Input = styled(Field)`
   background-color: ${({ theme }) => theme.contentBackgroundLight};
   border: 1px solid ${({ theme }) => theme.grey};
   outline: none;
+
+  &:focus {
+    outline: 1px solid blue;
+  }
 `;

@@ -2,19 +2,52 @@ import React from 'react';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 import { PrimaryButton } from '../../src/components/Buttons';
-import { StyledForm, StyledSection, H2 } from './css';
+import {
+  StyledForm,
+  StyledSection,
+  H2,
+  InnerSection
+} from '../../src/components/Forms/AuthForm';
 import { Input } from '../../src/components/Input';
 
-const Login = () => (
-  <StyledSection aria-labelledby="login-header">
-    <H2 id="login-header">Sign In</H2>
-    <StyledForm>
-      <Input type="email" name="email" />
-      <Input type="password" name="password" />
-      <PrimaryButton>Login</PrimaryButton>
-    </StyledForm>
-  </StyledSection>
-);
+const Login = () => {
+  const onSubmit = () => {
+    // Dispatch and login.
+  };
+  return (
+    <StyledSection aria-labelledby="login-header">
+      <InnerSection>
+        <H2 id="login-header">
+          Sign In
+          <p className="screen-reader-only"> with your credentials below:</p>
+        </H2>
+        <StyledForm onSubmit={onSubmit}>
+          <label htmlFor="login-email" className="screen-reader-only">
+            Email:
+          </label>
+          <Input
+            type="email"
+            name="email"
+            id="login-email"
+            placeholder="Email"
+          />
+
+          <label htmlFor="login-password" className="screen-reader-only">
+            Password:
+          </label>
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="login-password"
+          />
+
+          <PrimaryButton>Login</PrimaryButton>
+        </StyledForm>
+      </InnerSection>
+    </StyledSection>
+  );
+};
 
 export default withFormik({
   mapPropsToValues: () => ({
@@ -30,9 +63,5 @@ export default withFormik({
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
       .required('Password is required')
-  }),
-
-  handleSubmit: () => {
-    console.log('submitting');
-  }
+  })
 })(Login);

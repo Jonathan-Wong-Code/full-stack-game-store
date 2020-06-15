@@ -1,7 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
+import { normalize, hideVisually } from 'polished';
+
 import { primaryFont } from './typography';
-import { normalize } from 'polished';
-import { defaultTheme } from '../theme/themes';
+import { defaultTheme } from './themes';
+import 'what-input';
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize()}
@@ -38,6 +40,14 @@ export const GlobalStyle = createGlobalStyle`
     background: none;
     cursor: pointer;
     border: none;
+  }
+  
+  .screen-reader-only {
+    ${hideVisually}
+  }
+
+  [data-whatintent='mouse'] *:focus {
+    outline: none;
   }
 
 `;
