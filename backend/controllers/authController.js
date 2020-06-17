@@ -24,9 +24,7 @@ const createSendToken = (user, res, statusCode, req) => {
 
   res.status(statusCode).json({
     status: 'success',
-    data: {
-      user,
-    },
+    user,
     token,
   });
 };
@@ -48,13 +46,15 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
-  const passwordMatches = await user.correctPassword(password);
 
-  if (!user || !passwordMatches) {
-    return next(
-      new AppError('Incorrect email or password, please try again!', 404)
-    );
+  const user = await User.findOne({ email });
+  if (!email || !password) {
+    return next(new AppError('Please provide email and password!', 400));
+  }
+  // 2) Check if user exists && password is correct
+
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError('Incorrect email or password', 401));
   }
 
   createSendToken(user, res, 200, req);

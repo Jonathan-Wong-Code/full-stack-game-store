@@ -22,9 +22,14 @@ const { cloudinaryConfig } = require('./middleware/cloudinary');
 const app = express();
 app.enable('trust proxy');
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 
-app.options('*', cors());
+// app.options('*', cors());
 
 //Set  Security HTTP Headers
 app.use(helmet());

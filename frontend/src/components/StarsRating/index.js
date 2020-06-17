@@ -1,25 +1,46 @@
 import React from 'react';
-import { number } from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import { number, func, bool } from 'prop-types';
 
-import ScreenReaderOnly from '../ScreenReaderOnly';
 import Icon from '../Icon';
 
 import { StarFilled, StarUnfilled } from '../../assets/icons';
-import { StarsContainer } from './css';
 import useTheme from '../../hooks/useTheme';
+import { StarsContainer } from './css';
 
-const StarsRating = ({ rating }) => {
+const Stars = ({ rating, setRating, isForReview = true }) => {
   const theme = useTheme();
+
+  const getStarFilledType = i =>
+    isForReview ? (
+      <button type="button" onClick={() => setRating(i + 1)}>
+        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
+          <StarFilled />
+        </Icon>
+      </button>
+    ) : (
+      <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
+        <StarFilled />
+      </Icon>
+    );
+
+  const getStarUnfilledType = i =>
+    isForReview ? (
+      <button type="button" onClick={() => setRating(rating + i + 1)}>
+        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
+          <StarUnfilled />
+        </Icon>
+      </button>
+    ) : (
+      <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
+        <StarUnfilled />
+      </Icon>
+    );
 
   const getFilledStars = () => {
     const stars = [];
     for (let i = 0; i < rating; i += 1) {
-      stars.push(
-        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
-          <StarFilled />
-        </Icon>
-      );
+      stars.push(getStarFilledType(i));
     }
 
     return stars.map(star => star);
@@ -31,11 +52,7 @@ const StarsRating = ({ rating }) => {
     const stars = [];
 
     for (let i = 0; i < unfilledStars; i += 1) {
-      stars.push(
-        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
-          <StarUnfilled />
-        </Icon>
-      );
+      stars.push(getStarUnfilledType(i));
     }
 
     return stars.map(star => star);
@@ -43,17 +60,23 @@ const StarsRating = ({ rating }) => {
 
   return (
     <StarsContainer>
-      <ScreenReaderOnly>
+      <span className="screen-reader-only">
         The rating for this review is: {rating} out of 5
-      </ScreenReaderOnly>
+      </span>
       {getFilledStars()}
       {getUnfilledStars()}
     </StarsContainer>
   );
 };
 
-StarsRating.propTypes = {
-  rating: number.isRequired
+Stars.propTypes = {
+  rating: number.isRequired,
+  setRating: func,
+  isForReview: bool
 };
 
-export default StarsRating;
+Stars.defaultProps = {
+  setRating: () => {},
+  isForReview: false
+};
+export default Stars;

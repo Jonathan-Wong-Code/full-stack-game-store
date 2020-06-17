@@ -2,11 +2,6 @@ import styled from 'styled-components';
 import spacing from '../../../theme/spacing';
 import { breakpoints } from '../../../theme/breakpoints';
 
-export const StarsContainer = styled.div`
-  display: flex;
-  line-height: 1;
-`;
-
 export const Section = styled.section`
   display: flex;
   flex-direction: column;

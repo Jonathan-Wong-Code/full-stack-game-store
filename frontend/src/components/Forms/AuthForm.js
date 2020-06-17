@@ -40,3 +40,9 @@ export const H2 = styled.h2`
   line-height: 1;
   margin-bottom: ${spacing[6]};
 `;
+
+export const Links = styled.div`
+  margin-top: ${spacing[3]};
+  display: flex;
+  justify-content: space-between;
+`;

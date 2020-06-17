@@ -2,15 +2,20 @@
 import React from 'react';
 import Head from 'next/head';
 import { object, func } from 'prop-types';
+import { Provider } from 'react-redux';
 
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from '../theme/themes';
 import { ThemeContextProvider } from '../src/context/themeContext';
-import { Wrapper } from '../src/components/Wrapper';
+
+import { configureStore } from '../src/store';
+
 import { GlobalStyle } from '../theme/Global';
 import Layout from '../src/components/Layout';
 
 function MyApp({ Component, pageProps }) {
+  const store = configureStore();
+
   return (
     <>
       <Head>
@@ -21,10 +26,12 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ThemeContextProvider theme={defaultTheme}>
         <ThemeProvider theme={defaultTheme}>
-          <GlobalStyle />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Provider store={store}>
+            <GlobalStyle />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </Provider>
         </ThemeProvider>
       </ThemeContextProvider>
     </>

@@ -1,6 +1,6 @@
-const Dislike = require("../models/dislikeModel");
-const catchAsync = require("../utils/catchAsync");
-const Like = require("../models/likeModel");
+const Dislike = require('../models/dislikeModel');
+const catchAsync = require('../utils/catchAsync');
+const Like = require('../models/likeModel');
 
 exports.addDislike = catchAsync(async (req, res, next) => {
   if (!req.body.user) req.body.user = req.user.id;
@@ -14,7 +14,7 @@ exports.addDislike = catchAsync(async (req, res, next) => {
   });
 
   res.status(201).json({
-    status: "success",
+    status: 'success',
     data: {
       dislike,
     },
@@ -29,7 +29,7 @@ exports.removeDislike = catchAsync(async (req, res, next) => {
   });
 
   res.status(204).json({
-    status: "success",
+    status: 'success',
     data: null,
   });
 });

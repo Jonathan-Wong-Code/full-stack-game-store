@@ -1,19 +1,34 @@
 import React from 'react';
+import { shape, string } from 'prop-types';
+
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
+import Link from 'next/link';
 import { PrimaryButton } from '../../src/components/Buttons';
 import {
   StyledForm,
   StyledSection,
   H2,
-  InnerSection
+  InnerSection,
+  Links
 } from '../../src/components/Forms/AuthForm';
 import { Input } from '../../src/components/Input';
+import { startLogin } from '../../src/actions/auth';
 
-const Login = () => {
-  const onSubmit = () => {
-    // Dispatch and login.
+// Done becuse of next/link requires a tag.
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
+const Login = ({ values }) => {
+  ('render');
+  const dispatch = useDispatch();
+
+  const onSubmit = e => {
+    e.preventDefault();
+    const { email, password } = values;
+    dispatch(startLogin({ email, password }));
   };
+
   return (
     <StyledSection aria-labelledby="login-header">
       <InnerSection>
@@ -44,9 +59,31 @@ const Login = () => {
 
           <PrimaryButton>Login</PrimaryButton>
         </StyledForm>
+        <Links className="links">
+          <Link href="/forgotPassword" as="/forgotPassword">
+            <a>Forgot your password?</a>
+          </Link>
+          <Link href="/signup" as="/signup">
+            <a>Sign up</a>
+          </Link>
+        </Links>
       </InnerSection>
     </StyledSection>
   );
+};
+
+Login.propTypes = {
+  values: shape({
+    email: string,
+    password: string
+  })
+};
+
+Login.defaultProps = {
+  values: {
+    email: '',
+    password: ''
+  }
 };
 
 export default withFormik({

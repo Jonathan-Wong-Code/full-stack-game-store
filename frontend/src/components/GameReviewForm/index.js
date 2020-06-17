@@ -3,7 +3,7 @@ import { withFormik } from 'formik';
 import { string } from 'prop-types';
 
 import { Input } from '../Input';
-import Stars from './Stars';
+import StarsRating from '../StarsRating';
 import UserProfile from '../UserProfile';
 import {
   ReviewContainer,
@@ -26,7 +26,7 @@ const GameReviewForm = ({
       <ReviewContainer>
         <form onSubmit={onSubmit}>
           <ReviewRatingTitle>
-            <Stars rating={rating} setRating={setRating} />
+            <StarsRating rating={rating} setRating={setRating} isForReview />
             <label htmlFor="game-review-title" className="screen-reader-only">
               Enter review title:
             </label>
