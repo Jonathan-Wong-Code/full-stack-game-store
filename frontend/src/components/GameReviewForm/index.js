@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withFormik } from 'formik';
 import { string } from 'prop-types';
+import * as Yup from 'yup';
 
 import { Input } from '../Input';
 import StarsRating from '../StarsRating';
@@ -17,7 +18,7 @@ const GameReviewForm = ({
   userName = 'john doe',
   userPhoto = 'http://www.fillmurray.com/g/200/300'
 }) => {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
 
   const onSubmit = () => {};
   return (
@@ -69,5 +70,13 @@ export default withFormik({
   mapPropsToValues: () => ({
     description: '',
     title: ''
+  }),
+
+  validationSchema: Yup.object().shape({
+    description: Yup.string()
+      .min(20, 'Review must be 20 characters long at least.')
+      .required('A review description is required'),
+
+    title: Yup.string().required('A review title is required')
   })
 })(GameReviewForm);

@@ -64,17 +64,15 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    next(new AppError('No account found associated with that email', 404));
+    return next(
+      new AppError('No account found associated with that email', 404)
+    );
   }
   //Want unhashed
   const resetToken = user.createResetPasswordToken();
   await user.save({ validateBeforeSave: false });
 
-  const message = `Forgot your password ? Head over to ${
-    req.protocol
-  }://${req.get(
-    'host'
-  )}/api/v1/resetPassword/${resetToken} to reset password. This expires in 10 minutes`;
+  const message = `Forgot your password ? Head over to http://localhost:3000/resetPassword/${resetToken} to reset password. This expires in 10 minutes`;
 
   const newEmail = new Email(user, message);
 
@@ -94,7 +92,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ passwordResetToken: hashedToken });
   if (!user) {
-    next(new AppError('Reset token invalid. Please try again', 404));
+    return next(new AppError('Reset token invalid. Please try again', 404));
   }
 
   user.password = updatedPassword;

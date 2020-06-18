@@ -1,0 +1,23 @@
+import { Preview, Meta, Story, Props } from '@storybook/addon-docs/blocks';
+import GameReviewForm from './index';
+
+<Meta title="Design System|Components" component={GameReviewForm} />
+
+# GameReviewForm
+
+## Usage
+
+The game review form is a component used for reviewing games. It allows the user to set a rating of 1 to 5. They can also write a review title and description and submit it.
+
+<Preview>
+  <Story name="GameReviewForm">
+    <GameReviewForm
+      userName="john doe"
+      userPhoto="http://www.fillmurray.com/g/200/300"
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={GameReviewForm} />

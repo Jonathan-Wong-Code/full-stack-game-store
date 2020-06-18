@@ -1,15 +1,15 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 class Email {
   constructor(user, message) {
     this.to = user.email;
     this.from = `Jon ${process.env.EMAIL_FROM}`;
     this.message = message;
-    this.firstName = user.name.split(" ")[0];
+    this.firstName = user.name.split(' ')[0];
   }
 
   createTransport() {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       return nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
@@ -21,7 +21,7 @@ class Email {
     }
 
     return nodemailer.createTransport({
-      service: "SendGrid",
+      service: 'SendGrid',
       auth: {
         user: process.env.SENDGRID_USERNAME,
         pass: process.env.SENDGRID_PASSWORD,

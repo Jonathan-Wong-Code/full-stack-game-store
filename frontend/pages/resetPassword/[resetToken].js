@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
+import { useRouter } from 'next/router';
+
 import { PrimaryButton } from '../../src/components/Buttons';
 import {
   StyledForm,
@@ -10,9 +12,14 @@ import {
 } from '../../src/components/Forms/AuthForm';
 import { Input } from '../../src/components/Input';
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
+  const {
+    query: { resetToken }
+  } = useRouter();
+
   const onSubmit = () => {};
 
+  console.log(resetToken);
   return (
     <StyledSection aria-labelledby="reset-password-header">
       <InnerSection>
@@ -68,4 +75,4 @@ export default withFormik({
       .min(8, 'Must be at least 8 characters')
       .required('Password is required')
   })
-})(ForgotPassword);
+})(ResetPassword);

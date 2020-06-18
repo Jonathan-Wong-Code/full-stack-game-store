@@ -1,10 +1,10 @@
-import { useReducer } from "react";
+import { useReducer } from 'react';
 
 const reducer = (newState, oldState) => ({ ...newState, ...oldState });
 
 const useSetState = ({ initialState = {} }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const setState = (newStateData) => dispatch(newStateData);
+  const setState = newStateData => dispatch(newStateData);
 
   return [state, setState];
 };

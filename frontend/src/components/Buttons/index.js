@@ -40,8 +40,7 @@ const PrimaryBaseButton = styled(BaseButton)`
   border: 1px solid ${({ theme }) => theme.primaryLight};
 
   &:hover,
-  &:active,
-  &:focus {
+  &:active {
     color: ${({ theme }) => theme.textInverted};
     background-color: ${({ theme }) => theme.primaryLight};
   }
@@ -64,8 +63,7 @@ const SecondaryBaseButton = styled(BaseButton)`
   border: 1px solid ${({ theme }) => theme.secondaryColor};
 
   &:hover,
-  &:active,
-  &:focus {
+  &:active {
     color: ${({ theme }) => theme.textInverted};
     border: 1px solid ${({ theme }) => theme.secondaryLight};
     background-color: ${({ theme }) => theme.secondaryLight};

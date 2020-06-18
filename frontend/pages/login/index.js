@@ -4,6 +4,7 @@ import { shape, string } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
+
 import Link from 'next/link';
 import { PrimaryButton } from '../../src/components/Buttons';
 import {
@@ -20,7 +21,6 @@ import { startLogin } from '../../src/actions/auth';
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 const Login = ({ values }) => {
-  ('render');
   const dispatch = useDispatch();
 
   const onSubmit = e => {
