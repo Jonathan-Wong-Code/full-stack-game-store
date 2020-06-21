@@ -1,5 +1,5 @@
 import React from 'react';
-
-const Footer = () => <footer>FOOTER</footer>;
+import { StyledFooter } from './css';
+const Footer = () => <StyledFooter>FOOTER</StyledFooter>;
 
 export default Footer;

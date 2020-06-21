@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const { promisify } = require('util');
 
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
@@ -64,9 +65,15 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    return next(
-      new AppError('No account found associated with that email', 404)
-    );
+    // return next(
+    //   new AppError('No account found associated with that email', 404)
+    // );
+
+    // Always send a 200 so a hacker can't guess user email accounts
+    res.status(200).json({
+      status: 'success',
+      message: 'Password reset email sent',
+    });
   }
   //Want unhashed
   const resetToken = user.createResetPasswordToken();
@@ -115,6 +122,35 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   req.user.password = updatedPassword;
   req.user.passwordConfirm = updatedPasswordConfirm;
   await req.user.save();
+
+  createSendToken(req.user, res, 200, req);
+});
+
+exports.checkLoggedIn = catchAsync(async (req, res, next) => {
+  let token = {};
+
+  if (req.cookies && req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+
+  if (!token) {
+    return next(new AppError('Invalid token please login', 401));
+  }
+
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  const user = await User.findById(decoded.id);
+  if (!user) {
+    return next(new AppError('No user found please login', 401));
+  }
+
+  if (await user.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password. Please login again', 401)
+    );
+  }
+
+  req.user = user;
 
   createSendToken(req.user, res, 200, req);
 });

@@ -28,6 +28,7 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={defaultTheme}>
           <Provider store={store}>
             <GlobalStyle />
+            {/* <RouteListener /> */}
             <Layout>
               <Component {...pageProps} />
             </Layout>

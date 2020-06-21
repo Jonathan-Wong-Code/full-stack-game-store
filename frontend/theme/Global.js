@@ -23,6 +23,17 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
 
+
+
+  html, body, #__next {
+    height: 100%;
+  }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+  }
+
   ul, li {
     list-style-type: none;
   }

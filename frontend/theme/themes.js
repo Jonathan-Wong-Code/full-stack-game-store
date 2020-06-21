@@ -1,4 +1,4 @@
-import { green, purple, neutral, black, white } from './colors';
+import { green, purple, neutral, black, white, red } from './colors';
 export const defaultTheme = {
   primaryColor: purple[200],
   primaryLight: purple[100],
@@ -14,6 +14,8 @@ export const defaultTheme = {
   lightGrey: neutral[200],
   grey: neutral[300],
   darkGrey: neutral[400],
+
+  errorRed: red[100],
 
   bodyBackground: neutral[200],
   black,

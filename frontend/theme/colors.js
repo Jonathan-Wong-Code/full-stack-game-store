@@ -9,6 +9,10 @@ export const green = {
   200: '#167D7F'
 };
 
+export const red = {
+  100: '#D72D2D'
+};
+
 export const neutral = {
   100: '#ffffff',
   200: '#f4f5f7',

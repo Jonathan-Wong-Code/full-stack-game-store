@@ -1,18 +1,20 @@
 import styled from 'styled-components';
+import { Form } from 'formik';
+
 import spacing from '../../../theme/spacing';
-import { typeScale } from '../../../theme/typography';
 import { breakpoints } from '../../../theme/breakpoints';
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
 
   & input {
-    margin-bottom: ${spacing[2]};
+    margin: ${spacing[2]} 0;
   }
 
   & button {
     margin-top: ${spacing[5]};
+    margin-bottom: ${spacing[3]};
   }
 `;
 
@@ -34,15 +36,12 @@ export const InnerSection = styled.div`
   background-color: ${({ theme }) => theme.contentBackgroundLight};
 `;
 
-export const H2 = styled.h2`
-  font-size: ${typeScale.header2};
-  text-align: center;
-  line-height: 1;
-  margin-bottom: ${spacing[6]};
+export const ErrorMsg = styled.p`
+  color: ${({ theme }) => theme.errorRed};
+  margin-bottom: ${spacing[0]};
 `;
 
 export const Links = styled.div`
-  margin-top: ${spacing[3]};
   display: flex;
   justify-content: space-between;
 `;

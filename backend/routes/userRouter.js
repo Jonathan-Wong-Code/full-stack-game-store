@@ -5,6 +5,7 @@ const {
   forgotPassword,
   resetPassword,
   updatePassword,
+  checkLoggedIn,
 } = require('../controllers/authController');
 
 const { protect, restrictToRole } = require('../middleware/auth');
@@ -32,6 +33,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.post('/forgotPassword', forgotPassword);
 router.post('/resetPassword/:token', resetPassword);
+router.post('/checkLoggedIn', checkLoggedIn);
 
 router.use(protect);
 

@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 
 const gameRouter = require('./routes/gameRouter');
 const userRouter = require('./routes/userRouter');
@@ -29,8 +30,6 @@ app.use(
   })
 );
 
-// app.options('*', cors());
-
 //Set  Security HTTP Headers
 app.use(helmet());
 
@@ -49,6 +48,8 @@ app.use(xss());
 app.use(compression());
 
 app.use('/api', limiter);
+
+app.use(cookieParser());
 
 app.use(express.json());
 
