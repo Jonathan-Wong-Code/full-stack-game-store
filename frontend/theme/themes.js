@@ -13,7 +13,7 @@ export const defaultTheme = {
   contentBackground: neutral[300],
   lightGrey: neutral[200],
   grey: neutral[300],
-  darkGrey: neutral[400],
+  darkGrey: neutral[500],
 
   errorRed: red[100],
 

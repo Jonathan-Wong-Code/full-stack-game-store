@@ -19,7 +19,6 @@ import {
 
 import { Input } from '../../src/components/Input';
 import useSetState from '../../src/hooks/useSetState';
-import withAuth from '../../src/HoC/withAuth';
 
 // Done becuse of next/link requires a tag.
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -30,11 +29,9 @@ const validationSchema = Yup.object().shape({
     .required('Email is required')
 });
 
-const ForgotPassword = ({ isLoggedIn }) => {
+const ForgotPassword = () => {
   const [{ loading }, setState] = useSetState({
     loading: false
-    // message: '',
-    // error: ''
   });
 
   const onSubmit = async ({ email }) => {
@@ -45,22 +42,13 @@ const ForgotPassword = ({ isLoggedIn }) => {
         url: 'http://localhost:5000/api/v1/users/forgotPassword',
         data: { email }
       });
-      // setState({ message: 'Password reset sent' });
     } catch (error) {
-      // setState({ error: error.response.data.message });
+      // Fail silently
     } finally {
       setState({ loading: false });
       Router.push('/password-reset-sent');
     }
   };
-
-  // const onChange = (e, handleChange) => {
-  //   if (message) setState({ message: '' });
-  //   if (error) setState({ error: '' });
-  //   handleChange(e);
-  // };
-
-  if (isLoggedIn) Router.push('/');
 
   return (
     <Formik
@@ -84,21 +72,14 @@ const ForgotPassword = ({ isLoggedIn }) => {
               <label htmlFor="forgot-pass-email" className="screen-reader-only">
                 Email:
               </label>
-              <Input
-                name="email"
-                id="forgot-pass-email"
-                placeholder="Email"
-                // onChange={e => onChange(e, handleChange)}
-              />
+              <Input name="email" id="forgot-pass-email" placeholder="Email" />
 
               {errors.email && touched.email && !loading && (
                 <ErrorMsg>{errors.email}</ErrorMsg>
               )}
 
               <PrimaryButton>Submit</PrimaryButton>
-              {/* {error && !loading && <ErrorMsg>{error}</ErrorMsg>} */}
               {loading && <p>Sending email...</p>}
-              {/* {message && !loading && <p>{message}</p>} */}
             </StyledForm>
 
             <Links className="links">
@@ -116,4 +97,4 @@ const ForgotPassword = ({ isLoggedIn }) => {
   );
 };
 
-export default withAuth(ForgotPassword);
+export default ForgotPassword;

@@ -38,7 +38,7 @@ export const InnerSection = styled.div`
 
 export const ErrorMsg = styled.p`
   color: ${({ theme }) => theme.errorRed};
-  margin-bottom: ${spacing[0]};
+  margin-bottom: ${({ apiError }) => (apiError ? spacing[3] : spacing[0])};
 `;
 
 export const Links = styled.div`

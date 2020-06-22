@@ -12,6 +12,7 @@ import { configureStore } from '../src/store';
 
 import { GlobalStyle } from '../theme/Global';
 import Layout from '../src/components/Layout';
+import RouteListener from '../src/components/RouteListener';
 
 function MyApp({ Component, pageProps }) {
   const store = configureStore();
@@ -28,9 +29,10 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={defaultTheme}>
           <Provider store={store}>
             <GlobalStyle />
-            {/* <RouteListener /> */}
             <Layout>
-              <Component {...pageProps} />
+              <RouteListener>
+                <Component {...pageProps} />
+              </RouteListener>
             </Layout>
           </Provider>
         </ThemeProvider>

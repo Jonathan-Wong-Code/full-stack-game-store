@@ -1,4 +1,10 @@
-import { loginSuccess, loginError, loginLoading } from '../actions/auth';
+import {
+  loginSuccess,
+  loginError,
+  loginLoading,
+  clearLoginError,
+  logout
+} from '../actions/auth';
 
 const initialState = {
   user: null,
@@ -25,6 +31,20 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      };
+
+    case clearLoginError().type:
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
+
+    case logout().type:
+      return {
+        loading: false,
+        error: null,
+        user: null
       };
 
     default:

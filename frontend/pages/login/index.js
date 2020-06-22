@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { compose } from 'redux';
-import Router from 'next/router';
 
 import Link from 'next/link';
 import { PrimaryButton } from '../../src/components/Buttons';
@@ -19,33 +18,35 @@ import {
 } from '../../src/components/Forms/AuthForm';
 import { Input } from '../../src/components/Input';
 
-import { startLogin } from '../../src/actions/auth';
+import { startLogin, clearLoginError } from '../../src/actions/auth';
 import { selectAuthError, selectAuthLoading } from '../../src/selectors/auth';
-import withAuth from '../../src/HoC/withAuth';
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Enter a valid email format')
+    .required('Email is required'),
+
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required')
+});
+
 // Done becuse of next/link requires a tag.
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-const Login = ({ isLoggedIn }) => {
+const Login = () => {
   const dispatch = useDispatch();
 
   const loginError = useSelector(selectAuthError);
   const loginLoading = useSelector(selectAuthLoading);
 
+  useEffect(() => {
+    return () => dispatch(clearLoginError());
+  }, []);
+
   const onSubmit = values => {
     compose(dispatch, startLogin)(values);
   };
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Enter a valid email format')
-      .required('Email is required'),
-
-    password: Yup.string()
-      .min(8, 'Password must be at least 8 characters')
-      .required('Password is required')
-  });
-
-  if (isLoggedIn) Router.push('/');
 
   return (
     <Formik
@@ -114,4 +115,4 @@ const Login = ({ isLoggedIn }) => {
   );
 };
 
-export default withAuth(Login);
+export default Login;
