@@ -16,13 +16,13 @@ export const Container = styled.section`
   display: flex;
   align-items: flex-end;
 
-  padding: ${spacing[6]};
+  padding: ${spacing[4]};
 
-  @media screen and (min-width: ${breakpoints[2]}px) {
+  @media screen and (min-width: ${breakpoints[0]}px) {
     height: 450px;
     width: 992px;
     background-size: cover;
-    padding: ${spacing[7]};
+    padding: ${spacing[5]};
   }
 `;
 
@@ -31,22 +31,31 @@ export const ContentFlexbox = styled.div`
   align-items: flex-end;
   width: 100%;
   flex-direction: column;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: ${spacing[3]};
 
-  @media screen and (min-width: ${breakpoints[2]}px) {
+  @media screen and (min-width: ${breakpoints[0]}px) {
     flex-direction: row;
+    padding: ${spacing[5]};
+    align-items: flex-end;
   }
 `;
 
 export const H3 = styled.h3`
-  font-size: ${typeScale.header1};
+  font-size: ${typeScale.header2};
   font-weight: ${typeWeight.bold};
+
+  @media screen and (min-width: ${breakpoints[0]}px) {
+    font-size: ${typeScale.header1};
+  }
 `;
 
 export const LeftSide = styled.div`
   width: 100%;
   margin-bottom: ${spacing[7]};
 
-  @media screen and (min-width: ${breakpoints[2]}px) {
+  @media screen and (min-width: ${breakpoints[0]}px) {
     justify-content: space-between;
     margin: 0;
   }
@@ -55,8 +64,7 @@ export const LeftSide = styled.div`
 export const RightSide = styled.div`
   width: 100%;
   display: block;
-
-  @media screen and (min-width: ${breakpoints[2]}px) {
+  @media screen and (min-width: ${breakpoints[0]}px) {
     justify-content: flex-end;
   }
 

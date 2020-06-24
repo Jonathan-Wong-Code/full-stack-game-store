@@ -3,11 +3,15 @@ import { applyStyleModifiers } from 'styled-components-modifiers';
 
 import { typeScale, typeWeight } from '../../../theme/typography';
 import spacing from '../../../theme/spacing';
-
+import { breakpoints } from '../../../theme/breakpoints';
 const MODIFIERS = {
   large: () => `
-    font-size:${typeScale.header1};
+    font-size:${typeScale.header2};
     padding: ${spacing[2]} ${spacing[6]};
+
+    @media screen and (min-width: ${breakpoints[2]}px) {
+      font-size:${typeScale.header1};
+    }
   `
 };
 

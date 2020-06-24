@@ -8,7 +8,7 @@ import {
   LeftSide,
   RightSide,
   PromoText,
-  ButtonContainer,
+  ButtonContainer
 } from './css';
 
 import { Cart } from '../../assets/icons';
@@ -27,7 +27,7 @@ const CarouselPanel = ({
   isAddToCart,
   buttonText,
   textColorLight,
-  gameTitle,
+  gameTitle
 }) => {
   const renderButtons = isAddToCart =>
     isAddToCart ? (
@@ -75,7 +75,7 @@ CarouselPanel.propTypes = {
   isAddToCart: bool,
   offerDescription: string.isRequired,
   promoText: string,
-  textColorLight: bool,
+  textColorLight: bool
 };
 
 CarouselPanel.defaultProps = {
@@ -85,7 +85,7 @@ CarouselPanel.defaultProps = {
   gameTitle: '',
   isAddToCart: true,
   promoText: '',
-  textColorLight: true,
+  textColorLight: true
 };
 
 export default CarouselPanel;

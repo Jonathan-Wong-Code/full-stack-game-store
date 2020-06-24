@@ -51,6 +51,7 @@ export const startResetPassword = (data, token) => async dispatch => {
 };
 
 export const startCheckLoggedIn = () => async dispatch => {
+  dispatch(loginLoading());
   try {
     const response = await axios({
       method: 'POST',
@@ -60,7 +61,7 @@ export const startCheckLoggedIn = () => async dispatch => {
 
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    // fail silently
+    dispatch(loginError(error.response.data.message));
   }
 };
 

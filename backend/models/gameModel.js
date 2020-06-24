@@ -22,6 +22,7 @@ const gameSchema = new mongoose.Schema(
       required: [true, 'A game must have an operating system'],
     },
 
+    // Represented as a JS date.
     releaseDate: {
       type: Date,
       default: Date.now(),
@@ -51,13 +52,14 @@ const gameSchema = new mongoose.Schema(
       required: [true, 'Game must have a price'],
     },
 
+    // Discount represents the amount taken off total price.
     discount: {
       type: Number,
       default: 0,
     },
 
     genre: {
-      type: String,
+      type: [String],
       required: [true, 'A game must have a genre'],
       enum: {
         values: [
@@ -71,17 +73,56 @@ const gameSchema = new mongoose.Schema(
           'Puzzle',
           'Adventure',
           'Fighting',
+          'Racing',
+          'Moba',
+          'RTS',
         ],
 
         message:
-          'A game must have a genre of Action, FPS, RPG, Strategy, MMORPG, Sports, Simulation, Puzzle, or Adventure',
+          'A game must have a genre of Action, FPS, RPG, Strategy, MMORPG, Sports, Simulation, Puzzle, Adventure, RTS, Moba, Racing',
       },
     },
-    imageCover: String,
-    cardPhoto: String,
-    galleryImages: [String],
-    mobileImages: [String],
-    thumbnails: [String],
+
+    // Images
+    imageCover: {
+      type: String,
+      default: '',
+    },
+
+    imageCoverMobile: {
+      type: String,
+      default: '',
+    },
+
+    cardPhoto: {
+      type: String,
+      default: '',
+    },
+
+    galleryImages: {
+      type: [String],
+      default: [],
+    },
+
+    mobileImages: {
+      type: [String],
+      default: [],
+    },
+    thumbnails: {
+      type: [String],
+      default: [],
+    },
+
+    // isFeatured denotes that it appears in the front end carousel
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    // isFrontPage denotes if the game should appear on the front page or not.
+    isFrontPage: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },

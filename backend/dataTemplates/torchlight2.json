@@ -1,0 +1,14 @@
+{
+  "title": "Torchlight 2",
+  "averageRating": "4",
+  "operatingSystems": ["Windows"],
+  "releaseDate": "Sept 20, 2012 03:24:00",
+  "company": "Runic Games",
+  "ratingsQuantity": 0,
+  "description": "Torchlight II is an action role-playing dungeon crawler video game developed by Runic Games, released for Microsoft Windows on September 20, 2012. It is the sequel to Torchlight, and features peer-to-peer multiplayer support and extended modding capabilities. The game was released for OS X on February 2, 2015, and for Linux on March 4, 2015. Ports for Nintendo Switch, PlayStation 4, and Xbox One were released September 3 2019 and were developed by Panic Button. \nTorchlight II takes place in a fantasy world where the player character can be any of four classes, each with different skills and abilities. The plot starts with the destruction of the town of Torchlight, at the hands of the Alchemist from the first game, and has the character following the trail of destruction left in the Alchemist's wake as he searches for a cure to his illness which has driven him insane. The sequel to the first game was originally going to be an MMORPG however Torchlight II was released with both single-player and multi-player support, as the company felt they could release this much faster than the planned MMO.",
+
+  "price": 40,
+  "genre": ["Action", "RPG"],
+  "isFeatured": false,
+  "isFrontPage": true
+}

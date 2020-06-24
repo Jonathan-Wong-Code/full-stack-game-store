@@ -1,0 +1,15 @@
+{
+  "title": "Forza Horizon 4",
+  "averageRating": "3",
+  "operatingSystems": ["Windows", "Mac OSX"],
+  "releaseDate": "Septemeber 28, 2018 03:24:00",
+  "company": "Microsfot Studios",
+  "ratingsQuantity": 0,
+  "description": "Dynamic seasons change everything at the world’s greatest automotive festival. Go it alone or team up with others to explore beautiful and historic Britain in a shared open world. Collect, modify and drive over 450 cars. Race, stunt, create and explore – choose your own path to become a Horizon Superstar.",
+
+  "price": 60,
+  "discount": 30,
+  "genre": ["Racing", "Sports"],
+  "isFeatured": false,
+  "isFrontPage": true
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Final Fantasy 7",
+  "averageRating": "5",
+  "operatingSystems": ["Windows"],
+  "releaseDate": "January 31, 1997 03:24:00",
+  "company": "Squaresoft",
+  "ratingsQuantity": 0,
+  "description": "Final Fantasy VII is the seventh main installment in the Final Fantasy series, developed and published by Squaresoft. It was released in January 1997 for the PlayStation, and was later re-released for the Microsoft Windows, PlayStation 3, PlayStation Portable, PlayStation Vita, PlayStation 4, iOS, Android, Xbox One and Switch platforms, it is also included on the PlayStation Classic mini console. It was directed by Yoshinori Kitase, produced by Hironobu Sakaguchi, with a score produced by Nobuo Uematsu and character designs by Tetsuya Nomura. It was the first title in the series to feature three-dimensional graphics, pre-rendered backgrounds and numerous full motion videos, and the first to be released in Europe. Final Fantasy VII follows the story of mercenary Cloud Strife, who is hired by the eco-terrorist group AVALANCHE—led by Barret Wallace—to help fight the mega-corporation Shinra Electric Power Company, who attempts to drain the planet's lifeblood as an energy source to further their profits. Apathetic to the cause, Cloud initially fights for personal gain, and for the promise he made to childhood friend Tifa Lockhart. Cloud eventually joins forces with many others to save the planet, which is threatened by Shinra and Cloud's nemesis Sephiroth, and discovers a reason to fight for a cause other than his own. The gameplay is a departure from previous entries in the series in many ways. Though it retains the Active Time Battle pseudo-turn based menu command system, Final Fantasy VII features three party members rather than four. The Materia system allows the player to customize each party member's abilities to their liking, and the Limit system grants them unique combat skills. Though minigames had been a recurring feature, Final Fantasy VII introduces numerous new ones, many of them playable in the theme park Gold Saucer varying from racing with Chocobos to snowboarding. Final Fantasy VII is the best-selling game in the series with over 12 million units sold. It is widely renowned as one of the most influential RPGs to date. Its memorable soundtrack, characters and story make it one of the most popular games in the series, a prominent feature in popular culture, and a frequent candidate for lists of the greatest games of all time. The popularity of the title has spawned a remake, titled simply Final Fantasy VII Remake, and a series of prequels, sequels and spinoffs titled the Compilation of Final Fantasy VII.",
+
+  "price": 30,
+  "genre": ["RPG"],
+  "isFeatured": false,
+  "isFrontPage": true
+}

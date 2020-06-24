@@ -1,0 +1,15 @@
+{
+  "title": "The Witcher 3",
+  "averageRating": "5",
+  "operatingSystems": ["Windows", "Mac OSX"],
+  "releaseDate": "May 19, 2015 03:24:00",
+  "company": "CD Projekt Red",
+  "ratingsQuantity": 0,
+  "description": "You are The Witcher, professional monster hunter, a killer for hire. Trained from early childhood and mutated to gain superhuman skills, strength and reflexes, witchers are a distrusted counterbalance to the monster-infested world in which they live. You are a drifter, always on the move, following in the footsteps of tragedy to make other people's problems your own - if the pay is good. You are now taking on your most important contract yet: to track down the child of prophecy, a living weapon, a key to save or destroy this world. You will make choices that go beyond good & evil, and you will face their far reaching consequences. The Witcher 3: Wild Hunt is a story-driven next-generation open world role-playing game, set in a troubled and morally indifferent fantasy universe. Built for endless adventure, the massive open world of The Witcher sets new standards in terms of size, depth and complexity. You will traverse a vast open world, rich with merchant cities, dangerous mountain passes, and forgotten caverns to explore. It's survival of the fittest - deal with treasonous generals, devious witches and corrupt royalty to provide dark and dangerous services, then invest your rewards to upgrade your equipment, or spend them away on pleasures of the night.",
+
+  "price": 60,
+  "discount": 30,
+  "genre": ["RPG", "Action"],
+  "isFeatured": false,
+  "isFrontPage": true
+}

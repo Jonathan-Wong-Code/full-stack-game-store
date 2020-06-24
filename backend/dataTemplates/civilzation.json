@@ -1,0 +1,14 @@
+{
+  "title": "Civilization VI",
+  "averageRating": "4",
+  "operatingSystems": ["Windows", "Mac OSX"],
+  "releaseDate": "October 21, 2019 03:24:00",
+  "company": "Firaxis Games",
+  "ratingsQuantity": 0,
+  "description": "Civilization VI offers new ways to interact with your world, expand your empire across the map, advance your culture, and compete against history’s greatest leaders to build a civilization that will stand the test of time. See the marvels of your empire spread across the map like never before. Each city spans multiple tiles so you can custom build your cities to take full advantage of the local terrain. ",
+
+  "price": 80,
+  "genre": ["Simulation"],
+  "isFeatured": true,
+  "isFrontPage": true
+}

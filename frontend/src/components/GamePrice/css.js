@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { typeScale } from '../../../theme/typography';
 import spacing from '../../../theme/spacing';
+import { breakpoints } from '../../../theme/breakpoints';
 
 export const Prices = styled.div`
   margin-left: ${({ gameDiscount }) => (gameDiscount ? spacing[2] : null)};
@@ -19,5 +20,9 @@ export const OriginalGamePrice = styled.p`
 
 export const FinalGamePrice = styled.p`
   font-size: ${({ isLarge }) =>
-    isLarge ? typeScale.header1 : typeScale.paragraph};
+    isLarge ? typeScale.header2 : typeScale.paragraph};
+
+  @media screen and (min-width: ${breakpoints[2]}px) {
+    font-size: ${typeScale.header1};
+  }
 `;

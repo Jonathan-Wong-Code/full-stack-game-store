@@ -4,11 +4,15 @@ const catchAsync = require('../utils/catchAsync');
 const { uploader } = require('../middleware/cloudinary');
 
 exports.createGame = catchAsync(async (req, res, next) => {
+  if (req.body.releaseDate) {
+    req.body.releaseDate = new Date(req.body.releaseDate);
+  }
+
   const newGame = await Game.create(req.body);
 
   res.status(201).json({
     message: 'success',
-    result: newGame,
+    game: newGame,
   });
 });
 
@@ -23,7 +27,7 @@ exports.getAllGames = catchAsync(async (req, res, next) => {
 
   res.status(201).json({
     message: 'success',
-    result: games,
+    games,
   });
 });
 
@@ -84,13 +88,18 @@ exports.addGameCoverImage = catchAsync(async (req, res, next) => {
     const image = await uploader.upload(req.imageCover, {
       eager: [
         {
-          height: 160,
-          width: 320,
+          height: 215,
+          width: 460,
+        },
+        {
+          height: 666,
+          width: 1000,
         },
       ],
     });
     req.body.imageCover = image.url;
     req.body.cardPhoto = image.eager[0].url;
+    req.body.imageCoverMobile = image.eager[1].url;
   }
 
   next();

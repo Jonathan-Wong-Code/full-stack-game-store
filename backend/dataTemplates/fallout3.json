@@ -1,0 +1,15 @@
+{
+  "title": "Fallout 3",
+  "averageRating": "4",
+  "operatingSystems": ["Windows", "Mac OSX"],
+  "releaseDate": "October 28, 2008 03:24:00",
+  "company": "Bethesda Game Studios",
+  "ratingsQuantity": 0,
+  "description": "Fallout 3 takes place in the year 2277, and within the region that covers most of the ruined city of Washington, D.C., Northern Virginia, and parts of Maryland. The game's scaled landscape includes war-ravaged variants of numerous real-life landmarks such as the White House, the Jefferson and Lincoln Memorials, Arlington National Cemetery and the Washington Monument, with a small number of settlements dotted around the Capital Wasteland that consist of descendants of survivors from the Great War, including one that surrounds an unexploded bomb, another consisting primarily of ghoul inhabitants, and another formed within the hulking remains of an aircraft carrier. While the city can be explored, much of the interior zones are cut off by giant rubble over many of the roads leading in, meaning that access can only be achieved by using the city's former underground metro tunnels. The region has two major factions within it – the Enclave and the Brotherhood of Steel. While the Enclave is similar in goal to their western brethren, the eastern branch of the Brotherhood of Steel seeks to assist the people of the Wasteland, though a small group rejected this and became outcasts who seek to resume their original goal of salvaging high-level technology. Other factions include former slaves who seek to inspire others for freedom by restoring the Lincoln Memorial, a group that feast on blood, and a group who tend and care for a region of the wastes where plants have become abundant",
+
+  "price": 60,
+  "discount": 20,
+  "genre": ["RPG", "Action"],
+  "isFeatured": true,
+  "isFrontPage": true
+}

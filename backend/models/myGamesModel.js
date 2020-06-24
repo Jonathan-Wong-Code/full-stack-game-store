@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // This is like a Mongoose table join that gets referenced by the virtuals
 const MyGamesSchema = new mongoose.Schema(
   {
     game: {
       type: mongoose.Schema.ObjectId,
-      ref: "Game",
+      ref: 'Game',
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   {
@@ -20,4 +20,4 @@ const MyGamesSchema = new mongoose.Schema(
 
 MyGamesSchema.index({ user: 1, game: 1 }, { unique: true });
 
-module.exports = mongoose.model("MyGames", MyGamesSchema);
+module.exports = mongoose.model('MyGames', MyGamesSchema);

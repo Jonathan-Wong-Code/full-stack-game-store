@@ -15,7 +15,7 @@ import Layout from '../src/components/Layout';
 import RouteListener from '../src/components/RouteListener';
 
 function MyApp({ Component, pageProps }) {
-  const store = configureStore();
+  const store = configureStore(pageProps.initialReduxState);
 
   return (
     <>

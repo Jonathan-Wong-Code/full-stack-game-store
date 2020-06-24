@@ -1,0 +1,14 @@
+{
+  "title": "Anno 1800",
+  "averageRating": "4",
+  "operatingSystems": ["Windows"],
+  "releaseDate": "April 16, 2019 03:24:00",
+  "company": "Ubisoft",
+  "ratingsQuantity": 0,
+  "description": "Welcome to the dawn of the Industrial Age. The path you choose will define your world. Are you an innovator or an exploiter? A conqueror or a liberator? How the world remembers your name is up to you. In Anno 1800, players will take charge of their own fortune as they navigate the rapidly evolving technological landscape and malicious political arena of the 19th century in their quest to build an empire that will reach from the smog-filled cities of Europe to the teeming jungles of South America. Combining beloved features with innovative gameplay, Anno 1800 is the beginning of a new era for the Anno franchise as players leave their mark on a crucial moment in human history.",
+
+  "price": 80,
+  "genre": ["Simulation", "RTS"],
+  "isFeatured": true,
+  "isFrontPage": true
+}

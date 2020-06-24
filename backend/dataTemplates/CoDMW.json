@@ -1,0 +1,15 @@
+{
+  "title": "Call of Duty: Modern Warfare",
+  "averageRating": "3.5",
+  "operatingSystems": ["Windows"],
+  "releaseDate": "November 25, 2019 03:24:00",
+  "company": "Infinity Ward",
+  "ratingsQuantity": 0,
+  "description": "The stakes have never been higher as players take on the role of lethal Tier One operators in a heart-racing saga that will affect the global balance of power. Call of Duty®: Modern Warfare® engulfs fans in an incredibly raw, gritty, provocative narrative that brings unrivaled intensity and shines a light on the changing nature of modern war. Developed by the studio that started it all, Infinity Ward delivers an epic reimagining of the iconic Modern Warfare® series from the ground up. In the visceral and dramatic single-player story campaign, Call of Duty: Modern Warfare pushes boundaries and breaks rules the way only Modern Warfare can.Players will engage in breathtaking covert operations alongside a diverse cast of international special forces and freedom fighters throughout iconic European cities and volatile expanses of the Middle East. And the story doesn't end there. In Call of Duty: Modern Warfare, players will be thrust into an immersive narrative spanning the entire game. Experience the ultimate online playground with classic multiplayer, or squad-up and play cooperatively in a collection of elite operations accessible to all skill levels.",
+
+  "price": 80,
+  "discount": 20,
+  "genre": ["FPS"],
+  "isFeatured": true,
+  "isFrontPage": true
+}
