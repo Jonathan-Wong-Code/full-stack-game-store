@@ -7,13 +7,15 @@ export const {
   loginError,
   loginLoading,
   clearLoginError,
-  logout
+  logout,
+  loadingEnded
 } = createActions(
   'LOGIN_SUCCESS',
   'LOGIN_ERROR',
   'LOGIN_LOADING',
   'CLEAR_LOGIN_ERROR',
-  'LOGOUT'
+  'LOGOUT',
+  'LOADING_ENDED'
 );
 
 export const startLogin = data => async dispatch => {
@@ -61,7 +63,9 @@ export const startCheckLoggedIn = () => async dispatch => {
 
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    dispatch(loginError(error.response.data.message));
+    console.log(error);
+  } finally {
+    dispatch(loadingEnded());
   }
 };
 
@@ -77,5 +81,20 @@ export const startSignup = data => async dispatch => {
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
     dispatch(loginError(error.response.data.message));
+  }
+};
+
+export const startLogout = () => async dispatch => {
+  try {
+    await axios({
+      method: 'GET',
+      url: 'http://localhost:5000/api/v1/users/logout',
+      withCredentials: true
+    });
+
+    dispatch(logout());
+  } catch (err) {
+    console.log(err.response);
+    window.alert('error', 'Error logging out! Try again.');
   }
 };

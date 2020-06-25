@@ -65,10 +65,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    // return next(
-    //   new AppError('No account found associated with that email', 404)
-    // );
-
     // Always send a 200 so a hacker can't guess user email accounts
     res.status(200).json({
       status: 'success',
@@ -153,4 +149,12 @@ exports.checkLoggedIn = catchAsync(async (req, res, next) => {
   req.user = user;
 
   createSendToken(req.user, res, 200, req);
+});
+
+exports.logout = catchAsync(async (req, res, next) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
 });

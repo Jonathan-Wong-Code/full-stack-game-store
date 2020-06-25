@@ -83,46 +83,17 @@ const gameSchema = new mongoose.Schema(
       },
     },
 
-    // Images
-    imageCover: {
-      type: String,
-      default: '',
-    },
+    coverImage: String,
+    coverImageSmall: String,
 
-    imageCoverMobile: {
-      type: String,
-      default: '',
-    },
-
-    cardPhoto: {
-      type: String,
-      default: '',
-    },
-
-    galleryImages: {
-      type: [String],
-      default: [],
-    },
-
-    mobileImages: {
-      type: [String],
-      default: [],
-    },
-    thumbnails: {
-      type: [String],
-      default: [],
-    },
+    galleryImages: [String],
+    mobileGalleryImages: [String],
+    thumbnails: [String],
 
     // isFeatured denotes that it appears in the front end carousel
-    isFeatured: {
-      type: Boolean,
-      default: false,
-    },
+    isFeatured: Boolean,
     // isFrontPage denotes if the game should appear on the front page or not.
-    isFrontPage: {
-      type: Boolean,
-      default: false,
-    },
+    isFrontPage: Boolean,
   },
   {
     toJSON: { virtuals: true },

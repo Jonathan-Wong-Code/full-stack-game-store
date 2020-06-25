@@ -3,7 +3,8 @@ import {
   loginError,
   loginLoading,
   clearLoginError,
-  logout
+  logout,
+  loadingEnded
 } from '../actions/auth';
 
 const initialState = {
@@ -38,6 +39,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null
+      };
+
+    case loadingEnded().type:
+      return {
+        ...state,
+        loading: false
       };
 
     case logout().type:

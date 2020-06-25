@@ -14,12 +14,12 @@ exports.dataUriSingle = (req, res, next) => {
 
 // converts images for games to base 64.
 exports.dataUriGames = (req, res, next) => {
-  if (req.files.imageCover) {
+  if (req.files && req.files.imageCover) {
     const imageCoverFile = dUri.format('.jpeg', req.files.imageCover.buffer);
     req.imageCover = imageCoverFile.content;
   }
 
-  if (req.files.images) {
+  if (req.files && req.files.images) {
     const images = req.files.images.map((file) => {
       return dUri.format('.jpeg', file.buffer).content;
     });

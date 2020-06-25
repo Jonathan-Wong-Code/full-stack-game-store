@@ -92,8 +92,8 @@ exports.addGameCoverImage = catchAsync(async (req, res, next) => {
           width: 460,
         },
         {
-          height: 666,
-          width: 1000,
+          height: 400,
+          width: 600,
         },
       ],
     });

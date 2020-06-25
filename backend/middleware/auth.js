@@ -17,6 +17,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = null;
   }
 
+  console.log(token);
+
   if (!token) {
     return next(new AppError('You are not logged in. Please login', 401));
   }

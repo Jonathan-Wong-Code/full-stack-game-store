@@ -14,7 +14,7 @@ import {
 } from './css';
 
 import { selectAuthUser } from '../../selectors/auth';
-import { logout } from '../../actions/auth';
+import { startLogout } from '../../actions/auth';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,9 @@ const Header = () => {
             <Link href="/" as="/">
               <a>FSG</a>
             </Link>
-            <span class="screen-reader-only">Welcome to Full Stack Gamers</span>
+            <span className="screen-reader-only">
+              Welcome to Full Stack Gamers
+            </span>
           </Logo>
 
           <LeftInnerNav>
@@ -67,7 +69,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Button type="button" onClick={() => dispatch(logout())}>
+                <Button type="button" onClick={() => dispatch(startLogout())}>
                   Logout
                 </Button>
               </li>
