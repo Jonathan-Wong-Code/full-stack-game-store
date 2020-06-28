@@ -10,7 +10,7 @@ const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
 
   return (
     <Prices gameDiscount={gameDiscount} isLarge={isLarge}>
-      {gameDiscount && (
+      {!!gameDiscount && (
         <>
           <ScreenReaderOnly>Original price is:</ScreenReaderOnly>
           <OriginalGamePrice isLarge={isLarge} discountColor={discountColor}>
@@ -18,13 +18,12 @@ const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
           </OriginalGamePrice>
         </>
       )}
-
       <ScreenReaderOnly>Current price is:</ScreenReaderOnly>
       <FinalGamePrice isLarge={isLarge}>
-        {gameDiscount ? (
-          formatPricing(finalPrice, 2)
+        {gameDiscount && gameDiscount > 0 ? (
+          <p> {formatPricing(finalPrice, 2)}</p>
         ) : (
-          <PriceHighlight isLarge={isLarge}>
+          <PriceHighlight modifiers={isLarge && 'large'}>
             {formatPricing(gamePrice, 2)}
           </PriceHighlight>
         )}
@@ -37,13 +36,13 @@ GamePrice.propTypes = {
   gameDiscount: number,
   gamePrice: number.isRequired,
   isLarge: bool,
-  discountColor: string,
+  discountColor: string
 };
 
 GamePrice.defaultProps = {
   gameDiscount: null,
   isLarge: false,
-  discountColor: null,
+  discountColor: null
 };
 
 export default GamePrice;

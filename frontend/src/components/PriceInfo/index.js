@@ -14,18 +14,21 @@ const PriceInfo = ({
   isLarge,
   discountColor
 }) => {
-  const discount = gameDiscount
-    ? formatPercentage(gameDiscount, gamePrice)
-    : undefined;
+  const discountPercentage =
+    gameDiscount && gameDiscount > 0
+      ? formatPercentage(gameDiscount, gamePrice)
+      : undefined;
+
+  const renderDiscount = () => (
+    <PriceHighlight modifiers={isLarge ? 'large' : null}>
+      <ScreenReaderOnly>Discount on {gameTitle} is</ScreenReaderOnly>
+      {discountPercentage}%
+    </PriceHighlight>
+  );
 
   return (
-    <PriceFlexBox style={{ display: 'flex' }}>
-      {gameDiscount && (
-        <PriceHighlight modifiers={isLarge ? 'large' : null}>
-          <ScreenReaderOnly>Discount on {gameTitle} is</ScreenReaderOnly>-
-          {discount}%
-        </PriceHighlight>
-      )}
+    <PriceFlexBox>
+      {!!gameDiscount && renderDiscount()}
 
       <GamePrice
         gameDiscount={gameDiscount}

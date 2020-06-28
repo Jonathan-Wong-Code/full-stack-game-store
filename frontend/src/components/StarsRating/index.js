@@ -26,8 +26,12 @@ const Stars = ({ rating, setRating, isForReview = true }) => {
 
   const getStarUnfilledType = i =>
     isForReview ? (
-      <button type="button" onClick={() => setRating(rating + i + 1)}>
-        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
+      <button
+        type="button"
+        onClick={() => setRating(rating + i + 1)}
+        key={uuidv4()}
+      >
+        <Icon iconColor={theme.primaryLight} variants="small">
           <StarUnfilled />
         </Icon>
       </button>

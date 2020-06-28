@@ -18,7 +18,7 @@ export const OriginalGamePrice = styled.p`
   color: ${({ discountColor, theme }) => discountColor || theme.primaryColor};
 `;
 
-export const FinalGamePrice = styled.p`
+export const FinalGamePrice = styled.div`
   font-size: ${({ isLarge }) =>
     isLarge ? typeScale.header2 : typeScale.paragraph};
 

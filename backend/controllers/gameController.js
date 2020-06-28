@@ -88,18 +88,13 @@ exports.addGameCoverImage = catchAsync(async (req, res, next) => {
     const image = await uploader.upload(req.imageCover, {
       eager: [
         {
-          height: 215,
-          width: 460,
-        },
-        {
           height: 400,
           width: 600,
         },
       ],
     });
-    req.body.imageCover = image.url;
-    req.body.cardPhoto = image.eager[0].url;
-    req.body.imageCoverMobile = image.eager[1].url;
+    req.body.coverImage = image.url;
+    req.body.coverImageSmall = image.eager[0].url;
   }
 
   next();
@@ -125,7 +120,9 @@ exports.addGameGalleryImages = catchAsync(async (req, res, next) => {
     );
     const resolvedImages = await Promise.all(images);
     req.body.galleryImages = resolvedImages.map((image) => image.url);
-    req.body.mobileImages = resolvedImages.map((image) => image.eager[0].url);
+    req.body.mobileGalleryImages = resolvedImages.map(
+      (image) => image.eager[0].url
+    );
     req.body.thumbnails = resolvedImages.map((image) => image.eager[1].url);
   }
 

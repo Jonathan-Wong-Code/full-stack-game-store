@@ -27,6 +27,8 @@ import ReviewCard from '../src/components/ReviewCard';
 
 import GameReviewForm from '../src/components/GameReviewForm';
 
+import Carousel from '../src/components/Carousel';
+
 export default function ComponentRenderer() {
   return (
     <>
@@ -79,6 +81,7 @@ export default function ComponentRenderer() {
         reviewDislikes={20}
       />
       <GameReviewForm />
+      <Carousel />
     </>
   );
 }

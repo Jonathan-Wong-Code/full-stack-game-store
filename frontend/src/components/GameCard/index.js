@@ -8,7 +8,7 @@ import {
   GameInformation,
   GameTitle,
   PriceInformation,
-  Img,
+  Img
 } from './css';
 
 import IconButton from '../IconButton';
@@ -23,7 +23,7 @@ const GameCard = ({ gameDiscount, gameTitle, gamePrice, imgSource }) => {
   return (
     <Container aria-labelledby="game-title">
       <div>
-        <Img src={imgSource} alt={`image for ${gameTitle}`} />
+        <Img src={imgSource} alt={`A promotional image for ${gameTitle}`} />
       </div>
 
       <GameInformation aria-label="Game information">
@@ -53,11 +53,11 @@ GameCard.propTypes = {
   gameTitle: string.isRequired,
   gamePrice: number.isRequired,
   gameDiscount: number,
-  imgSource: string.isRequired,
+  imgSource: string.isRequired
 };
 
 GameCard.defaultProps = {
-  gameDiscount: null,
+  gameDiscount: null
 };
 
 export default GameCard;

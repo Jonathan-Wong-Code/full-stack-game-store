@@ -9,6 +9,7 @@ export const Container = styled.section`
   background-image: url(${({ gameImage }) => gameImage});
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 
   color: ${({ textColorLight, theme }) =>
     textColorLight ? theme.textInverted : theme.textColor};
@@ -19,9 +20,12 @@ export const Container = styled.section`
   padding: ${spacing[4]};
 
   @media screen and (min-width: ${breakpoints[0]}px) {
-    height: 450px;
-    width: 992px;
+    // height: 500px;
+    // max-width 990px;
+    width: 100%;
+    height: 100%;
     background-size: cover;
+    background-position: center top;
     padding: ${spacing[5]};
   }
 `;
