@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CarouselContainer = styled.section`
   position: relative;
-  height: 500px;
+  height: 470px;
   width: 70vw;
 
   margin: 0 auto;
@@ -11,7 +11,7 @@ export const CarouselContainer = styled.section`
 
 export const CarouselContent = styled.div`
   transform: translateX(-${props => props.translate}px);
-  transition: all ease-out ${props => props.transition}s;
+  transition: transform ease-out ${props => props.transition}s;
   height: 100%;
   display: flex;
   width: ${({ width }) => `${width}px`};

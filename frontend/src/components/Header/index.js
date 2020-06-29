@@ -35,7 +35,7 @@ const Header = () => {
 
           <LeftInnerNav>
             <li>
-              <Link href="/" as="/">
+              <Link href="/store" as="/store">
                 <StyledLink>Store</StyledLink>
               </Link>
             </li>

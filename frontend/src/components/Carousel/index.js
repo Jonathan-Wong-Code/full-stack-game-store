@@ -8,15 +8,31 @@ import { CarouselContainer, CarouselContent } from './css';
 import CarouselPanel from '../CarouselPanel';
 import Arrow from './Arrow';
 import Dots from './Dots';
+
 const Carousel = ({ slides }) => {
   const firstSlide = slides[0];
   const secondSlide = slides[1];
+  const thirdSlide = slides[2];
   const lastSlide = slides[slides.length - 1];
+  const secondLastSlide = slides[slides.length - 2];
 
   const [
-    { transition, translate, activePanel, renderedSlides },
+    { transition, translate, activePanel, renderedSlides, windowWidth },
     setState
-  ] = useSetState({});
+  ] = useSetState({
+    renderedSlides: [
+      secondLastSlide,
+      lastSlide,
+      firstSlide,
+      secondSlide,
+      thirdSlide
+    ],
+    activePanel: 0,
+    transition: 0.45,
+    windowWidth: 0
+  });
+
+  const contentBoxRef = useRef();
 
   const transitionRef = useRef();
   const resizeRef = useRef();
@@ -26,15 +42,13 @@ const Carousel = ({ slides }) => {
     resizeRef.current = handleResize;
   });
 
-  const { windowWidth } = useWindowWidth();
+  // const { windowWidth } = useWindowWidth();
 
   // Initial setup
   useEffect(() => {
     setState({
-      translate: window.innerWidth * 0.7,
-      renderedSlides: [lastSlide, firstSlide, secondSlide],
-      activePanel: 0,
-      transition: 0.45
+      translate: window.innerWidth * 0.7 * 2,
+      windowWidth: window.innerWidth
     });
   }, []);
 
@@ -45,15 +59,19 @@ const Carousel = ({ slides }) => {
 
   // Set up transitionend listener
   useEffect(() => {
-    const smooth = e => {
-      if (e.target.className.includes('carousel-content')) {
-        transitionRef.current();
-      }
+    const smooth = () => {
+      transitionRef.current();
     };
-    const transitionend = window.addEventListener('transitionend', smooth);
-    return () => window.removeEventListener('transitionend', transitionend);
+
+    const transitionend = contentBoxRef.current.addEventListener(
+      'transitionend',
+      smooth
+    );
+    return () =>
+      contentBoxRef.current.removeEventListener('transitionend', transitionend);
   }, []);
 
+  // Resize Listener
   useLayoutEffect(() => {
     const resize = () => {
       resizeRef.current();
@@ -63,7 +81,13 @@ const Carousel = ({ slides }) => {
   }, []);
 
   const handleResize = () => {
-    setState({ translate: windowWidth * 0.7, transition: 0 });
+    if (translate !== windowWidth * 0.7) {
+      setState({
+        translate: window.innerWidth * 0.7 * 2,
+        transition: 0,
+        windowWidth: window.innerWidth
+      });
+    }
   };
 
   const nextSlide = () => {
@@ -75,28 +99,47 @@ const Carousel = ({ slides }) => {
 
   const prevSlide = () => {
     setState({
-      translate: 0,
+      translate: translate - windowWidth * 0.7,
       activePanel: activePanel === 0 ? slides.length - 1 : activePanel - 1
     });
   };
 
+  // Set slides on every transition
   const smoothTransition = () => {
     let _slides = [];
     // Last slide
     if (activePanel === slides.length - 1) {
-      _slides = [slides[slides.length - 2], lastSlide, firstSlide];
+      _slides = [
+        slides[slides.length - 3],
+        slides[slides.length - 2],
+        lastSlide,
+        firstSlide,
+        slides[1]
+      ];
     } // first slide
     else if (activePanel === 0) {
-      _slides = [lastSlide, firstSlide, secondSlide];
+      _slides = [
+        slides[slides.length - 2],
+        lastSlide,
+        firstSlide,
+        secondSlide,
+        slides[2]
+      ];
     } else {
-      _slides = slides.slice(activePanel - 1, activePanel + 2);
+      _slides = [
+        slides[activePanel - 2] ? slides[activePanel - 2] : firstSlide,
+        slides[activePanel - 1],
+        slides[activePanel],
+        slides[activePanel + 1],
+        slides[activePanel + 2] ? slides[activePanel + 2] : lastSlide
+      ];
     }
 
     // reset to original position
     setState({
       renderedSlides: _slides,
       transition: 0,
-      translate: windowWidth * 0.7
+      translate: windowWidth * 0.7 * 2
     });
   };
 
@@ -108,6 +151,7 @@ const Carousel = ({ slides }) => {
         transition={transition}
         width={windowWidth * 0.7 * renderedSlides.length}
         className="carousel-content"
+        ref={contentBoxRef}
       >
         {renderedSlides.map(game => (
           <CarouselPanel

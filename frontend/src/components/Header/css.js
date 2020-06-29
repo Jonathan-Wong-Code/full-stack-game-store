@@ -33,11 +33,11 @@ export const Nav = styled.nav`
   justify-content: space-between;
 `;
 
-export const LeftNav = styled.ul`
+export const LeftNav = styled.div`
   display: flex;
   align-items: center;
 `;
-export const LeftInnerNav = styled.div`
+export const LeftInnerNav = styled.ul`
   display: flex;
 `;
 

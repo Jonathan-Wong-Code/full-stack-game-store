@@ -28,7 +28,7 @@ const ArrowComponent = styled.button`
 `;
 
 const Arrow = ({ direction, handleClick }) => (
-  <ArrowComponent direction={direction} onClick={handleClick}>
+  <ArrowComponent direction={direction} onClick={handleClick} tabIndex={5}>
     {direction === 'right' ? <span>right</span> : <span>left</span>}
   </ArrowComponent>
 );
