@@ -25,7 +25,7 @@ const Header = () => {
       <Nav>
         <LeftNav>
           <Logo>
-            <Link href="/" as="/">
+            <Link href="/" as="/" passHref>
               <a>FSG</a>
             </Link>
             <span className="screen-reader-only">
@@ -35,12 +35,12 @@ const Header = () => {
 
           <LeftInnerNav>
             <li>
-              <Link href="/store" as="/store">
+              <Link href="/store" as="/store" passHref>
                 <StyledLink>Store</StyledLink>
               </Link>
             </li>
             <li>
-              <Link href="/" as="/">
+              <Link href="/" as="/" passHref>
                 <StyledLink>Search All</StyledLink>
               </Link>
             </li>
@@ -51,12 +51,12 @@ const Header = () => {
           {!isLoggedIn ? (
             <>
               <li>
-                <Link href="/login" as="/login">
+                <Link href="/login" as="/login" passHref>
                   <StyledLink>Login</StyledLink>
                 </Link>
               </li>
               <li>
-                <Link href="/signup" as="/signup">
+                <Link href="/signup" as="/signup" passHref>
                   <a>Signup</a>
                 </Link>
               </li>
@@ -64,7 +64,7 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <Link href="/profile" as="/profile">
+                <Link href="/profile" as="/profile" passHref>
                   <StyledLink>Profile</StyledLink>
                 </Link>
               </li>

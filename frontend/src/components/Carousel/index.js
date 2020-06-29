@@ -47,10 +47,16 @@ const Carousel = ({ slides }) => {
   // Initial setup
   useEffect(() => {
     setState({
-      translate: window.innerWidth * 0.7 * 2,
+      translate:
+        window.innerWidth > 992
+          ? window.innerWidth * 0.7 * 2
+          : window.innerWidth * 2,
       windowWidth: window.innerWidth
     });
   }, []);
+
+  // If windowWidth is mobile view.
+  const isMobile = () => windowWidth < 992;
 
   // Reset transition
   useEffect(() => {
@@ -81,25 +87,27 @@ const Carousel = ({ slides }) => {
   }, []);
 
   const handleResize = () => {
-    if (translate !== windowWidth * 0.7) {
-      setState({
-        translate: window.innerWidth * 0.7 * 2,
-        transition: 0,
-        windowWidth: window.innerWidth
-      });
-    }
+    setState({
+      translate: isMobile ? window.innerWidth * 2 : window.innerWidth * 0.7 * 2,
+      transition: 0,
+      windowWidth: window.innerWidth
+    });
   };
 
   const nextSlide = () => {
     setState({
-      translate: translate + windowWidth * 0.7,
+      translate: isMobile
+        ? translate + windowWidth
+        : translate + windowWidth * 0.7,
       activePanel: activePanel === slides.length - 1 ? 0 : activePanel + 1
     });
   };
 
   const prevSlide = () => {
     setState({
-      translate: translate - windowWidth * 0.7,
+      translate: isMobile
+        ? translate - windowWidth
+        : translate - windowWidth * 0.7,
       activePanel: activePanel === 0 ? slides.length - 1 : activePanel - 1
     });
   };
@@ -139,40 +147,46 @@ const Carousel = ({ slides }) => {
     setState({
       renderedSlides: _slides,
       transition: 0,
-      translate: windowWidth * 0.7 * 2
+      translate: isMobile ? windowWidth * 2 : windowWidth * 0.7 * 2
     });
   };
 
   if (!renderedSlides) return null;
   return (
-    <CarouselContainer>
-      <CarouselContent
-        translate={translate}
-        transition={transition}
-        width={windowWidth * 0.7 * renderedSlides.length}
-        className="carousel-content"
-        ref={contentBoxRef}
-      >
-        {renderedSlides.map(game => (
-          <CarouselPanel
-            key={uuidv4()}
-            promoText="Now available"
-            offerDescription={`${game.title}`}
-            gamePrice={game.price}
-            gameDiscount={game.discount}
-            gameImage={game.coverImage}
-            isAddToCart
-            buttonText="Add to Cart"
-            hasButton
-            textColorLight
-            gameTitle={game.title}
-          />
-        ))}
-      </CarouselContent>
-      <Arrow direction="left" handleClick={prevSlide} />
-      <Arrow direction="right" handleClick={nextSlide} />
+    <>
+      <CarouselContainer>
+        <CarouselContent
+          translate={translate}
+          transition={transition}
+          width={
+            isMobile
+              ? windowWidth * renderedSlides.length
+              : windowWidth * 0.7 * renderedSlides.length
+          }
+          className="carousel-content"
+          ref={contentBoxRef}
+        >
+          {renderedSlides.map(game => (
+            <CarouselPanel
+              key={uuidv4()}
+              promoText="Now available"
+              offerDescription={`${game.title}`}
+              gamePrice={game.price}
+              gameDiscount={game.discount}
+              gameImage={game.coverImage}
+              isAddToCart
+              buttonText="Add to Cart"
+              hasButton
+              textColorLight
+              gameTitle={game.title}
+            />
+          ))}
+        </CarouselContent>
+        <Arrow direction="left" handleClick={prevSlide} />
+        <Arrow direction="right" handleClick={nextSlide} />
+      </CarouselContainer>
       <Dots slides={slides} activeIndex={activePanel} />
-    </CarouselContainer>
+    </>
   );
 };
 

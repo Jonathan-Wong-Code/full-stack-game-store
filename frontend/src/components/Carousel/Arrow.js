@@ -5,9 +5,10 @@ const ArrowComponent = styled.button`
   display: flex;
   position: absolute;
   top: 50%;
-  ${props => (props.direction === 'right' ? `right: 25px` : `left: 25px`)};
+  ${props => (props.direction === 'right' ? `right: 45px` : `left: 25px`)};
   height: 50px;
   width: 50px;
+  transform: translateY(-50%);
   justify-content: center;
   background: white;
   border-radius: 50%;
@@ -15,7 +16,7 @@ const ArrowComponent = styled.button`
   align-items: center;
   transition: transform ease-in 0.1s;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-50%);
   }
   img {
     transform: translateX(

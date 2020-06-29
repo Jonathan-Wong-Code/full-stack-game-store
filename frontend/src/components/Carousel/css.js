@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-
+import { breakpoints } from '../../../theme/breakpoints';
 export const CarouselContainer = styled.section`
   position: relative;
   height: 470px;
-  width: 70vw;
+  width: 100vw;
 
-  margin: 0 auto;
-  // overflow: hidden;
+  @media screen and (min-width: ${breakpoints[1]}px) {
+    width: 70vw;
+    margin: 0 auto;
+  }
 `;
 
 export const CarouselContent = styled.div`

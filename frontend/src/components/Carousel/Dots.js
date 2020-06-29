@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { bool, array, number } from 'prop-types';
+import spacing from '../../../theme/spacing';
 
 const DotComponent = styled.span`
   padding: 10px;
   margin-right: 10px;
   cursor: pointer;
   border-radius: 50%;
+  border: 2px solid ${({ theme }) => theme.primaryColor};
   background: ${({ active, theme }) => (active ? theme.primaryColor : 'white')};
 `;
 
 const DotsContainer = styled.div`
-  position: absolute;
-  bottom: 0;
+  // position: absolute;
+  // bottom: 0;
+  margin-top: ${spacing[5]};
   width: 100%;
   display: flex;
   align-items: center;
