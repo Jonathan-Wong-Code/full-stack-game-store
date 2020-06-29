@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import { array } from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -19,17 +19,19 @@ const Carousel = ({ slides }) => {
   ] = useSetState({});
 
   const transitionRef = useRef();
-
+  const resizeRef = useRef();
   // Update Refs on every render
   useEffect(() => {
     transitionRef.current = smoothTransition;
+    resizeRef.current = handleResize;
   });
 
   const { windowWidth } = useWindowWidth();
+
   // Initial setup
   useEffect(() => {
     setState({
-      translate: window.innerWidth,
+      translate: window.innerWidth * 0.7,
       renderedSlides: [lastSlide, firstSlide, secondSlide],
       activePanel: 0,
       transition: 0.45
@@ -52,9 +54,21 @@ const Carousel = ({ slides }) => {
     return () => window.removeEventListener('transitionend', transitionend);
   }, []);
 
+  useLayoutEffect(() => {
+    const resize = () => {
+      resizeRef.current();
+    };
+    const onResize = window.addEventListener('resize', resize);
+    window.removeEventListener('resize', onResize);
+  }, []);
+
+  const handleResize = () => {
+    setState({ translate: windowWidth * 0.7, transition: 0 });
+  };
+
   const nextSlide = () => {
     setState({
-      translate: translate + windowWidth,
+      translate: translate + windowWidth * 0.7,
       activePanel: activePanel === slides.length - 1 ? 0 : activePanel + 1
     });
   };
@@ -82,7 +96,7 @@ const Carousel = ({ slides }) => {
     setState({
       renderedSlides: _slides,
       transition: 0,
-      translate: windowWidth
+      translate: windowWidth * 0.7
     });
   };
 
@@ -92,7 +106,7 @@ const Carousel = ({ slides }) => {
       <CarouselContent
         translate={translate}
         transition={transition}
-        width={windowWidth * renderedSlides.length}
+        width={windowWidth * 0.7 * renderedSlides.length}
         className="carousel-content"
       >
         {renderedSlides.map(game => (

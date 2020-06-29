@@ -62,7 +62,9 @@ function Homepage({ featuredGames, nonFeaturedGames, games }) {
           gameTitle={game.title}
         />
       ))} */}
-      <Carousel slides={testGames} />
+      <div style={{ width: '100%', overflow: 'hidden' }}>
+        <Carousel slides={testGames} />
+      </div>
     </div>
   );
 }

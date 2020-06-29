@@ -20,13 +20,13 @@ export const Container = styled.section`
   padding: ${spacing[4]};
 
   @media screen and (min-width: ${breakpoints[0]}px) {
-    // height: 500px;
-    // max-width 990px;
-    width: 100%;
     height: 100%;
+    width: 100%;
+
     background-size: cover;
     background-position: center top;
     padding: ${spacing[5]};
+    margin-right: ${spacing[5]};
   }
 `;
 
