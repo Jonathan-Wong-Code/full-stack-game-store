@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { shape, string, array, number } from 'prop-types';
+import { shape, string, array, number, arrayOf } from 'prop-types';
 
 import { useSelector } from 'react-redux';
 import { selectAuthUser } from '../../src/selectors/auth';
@@ -195,20 +195,20 @@ const GamePage = ({ game }) => {
 
 GamePage.propTypes = {
   game: shape({
+    averageRating: number.isRequired,
     company: string,
     coverImage: string.isRequired,
     coverImageSmall: string.isRequired,
     description: string.isRequired,
-    genre: string,
-    operatingSystems: array,
-    title: string.isRequired,
-    price: string.isRequired,
-    releaseDate: string,
     discount: number,
-    averageRating: number.isRequired,
-    galleryImages: array,
+    galleryImages: arrayOf(string).isRequired,
+    genre: string,
     mobileGalleryImages: array,
-    thumbnails: array,
+    operatingSystems: array,
+    price: string.isRequired,
+    title: string.isRequired,
+    releaseDate: string.isRequired,
+    thumbnails: arrayOf(string).isRequired,
     youtubeTrailerLink: string.isRequired
   }).isRequired
 };

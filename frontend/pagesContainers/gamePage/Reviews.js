@@ -33,8 +33,7 @@ const Reviews = ({ user, addReview, gameReviews, gameId }) => {
               dislikes,
               rating,
               title,
-              id,
-              user: { name, photo }
+              id
             } = review;
 
             return (
@@ -42,12 +41,12 @@ const Reviews = ({ user, addReview, gameReviews, gameId }) => {
                 <ReviewCard
                   date={new Date(createdAt).toDateString()}
                   description={description}
-                  reviewLikes={likes.length}
-                  reviewDislikes={dislikes.length}
+                  reviewLikes={likes}
+                  reviewDislikes={dislikes}
                   rating={rating}
                   title={title}
-                  userName={name}
-                  userPhoto={photo}
+                  user={user}
+                  reviewId={id}
                 />
               </ReviewContainer>
             );
