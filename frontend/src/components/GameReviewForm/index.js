@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withFormik } from 'formik';
-import { string, shape } from 'prop-types';
+import { string, shape, func } from 'prop-types';
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -15,14 +15,14 @@ import {
 } from './css';
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
 
-const GameReviewForm = ({ userName, userPhoto, gameId, values }) => {
+const GameReviewForm = ({ userName, userPhoto, gameId, values, addReview }) => {
   const [rating, setRating] = useState(1);
 
   const handleSubmit = async e => {
     e.preventDefault();
     const { title, description } = values;
     try {
-      await axios({
+      const response = await axios({
         method: 'POST',
         url: `http://localhost:5000/api/v1/games/${gameId}/reviews`,
         withCredentials: true,
@@ -31,6 +31,16 @@ const GameReviewForm = ({ userName, userPhoto, gameId, values }) => {
           description,
           game: gameId,
           rating
+        }
+      });
+
+      addReview({
+        ...response.data.review,
+        likes: [],
+        dislikes: [],
+        user: {
+          name: userName,
+          photo: userPhoto
         }
       });
     } catch (error) {
@@ -85,7 +95,8 @@ GameReviewForm.propTypes = {
   values: shape({
     title: string.isRequired,
     description: string.isRequired
-  }).isRequired
+  }).isRequired,
+  addReview: func.isRequired
 };
 
 export default withFormik({

@@ -1,44 +1,31 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { shape, string, array, number } from 'prop-types';
 
 import { useSelector } from 'react-redux';
 import { selectAuthUser } from '../../src/selectors/auth';
 
 import {
-  SubHeading,
-  Detail,
-  DetailList,
-  DescriptionDetailsSection,
-  DescriptionContainer,
-  FilterBar,
-  GameDetailsContainer,
-  GameBanner,
   GameTitle,
-  InnerBanner,
-  GameCardContainer,
   GameTitleCardContainer,
   GameTitleContainer,
   GameTitleRating,
   Img,
   ImgGallery,
-  ImgContainer,
-  ReviewContainer,
-  PlayButton,
-  ReviewHeading
+  ImgContainer
 } from '../../pagesStyles/games.css';
 
-import Accordion from '../../src/components/Accordion';
+import VideoBanner from '../../pagesContainers/gamePage/VideoBanner';
+import GameDetails from '../../pagesContainers/gamePage/GameDetails';
+import Reviews from '../../pagesContainers/gamePage/Reviews';
+
 import GalleryModal from '../../src/components/GalleryModal';
-import GameReviewForm from '../../src/components/GameReviewForm';
-import PurchaseGameCard from '../../src/components/PurchaseGameCard';
-import ReviewCard from '../../src/components/ReviewCard';
 import { Wrapper } from '../../src/components/Wrapper';
 
 import useWindowWidth from '../../src/hooks/useWindowWidth';
 import useSetState from '../../src/hooks/useSetState';
 
-import { renderArrayText } from '../../src/utils/utils';
-
+// SET STATIC PATHS
 export async function getStaticPaths() {
   const response = await axios.get(
     'http://localhost:5000/api/v1/games?fields=id'
@@ -54,6 +41,7 @@ export async function getStaticPaths() {
   };
 }
 
+// FETCH DATA FOR STATIC RENDER
 export async function getStaticProps(context) {
   const response = await axios({
     method: 'GET',
@@ -68,6 +56,7 @@ export async function getStaticProps(context) {
   };
 }
 
+// COMPONENT
 const GamePage = ({ game }) => {
   const [
     { isOpen, modalType, modalLink, imgIndex, gameReviews },
@@ -116,6 +105,10 @@ const GamePage = ({ game }) => {
   const closeModal = () =>
     setState({ isOpen: false, modalType: null, modalLink: null });
 
+  const addReview = review => {
+    setState({ gameReviews: [review, ...gameReviews] });
+  };
+
   const {
     company,
     coverImage,
@@ -123,14 +116,13 @@ const GamePage = ({ game }) => {
     description,
     genre,
     operatingSystems,
-    reviews,
     title,
     price,
     releaseDate,
     discount,
     averageRating,
     galleryImages,
-    mobileGalleryImages,
+    // mobileGalleryImages,
     thumbnails,
     youtubeTrailerLink,
     id
@@ -139,26 +131,18 @@ const GamePage = ({ game }) => {
   return (
     <section>
       {/* GAME BANNER SECTION */}
+      <VideoBanner
+        coverImage={coverImage}
+        coverImageSmall={coverImageSmall}
+        windowWidth={windowWidth}
+        openVideoModal={openVideoModal}
+        title={title}
+        price={price}
+        discount={discount}
+      />
 
-      <GameBanner
-        className="backgroundimg"
-        desktopImage={coverImage}
-        mobileImage={coverImageSmall}
-      >
-        <InnerBanner>
-          {windowWidth > 576 && <PlayButton onClick={openVideoModal} />}
-          <GameCardContainer>
-            <PurchaseGameCard
-              gameTitle={title}
-              gamePrice={price}
-              gameDiscount={discount}
-            />
-          </GameCardContainer>
-        </InnerBanner>
-      </GameBanner>
-
-      {/* GAME TITLE AND RATING */}
       <Wrapper>
+        {/* GAME TITLE AND RATING */}
         <GameTitleCardContainer>
           <GameTitleContainer>
             <GameTitle>{title}</GameTitle>
@@ -177,94 +161,56 @@ const GamePage = ({ game }) => {
           ))}
         </ImgGallery>
 
-        {isOpen && windowWidth > 576 && (
-          <GalleryModal
-            type={modalType}
-            mediaLink={modalLink}
-            closeModal={closeModal}
-            thumbnails={thumbnails}
-            galleryImages={galleryImages}
-            index={imgIndex}
-          />
-        )}
-
         {/* DESCRIPTION AND SPECS */}
-        <DescriptionDetailsSection>
-          <DescriptionContainer>
-            <SubHeading>Description</SubHeading>
-            <p>{description}</p>
-          </DescriptionContainer>
-          <GameDetailsContainer>
-            <SubHeading>Game details</SubHeading>
-            <DetailList>
-              <Detail>
-                Genre:
-                <span>{renderArrayText(genre)} </span>
-              </Detail>
-              <Detail>
-                Release date:
-                <span>{new Date(releaseDate).toDateString()}</span>
-              </Detail>
-              <Detail>
-                Company: <span>{company}</span>
-              </Detail>
-              <Detail>
-                Operating Systems:
-                <span>{renderArrayText(operatingSystems)}</span>
-              </Detail>
-            </DetailList>
-          </GameDetailsContainer>
-        </DescriptionDetailsSection>
-
+        <GameDetails
+          description={description}
+          genre={genre}
+          releaseDate={releaseDate}
+          company={company}
+          operatingSystems={operatingSystems}
+        />
         {/* REVIEWS */}
-        <section aria-labelledby="reviews-subheading">
-          <ReviewHeading id="reviews-subheading">User reviews</ReviewHeading>
-          {!!user && (
-            <FilterBar>
-              <Accordion title="+Add Your Review">
-                <GameReviewForm
-                  userName={user.name}
-                  userPhoto={user.photo}
-                  gameId={id}
-                />
-              </Accordion>
-            </FilterBar>
-          )}
-
-          <ul>
-            {gameReviews &&
-              gameReviews.map(review => {
-                const {
-                  createdAt,
-                  description,
-                  likes,
-                  dislikes,
-                  rating,
-                  title,
-                  id,
-                  user: { name, photo }
-                } = review;
-
-                return (
-                  <ReviewContainer key={id}>
-                    <ReviewCard
-                      date={new Date(createdAt).toDateString()}
-                      description={description}
-                      reviewLikes={likes.length}
-                      reviewDislikes={dislikes.length}
-                      rating={rating}
-                      title={title}
-                      userName={name}
-                      userPhoto={photo}
-                    />
-                  </ReviewContainer>
-                );
-              })}
-          </ul>
-        </section>
+        <Reviews
+          user={user}
+          addReview={addReview}
+          gameReviews={gameReviews}
+          gameId={id}
+        />
       </Wrapper>
+
+      {/* MODAL */}
+      {isOpen && windowWidth > 576 && (
+        <GalleryModal
+          type={modalType}
+          mediaLink={modalLink}
+          closeModal={closeModal}
+          thumbnails={thumbnails}
+          galleryImages={galleryImages}
+          index={imgIndex}
+        />
+      )}
     </section>
   );
+};
+
+GamePage.propTypes = {
+  game: shape({
+    company: string,
+    coverImage: string.isRequired,
+    coverImageSmall: string.isRequired,
+    description: string.isRequired,
+    genre: string,
+    operatingSystems: array,
+    title: string.isRequired,
+    price: string.isRequired,
+    releaseDate: string,
+    discount: number,
+    averageRating: number.isRequired,
+    galleryImages: array,
+    mobileGalleryImages: array,
+    thumbnails: array,
+    youtubeTrailerLink: string.isRequired
+  }).isRequired
 };
 
 export default GamePage;
