@@ -13,12 +13,11 @@ const CONTAINER_MODIFIERS = {
 export const Container = styled.div`
   font-size: ${typeScale.paragraph};
   font-weight: ${typeWeight.bold};
-
   list-style-type: none;
-
   max-width: 350px;
-  border-radius: 2px;
-
+  height: 100%;
+  box-shadow: 0px 0px 31px -15px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
   background-color: ${({ theme }) => theme.contentBackground};
 
   ${applyStyleModifiers(CONTAINER_MODIFIERS)};
@@ -57,10 +56,14 @@ export const OriginalGamePrice = styled.p`
   margin-bottom: ${spacing[1]};
   color: ${({ theme }) => theme.primaryColor};
 `;
+export const ImgContainer = styled.div`
+  height: 230px;
+`;
 
 export const Img = styled.img`
   height: 100%;
   width: 100%;
   display: block;
   object-fit: cover;
+  object-position: center top;
 `;

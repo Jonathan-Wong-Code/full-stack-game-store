@@ -27,11 +27,10 @@ export const IconStyles = styled.div`
   & svg {
     width: 40px;
     height: 35px;
-
     border-radius: 5px;
     padding: ${spacing[1]};
     fill: ${({ iconColor, theme }) => iconColor || theme.textInverted};
   }
-
+  padding: 3px;
   ${applyStyleModifiers(ICON_MODIFIERS)}
 `;

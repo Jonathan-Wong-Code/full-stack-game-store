@@ -6,7 +6,7 @@ import spacing from '../../../theme/spacing';
 import { breakpoints } from '../../../theme/breakpoints';
 const MODIFIERS = {
   large: () => `
-    font-size:${typeScale.header2};
+    font-size:${typeScale.header3};
     padding: ${spacing[2]} ${spacing[6]};
 
     @media screen and (min-width: ${breakpoints[2]}px) {

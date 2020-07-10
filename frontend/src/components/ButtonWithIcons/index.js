@@ -21,16 +21,16 @@ export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
 PrimaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
-  variants: oneOfType([string, array]),
+  variants: oneOfType([string, array])
 };
 
 PrimaryBtnWithIcon.defaultProps = {
-  variants: null,
+  variants: null
 };
 
 export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
   return (
-    <SecondaryStyles modifiers={variants}>
+    <SecondaryStyles modifiers={variants} className="button-component">
       <IconComponent>
         <Icon />
       </IconComponent>
@@ -42,9 +42,9 @@ export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
 SecondaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
-  variants: oneOfType([string, array]),
+  variants: oneOfType([string, array])
 };
 
 SecondaryBtnWithIcon.defaultProps = {
-  variants: null,
+  variants: null
 };

@@ -3,7 +3,6 @@ import { array } from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import useSetState from '../../hooks/useSetState';
-import useWindowWidth from '../../hooks/useWindowWidth';
 import { CarouselContainer, CarouselContent } from './css';
 import CarouselPanel from '../CarouselPanel';
 import Arrow from './Arrow';
@@ -27,36 +26,39 @@ const Carousel = ({ slides }) => {
       secondSlide,
       thirdSlide
     ],
+
     activePanel: 0,
     transition: 0.45,
     windowWidth: 0
   });
 
   const contentBoxRef = useRef();
-
   const transitionRef = useRef();
   const resizeRef = useRef();
-  // Update Refs on every render
+
+  // Utility functions
+  const isMobile = () => windowWidth < 576;
+  const isFirstSlide = () => activePanel === 0;
+  const isLastSlide = () => activePanel === slides.length - 1;
+
+  // Update Refs on every render due to Javascript closures.
   useEffect(() => {
     transitionRef.current = smoothTransition;
     resizeRef.current = handleResize;
   });
 
-  // const { windowWidth } = useWindowWidth();
+  // Initial setup. The 0.7 is used to match the 70vw of the carousel length.
+  // This is used throughout to match desktop styles. * 2 is because the middle panel is always 2 panels in from the beginning.
 
-  // Initial setup
   useEffect(() => {
     setState({
       translate:
-        window.innerWidth > 992
+        window.innerWidth > 576
           ? window.innerWidth * 0.7 * 2
           : window.innerWidth * 2,
       windowWidth: window.innerWidth
     });
   }, []);
-
-  // If windowWidth is mobile view.
-  const isMobile = () => windowWidth < 992;
 
   // Reset transition
   useEffect(() => {
@@ -65,8 +67,10 @@ const Carousel = ({ slides }) => {
 
   // Set up transitionend listener
   useEffect(() => {
-    const smooth = () => {
-      transitionRef.current();
+    const smooth = e => {
+      if (e.target.className.includes('carousel-content')) {
+        transitionRef.current();
+      }
     };
 
     const transitionend = contentBoxRef.current.addEventListener(
@@ -88,7 +92,9 @@ const Carousel = ({ slides }) => {
 
   const handleResize = () => {
     setState({
-      translate: isMobile ? window.innerWidth * 2 : window.innerWidth * 0.7 * 2,
+      translate: isMobile()
+        ? window.innerWidth * 2
+        : window.innerWidth * 0.7 * 2,
       transition: 0,
       windowWidth: window.innerWidth
     });
@@ -96,36 +102,36 @@ const Carousel = ({ slides }) => {
 
   const nextSlide = () => {
     setState({
-      translate: isMobile
+      translate: isMobile()
         ? translate + windowWidth
         : translate + windowWidth * 0.7,
-      activePanel: activePanel === slides.length - 1 ? 0 : activePanel + 1
+      activePanel: isLastSlide() ? 0 : activePanel + 1
     });
   };
 
   const prevSlide = () => {
     setState({
-      translate: isMobile
+      translate: isMobile()
         ? translate - windowWidth
         : translate - windowWidth * 0.7,
-      activePanel: activePanel === 0 ? slides.length - 1 : activePanel - 1
+      activePanel: isFirstSlide() ? slides.length - 1 : activePanel - 1
     });
   };
 
-  // Set slides on every transition
+  // Set slides on every transition. Assumes at least always 3 slides in the carousel.
   const smoothTransition = () => {
     let _slides = [];
     // Last slide
-    if (activePanel === slides.length - 1) {
+    if (isLastSlide()) {
       _slides = [
         slides[slides.length - 3],
         slides[slides.length - 2],
         lastSlide,
         firstSlide,
-        slides[1]
+        secondSlide
       ];
     } // first slide
-    else if (activePanel === 0) {
+    else if (isFirstSlide()) {
       _slides = [
         slides[slides.length - 2],
         lastSlide,
@@ -135,11 +141,11 @@ const Carousel = ({ slides }) => {
       ];
     } else {
       _slides = [
-        slides[activePanel - 2] ? slides[activePanel - 2] : firstSlide,
+        slides[activePanel - 2] ? slides[activePanel - 2] : lastSlide,
         slides[activePanel - 1],
         slides[activePanel],
         slides[activePanel + 1],
-        slides[activePanel + 2] ? slides[activePanel + 2] : lastSlide
+        slides[activePanel + 2] ? slides[activePanel + 2] : firstSlide
       ];
     }
 
@@ -147,7 +153,7 @@ const Carousel = ({ slides }) => {
     setState({
       renderedSlides: _slides,
       transition: 0,
-      translate: isMobile ? windowWidth * 2 : windowWidth * 0.7 * 2
+      translate: isMobile() ? windowWidth * 2 : windowWidth * 0.7 * 2
     });
   };
 
@@ -159,7 +165,7 @@ const Carousel = ({ slides }) => {
           translate={translate}
           transition={transition}
           width={
-            isMobile
+            isMobile()
               ? windowWidth * renderedSlides.length
               : windowWidth * 0.7 * renderedSlides.length
           }
@@ -169,8 +175,7 @@ const Carousel = ({ slides }) => {
           {renderedSlides.map(game => (
             <CarouselPanel
               key={uuidv4()}
-              promoText="Now available"
-              offerDescription={`${game.title}`}
+              promoText={game.promoText}
               gamePrice={game.price}
               gameDiscount={game.discount}
               gameImage={game.coverImage}
@@ -182,8 +187,8 @@ const Carousel = ({ slides }) => {
             />
           ))}
         </CarouselContent>
-        <Arrow direction="left" handleClick={prevSlide} />
-        <Arrow direction="right" handleClick={nextSlide} />
+        <Arrow direction="left" handleClick={prevSlide} left="25px" />
+        <Arrow direction="right" handleClick={nextSlide} right="45px" />
       </CarouselContainer>
       <Dots slides={slides} activeIndex={activePanel} />
     </>

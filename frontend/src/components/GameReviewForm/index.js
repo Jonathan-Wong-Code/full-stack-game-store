@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { withFormik } from 'formik';
-import { string } from 'prop-types';
+import { string, shape } from 'prop-types';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 import { Input } from '../Input';
 import StarsRating from '../StarsRating';
@@ -14,18 +15,34 @@ import {
 } from './css';
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
 
-const GameReviewForm = ({
-  userName = 'john doe',
-  userPhoto = 'http://www.fillmurray.com/g/200/300'
-}) => {
+const GameReviewForm = ({ userName, userPhoto, gameId, values }) => {
   const [rating, setRating] = useState(1);
 
-  const onSubmit = () => {};
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const { title, description } = values;
+    try {
+      await axios({
+        method: 'POST',
+        url: `http://localhost:5000/api/v1/games/${gameId}/reviews`,
+        withCredentials: true,
+        data: {
+          title,
+          description,
+          game: gameId,
+          rating
+        }
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <Section>
       <UserProfile userName={userName} userPhoto={userPhoto} />
       <ReviewContainer>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit} method="">
           <ReviewRatingTitle>
             <StarsRating rating={rating} setRating={setRating} isForReview />
             <label htmlFor="game-review-title" className="screen-reader-only">
@@ -52,8 +69,8 @@ const GameReviewForm = ({
             placeholder="Review text"
           />
           <ButtonContainer>
-            <PrimaryInvertedButton>Cancel</PrimaryInvertedButton>
-            <PrimaryButton>Save Review</PrimaryButton>
+            <PrimaryInvertedButton type="reset">Reset</PrimaryInvertedButton>
+            <PrimaryButton type="submit">Save Review</PrimaryButton>
           </ButtonContainer>
         </form>
       </ReviewContainer>
@@ -63,7 +80,12 @@ const GameReviewForm = ({
 
 GameReviewForm.propTypes = {
   userName: string.isRequired,
-  userPhoto: string.isRequired
+  userPhoto: string.isRequired,
+  gameId: string.isRequired,
+  values: shape({
+    title: string.isRequired,
+    description: string.isRequired
+  }).isRequired
 };
 
 export default withFormik({

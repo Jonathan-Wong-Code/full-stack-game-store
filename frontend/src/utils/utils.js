@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const formatPricing = (price, decimals) => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -12,3 +10,7 @@ export const formatPricing = (price, decimals) => {
 
 export const formatPercentage = (numerator, denominator) =>
   (numerator / denominator).toFixed(2) * 100;
+
+export const renderArrayText = array => {
+  return array.map((text, i) => ` ${text}${i === array.length - 1 ? '' : ','}`);
+};

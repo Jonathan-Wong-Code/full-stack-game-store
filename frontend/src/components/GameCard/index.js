@@ -1,5 +1,6 @@
 import React from 'react';
 import { number, string } from 'prop-types';
+import Link from 'next/link';
 
 import { Cart } from '../../assets/icons';
 
@@ -8,7 +9,8 @@ import {
   GameInformation,
   GameTitle,
   PriceInformation,
-  Img
+  Img,
+  ImgContainer
 } from './css';
 
 import IconButton from '../IconButton';
@@ -16,36 +18,49 @@ import IconButton from '../IconButton';
 import { formatPercentage } from '../../utils/utils';
 import PriceInfo from '../PriceInfo';
 
-const GameCard = ({ gameDiscount, gameTitle, gamePrice, imgSource }) => {
+const GameCard = ({
+  gameDiscount,
+  gameTitle,
+  gamePrice,
+  imgSource,
+  gameId
+}) => {
   const discount = gameDiscount
     ? formatPercentage(gameDiscount, gamePrice)
     : undefined;
   return (
-    <Container aria-labelledby="game-title">
-      <div>
-        <Img src={imgSource} alt={`A promotional image for ${gameTitle}`} />
-      </div>
+    <Link href={`/games/${gameId}`} as={`/games/${gameId}`} passHref>
+      <a>
+        <Container aria-labelledby="game-title">
+          <ImgContainer>
+            <Img src={imgSource} alt={`A promotional image for ${gameTitle}`} />
+          </ImgContainer>
 
-      <GameInformation aria-label="Game information">
-        <GameTitle id="game-title">{gameTitle}</GameTitle>
+          <GameInformation aria-label="Game information">
+            <GameTitle id="game-title">{gameTitle}</GameTitle>
 
-        <PriceInformation>
-          <PriceInfo
-            gamePrice={gamePrice}
-            discount={discount}
-            gameDiscount={gameDiscount}
-            gameTitle={gameTitle}
-          />
+            <PriceInformation>
+              <PriceInfo
+                gamePrice={gamePrice}
+                discount={discount}
+                gameDiscount={gameDiscount}
+                gameTitle={gameTitle}
+              />
 
-          <IconButton
-            description={`Click to add ${gameTitle} to cart`}
-            Icon={Cart}
-            variants="secondary"
-            onClick={undefined}
-          />
-        </PriceInformation>
-      </GameInformation>
-    </Container>
+              <IconButton
+                description={`Click to add ${gameTitle} to cart`}
+                Icon={Cart}
+                variants="secondary"
+                onClick={e => {
+                  e.stopPropagation();
+                  console.log('hello');
+                }}
+              />
+            </PriceInformation>
+          </GameInformation>
+        </Container>
+      </a>
+    </Link>
   );
 };
 
@@ -53,7 +68,8 @@ GameCard.propTypes = {
   gameTitle: string.isRequired,
   gamePrice: number.isRequired,
   gameDiscount: number,
-  imgSource: string.isRequired
+  imgSource: string.isRequired,
+  gameId: string.isRequired
 };
 
 GameCard.defaultProps = {

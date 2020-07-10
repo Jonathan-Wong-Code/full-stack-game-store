@@ -17,7 +17,11 @@ const userSchema = new mongoose.Schema(
       unique: [true, 'An account already exists with that email'],
     },
 
-    photoRegular: String,
+    photo: {
+      type: String,
+      default:
+        'https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg',
+    },
     photoSmall: String,
 
     password: {

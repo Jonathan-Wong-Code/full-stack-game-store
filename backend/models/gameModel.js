@@ -94,6 +94,13 @@ const gameSchema = new mongoose.Schema(
     isFeatured: Boolean,
     // isFrontPage denotes if the game should appear on the front page or not.
     isFrontPage: Boolean,
+
+    promoText: {
+      type: String,
+      trim: true,
+    },
+
+    youtubeTrailerLink: String,
   },
   {
     toJSON: { virtuals: true },

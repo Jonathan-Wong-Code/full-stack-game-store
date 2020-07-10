@@ -15,7 +15,7 @@ export const PriceInformation = styled.div`
 `;
 
 export const Prices = styled.div`
-  margin-left: ${({ gameDiscount }) => (gameDiscount ? spacing[2] : null)};
+  margin-left: ${({ gameDiscount }) => (gameDiscount > 0 ? spacing[2] : null)};
   margin-left: ${({ isLarge }) => (isLarge ? spacing[7] : null)};
 `;
 

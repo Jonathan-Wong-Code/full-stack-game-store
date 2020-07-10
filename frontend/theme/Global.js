@@ -21,9 +21,10 @@ export const GlobalStyle = createGlobalStyle`
     background: ${defaultTheme.bodyBackground};
     color: ${defaultTheme.textColor};
     line-height: 1.5;
+    margin: 0;
   }
 
-
+ 
 
   html, body, #__next {
     height: 100%;
@@ -46,6 +47,7 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+    display: block;
   }
 
   button {
@@ -60,6 +62,21 @@ export const GlobalStyle = createGlobalStyle`
 
   [data-whatintent='mouse'] *:focus {
     outline: none;
+    border: none;
+  }
+
+  *:focus {
+    outline: 5px solid blue;
+  }
+
+   @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 
 `;

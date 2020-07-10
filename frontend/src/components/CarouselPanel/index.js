@@ -20,7 +20,6 @@ import { SecondaryBtnWithIcon } from '../ButtonWithIcons';
 
 const CarouselPanel = ({
   promoText,
-  offerDescription,
   gamePrice,
   gameDiscount,
   gameImage,
@@ -45,9 +44,9 @@ const CarouselPanel = ({
       <ContentFlexbox>
         <LeftSide>
           {promoText && <PromoText>{promoText}</PromoText>}
-          <H3>{offerDescription}</H3>
+          <H3>{gameTitle}</H3>
         </LeftSide>
-        <RightSide>
+        <RightSide gameDiscount={gameDiscount}>
           <PriceInfo
             gameDiscount={gameDiscount}
             gamePrice={gamePrice}
@@ -55,7 +54,7 @@ const CarouselPanel = ({
             isLarge
             discountColor="inherit"
           />
-          <ButtonContainer>
+          <ButtonContainer gameDiscount={gameDiscount}>
             {buttonText && renderButtons(isAddToCart)}
           </ButtonContainer>
         </RightSide>
@@ -73,7 +72,6 @@ CarouselPanel.propTypes = {
   gameTitle: string,
   /* Dictates if the button should be an Add to Cart or regular button */
   isAddToCart: bool,
-  offerDescription: string.isRequired,
   promoText: string,
   textColorLight: bool
 };

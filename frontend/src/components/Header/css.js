@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { typeScale, typeWeight } from '../../../theme/typography';
 import spacing from '../../../theme/spacing';
+import { breakpoints } from '../../../theme/breakpoints';
 
 export const Logo = styled.h1`
   font-size: ${typeScale.header1};
@@ -17,11 +18,16 @@ export const Logo = styled.h1`
 `;
 
 export const HeaderSection = styled.header`
+  display: none;
   background-color: ${({ theme }) => theme.darkGrey};
   color: ${({ theme }) => theme.textInverted};
   width: 100%;
   font-size: ${typeScale.header4};
   padding: ${spacing[5]} 0;
+
+  @media screen and (min-width: ${breakpoints[0]}px) {
+    display: block;
+  }
 `;
 
 export const Nav = styled.nav`

@@ -36,9 +36,10 @@ exports.getGame = catchAsync(async (req, res, next) => {
     path: 'reviews',
     select: '',
   });
+
   res.status(201).json({
     message: 'success',
-    result: game,
+    game,
   });
 });
 

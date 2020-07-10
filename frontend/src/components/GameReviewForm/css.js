@@ -5,6 +5,7 @@ import { breakpoints } from '../../../theme/breakpoints';
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
+  padding: ${spacing[6]} 0;
 
   @media screen and (min-width: ${breakpoints[0]}px) {
     flex-direction: row;

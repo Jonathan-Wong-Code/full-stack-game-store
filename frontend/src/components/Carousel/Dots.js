@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { bool, array, number } from 'prop-types';
 import spacing from '../../../theme/spacing';
+import { v4 as uuidv4 } from 'uuid';
 
 const DotComponent = styled.span`
   padding: 10px;
@@ -31,7 +32,7 @@ Dot.propTypes = {
 const Dots = ({ slides, activeIndex }) => (
   <DotsContainer>
     {slides.map((slide, i) => (
-      <Dot key={slide} active={activeIndex === i} index={i} />
+      <Dot key={slide} active={activeIndex === i} index={i} key={uuidv4()} />
     ))}
   </DotsContainer>
 );

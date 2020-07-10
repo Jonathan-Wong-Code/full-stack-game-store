@@ -1,4 +1,6 @@
 import { green, purple, neutral, black, white, red } from './colors';
+import { breakpoints } from './breakpoints';
+
 export const defaultTheme = {
   primaryColor: purple[200],
   primaryLight: purple[100],
@@ -14,11 +16,10 @@ export const defaultTheme = {
   lightGrey: neutral[200],
   grey: neutral[300],
   darkGrey: neutral[500],
-
   errorRed: red[100],
-
   bodyBackground: neutral[200],
   black,
   white,
-  dividerColor: neutral[300]
+  dividerColor: neutral[300],
+  breakpoints
 };

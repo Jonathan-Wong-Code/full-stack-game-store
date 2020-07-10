@@ -47,11 +47,14 @@ export const ContentFlexbox = styled.div`
 `;
 
 export const H3 = styled.h3`
+  text-align: center;
+
   font-size: ${typeScale.header2};
   font-weight: ${typeWeight.bold};
 
   @media screen and (min-width: ${breakpoints[0]}px) {
     font-size: ${typeScale.header1};
+    text-align: left;
   }
 `;
 
@@ -67,27 +70,35 @@ export const LeftSide = styled.div`
 
 export const RightSide = styled.div`
   width: 100%;
-  display: block;
-  @media screen and (min-width: ${breakpoints[0]}px) {
-    justify-content: flex-end;
-  }
+  display: ${({ gameDiscount }) => (gameDiscount === 0 ? 'flex' : 'block')};
+  flex-direction: column;
+  align-items: center;
 
   @media screen and (min-width: ${breakpoints[0]}px) {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
   }
 `;
 
 export const PromoText = styled.p`
   font-size: ${typeScale.paragraph};
-  margin-bottom: ${spacing[3]};
+  text-align: center;
+
+  @media screen and (min-width: ${breakpoints[0]}px) {
+    display: flex;
+    align-items: center;
+    margin-bottom: ${spacing[3]};
+    text-align: left;
+  }
 `;
 
 export const ButtonContainer = styled.div`
-  margin-top: ${spacing[6]};
+  margin-top: ${spacing[5]};
 
   @media screen and (min-width: ${breakpoints[0]}px) {
-    margin: 0;
+    margin-top: 0;
     margin-left: ${spacing[7]};
   }
 `;

@@ -73,6 +73,7 @@
       }
     ],
     "prefer-template": 2,
+    "react/display-name": 0,
     "react/no-danger": 0,
     "react/no-multi-comp": 0,
     "react/require-default-props": 2,
