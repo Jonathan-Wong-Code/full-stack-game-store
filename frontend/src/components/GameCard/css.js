@@ -67,3 +67,7 @@ export const Img = styled.img`
   object-fit: cover;
   object-position: center top;
 `;
+
+export const GameCardLink = styled.a`
+  height: 100%;
+`;

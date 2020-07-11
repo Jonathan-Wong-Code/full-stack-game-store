@@ -6,6 +6,7 @@ import { Cart } from '../../assets/icons';
 
 import {
   Container,
+  GameCardLink,
   GameInformation,
   GameTitle,
   PriceInformation,
@@ -30,7 +31,7 @@ const GameCard = ({
     : undefined;
   return (
     <Link href={`/games/${gameId}`} as={`/games/${gameId}`} passHref>
-      <a>
+      <GameCardLink>
         <Container aria-labelledby="game-title">
           <ImgContainer>
             <Img src={imgSource} alt={`A promotional image for ${gameTitle}`} />
@@ -59,7 +60,7 @@ const GameCard = ({
             </PriceInformation>
           </GameInformation>
         </Container>
-      </a>
+      </GameCardLink>
     </Link>
   );
 };

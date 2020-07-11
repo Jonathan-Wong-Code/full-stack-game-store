@@ -8,6 +8,6 @@ const router = express.Router({ mergeParams: true });
 router.use(protect);
 
 router.route('/').post(addLike);
-router.route('/:id').delete(removeLike);
+router.route('/:reviewId').delete(removeLike);
 
 module.exports = router;

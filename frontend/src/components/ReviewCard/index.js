@@ -1,8 +1,7 @@
 import React from 'react';
-import { string, number, object } from 'prop-types';
+import { string, number, shape } from 'prop-types';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { selectAuthUser } from '../../selectors/auth';
+
 import StarRating from '../StarsRating';
 
 import {
@@ -29,23 +28,24 @@ const ReviewCard = ({
   reviewLikes,
   title,
   reviewId,
-  user
+  user,
+  userName,
+  userPhoto
 }) => {
   const [
     { likes, dislikes, userHasLike, userHasDislike },
     setState
   ] = useSetState({
-    likes: reviewLikes,
-    dislikes: reviewDislikes,
-    userHasLike: reviewLikes.some(like => like === user.id),
-    userHasDislke: reviewDislikes.some(dislike => dislike === user.id)
+    likes: reviewLikes.length,
+    dislikes: reviewDislikes.length,
+    userHasLike: user && reviewLikes.some(like => like.user === user.id),
+    userHasDislike:
+      user && reviewDislikes.some(dislike => dislike.user === user.id)
   });
-
-  // const user = useSelector(selectAuthUser);
 
   const onLikeClick = async () => {
     try {
-      const response = await axios({
+      await axios({
         method: 'POST',
         url: `http://localhost:5000/api/v1/reviews/${reviewId}/likes`,
         data: {
@@ -55,10 +55,10 @@ const ReviewCard = ({
       });
 
       setState({
-        likes: [response.data.like, ...likes],
-        dislikes: dislikes.filter(dislike => dislike === user.id),
+        likes: likes + 1,
+        dislikes: dislikes > 0 && userHasDislike ? dislikes - 1 : dislikes,
         userHasLike: true,
-        userHasDislke: false
+        userHasDislike: false
       });
     } catch (error) {
       console.log(error.response);
@@ -67,7 +67,7 @@ const ReviewCard = ({
 
   const onDislikeClick = async () => {
     try {
-      const response = await axios({
+      await axios({
         method: 'POST',
         url: `http://localhost:5000/api/v1/reviews/${reviewId}/dislikes`,
         data: {
@@ -77,9 +77,9 @@ const ReviewCard = ({
       });
 
       setState({
-        dislikes: [response.data.dislike, ...dislikes],
-        likes: likes.filter(like => like === user.id),
-        userHasDislke: true,
+        dislikes: dislikes + 1,
+        likes: likes > 0 && userHasLike ? likes - 1 : likes,
+        userHasDislike: true,
         userHasLike: false
       });
     } catch (error) {
@@ -89,7 +89,7 @@ const ReviewCard = ({
 
   return (
     <ReviewContainer>
-      <UserProfile userName={user.name} userPhoto={user.photo} />
+      <UserProfile userName={userName} userPhoto={userPhoto} />
       <RightSide className="rightSide">
         <ReviewTitleRating className="Title">
           <ReviewTitle>{title}</ReviewTitle>
@@ -112,8 +112,7 @@ const ReviewCard = ({
               </FeedbackButton>
             </Feedback>
             <p>
-              ({likes.length} of {likes.length + dislikes.length} people found
-              this helpful)
+              ({likes} of {likes + dislikes} people found this helpful)
             </p>
           </ReviewFeedbackContainer>
         ) : (
@@ -134,7 +133,13 @@ ReviewCard.propTypes = {
   reviewId: string.isRequired,
   reviewLikes: number.isRequired,
   title: string.isRequired,
-  user: object.isRequired
+  userName: string.isRequired,
+  userPhoto: string.isRequired,
+  user: shape({
+    name: string.isRequired,
+    photo: string.isRequired,
+    id: string.isRequired
+  }).isRequired
 };
 
 export default ReviewCard;

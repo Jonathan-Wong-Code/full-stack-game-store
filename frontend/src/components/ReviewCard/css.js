@@ -60,6 +60,11 @@ export const FeedbackButton = styled.button`
 
   border-radius: 5px;
   font-weight: ${typeScale.bold};
+
+  &:disabled {
+    background: grey;
+    color: white;
+  }
 `;
 
 export const Feedback = styled.div`

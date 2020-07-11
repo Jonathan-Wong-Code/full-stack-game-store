@@ -22,7 +22,15 @@ const Reviews = ({ user, addReview, gameReviews, gameId }) => {
           </Accordion>
         </div>
       )}
-
+      <div className="filter">
+        <label htmlFor="filter-number-of-reviews">Show</label>
+        <select id="filter-number-of-reviews">
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+          <option value={20}>20</option>
+        </select>
+      </div>
       <ul>
         {gameReviews &&
           gameReviews.map(review => {
@@ -33,7 +41,8 @@ const Reviews = ({ user, addReview, gameReviews, gameId }) => {
               dislikes,
               rating,
               title,
-              id
+              id,
+              user: { name, photo }
             } = review;
 
             return (
@@ -46,6 +55,8 @@ const Reviews = ({ user, addReview, gameReviews, gameId }) => {
                   rating={rating}
                   title={title}
                   user={user}
+                  userName={name}
+                  userPhoto={photo}
                   reviewId={id}
                 />
               </ReviewContainer>
