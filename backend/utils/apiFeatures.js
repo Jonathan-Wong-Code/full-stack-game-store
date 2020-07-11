@@ -11,7 +11,7 @@ class APIFeatures {
     excluded.forEach((field) => delete queryStr[field]);
 
     let query = JSON.stringify(queryStr);
-    query = query.replace(/\b(gte|lte|lt|gt)\b/g, (match) => {
+    query = query.replace(/\b(gte|lte|lt|eq|gt)\b/g, (match) => {
       return `$${match}`;
     });
 

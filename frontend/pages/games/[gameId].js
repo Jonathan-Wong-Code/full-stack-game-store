@@ -58,34 +58,13 @@ export async function getStaticProps(context) {
 
 // COMPONENT
 const GamePage = ({ game }) => {
-  const [
-    { isOpen, modalType, modalLink, imgIndex, gameReviews },
-    setState
-  ] = useSetState({
+  const [{ isOpen, modalType, modalLink, imgIndex }, setState] = useSetState({
     isOpen: false,
     showGameReviewForm: false,
     modalType: null,
     modalLink: null,
-    imgIndex: 0,
-    gameReviews: null
+    imgIndex: 0
   });
-
-  useEffect(() => {
-    const getReviews = async () => {
-      try {
-        const response = await axios({
-          method: 'GET',
-          url: `http://localhost:5000/api/v1/games/${id}/reviews`
-        });
-
-        setState({ gameReviews: response.data.reviews });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getReviews();
-  }, []);
 
   const user = useSelector(selectAuthUser);
   const { windowWidth } = useWindowWidth();
@@ -104,10 +83,6 @@ const GamePage = ({ game }) => {
 
   const closeModal = () =>
     setState({ isOpen: false, modalType: null, modalLink: null });
-
-  const addReview = review => {
-    setState({ gameReviews: [review, ...gameReviews] });
-  };
 
   const {
     company,
@@ -170,12 +145,7 @@ const GamePage = ({ game }) => {
           operatingSystems={operatingSystems}
         />
         {/* REVIEWS */}
-        <Reviews
-          user={user}
-          addReview={addReview}
-          gameReviews={gameReviews}
-          gameId={id}
-        />
+        <Reviews user={user} gameId={id} />
       </Wrapper>
 
       {/* MODAL */}

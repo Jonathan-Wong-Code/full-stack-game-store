@@ -1,15 +1,58 @@
-import React from 'react';
-import { string, func, shape, array, number } from 'prop-types';
+import React, { useEffect } from 'react';
+import { string, shape } from 'prop-types';
+import axios from 'axios';
 
-import { ReviewHeading, ReviewContainer } from './Reviews.css';
+import {
+  ReviewHeading,
+  ReviewContainer,
+  FilterBar,
+  Label
+} from './Reviews.css';
 import Accordion from '../../src/components/Accordion';
 import GameReviewForm from '../../src/components/GameReviewForm';
 import ReviewCard from '../../src/components/ReviewCard';
+import useSetState from '../../src/hooks/useSetState';
 
-const Reviews = ({ user, addReview, gameReviews, gameId }) => {
+const Reviews = ({ user, gameId }) => {
+  const [{ gameReviews, limit, page, sortBy, rating }, setState] = useSetState({
+    gameReviews: [],
+    limit: 5,
+    page: 1,
+    sortBy: '-createdAt',
+    rating: 0
+  });
+
+  useEffect(() => {
+    const getReviews = async () => {
+      console.log(rating);
+      try {
+        const ratingStr = Number(rating) === 0 ? '' : `&rating=${rating}`;
+        console.log(ratingStr);
+        const response = await axios({
+          method: 'GET',
+          url: `http://localhost:5000/api/v1/games/${gameId}/reviews?sort=${sortBy}&limit=${limit}&page=${page}${ratingStr}`
+        });
+
+        setState({ gameReviews: response.data.reviews });
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+    getReviews();
+  }, [limit, page, sortBy, rating]);
+
+  const addReview = review => {
+    setState({ gameReviews: [review, ...gameReviews] });
+  };
+
+  const onChange = e => {
+    setState({ [e.target.name]: e.target.value });
+  };
+
   return (
     <section aria-labelledby="reviews-subheading">
       <ReviewHeading id="reviews-subheading">User reviews</ReviewHeading>
+
       {!!user && (
         <div>
           <Accordion title="+Add Your Review">
@@ -22,15 +65,56 @@ const Reviews = ({ user, addReview, gameReviews, gameId }) => {
           </Accordion>
         </div>
       )}
-      <div className="filter">
-        <label htmlFor="filter-number-of-reviews">Show</label>
-        <select id="filter-number-of-reviews">
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-          <option value={20}>20</option>
+
+      <FilterBar>
+        <Label
+          htmlFor="filter-number-of-reviews"
+          style={{ marginRight: '.5rem' }}
+        >
+          Show:
+        </Label>
+        <select
+          id="filter-number-of-reviews"
+          value={limit}
+          name="limit"
+          onChange={onChange}
+        >
+          <option value={5}>5 on page</option>
+          <option value={10}>10 on page</option>
+          <option value={15}>15 on page</option>
+          <option value={20}>20 on page</option>
         </select>
-      </div>
+
+        <Label htmlFor="filter-review-rating" style={{ marginRight: '.5rem' }}>
+          Rating:
+        </Label>
+        <select
+          id="filter-review-rating"
+          value={rating}
+          name="rating"
+          onChange={onChange}
+        >
+          <option value={0}>All</option>
+          <option value={1}>1 Star</option>
+          <option value={2}>2 Stars</option>
+          <option value={3}>3 Stars</option>
+          <option value={4}>4 Stars</option>
+          <option value={5}>5 Stars</option>
+        </select>
+
+        <Label htmlFor="filter-order-reviews">Order by:</Label>
+        <select
+          id="filter-order-reviews"
+          value={sortBy}
+          name="sortBy"
+          onChange={onChange}
+        >
+          <option value="-rating, -createdAt">Highest rating</option>
+          <option value="-createdAt">Date</option>
+          <option value="-likes">Most helpful</option>
+        </select>
+      </FilterBar>
+
       <ul>
         {gameReviews &&
           gameReviews.map(review => {
@@ -71,18 +155,6 @@ Reviews.propTypes = {
   user: shape({
     name: string.isRequired,
     photo: string.isRequired
-  }).isRequired,
-
-  addReview: func.isRequired,
-
-  gameReviews: shape({
-    createdAt: string.isRequired,
-    description: string.isRequired,
-    likes: array.isRequired,
-    dislikes: array.isRequired,
-    rating: number.isRequired,
-    title: string.isRequired,
-    id: string.isRequired
   }).isRequired,
 
   gameId: string.isRequired
