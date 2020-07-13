@@ -3,24 +3,22 @@ import { string, shape } from 'prop-types';
 import axios from 'axios';
 
 import { ReviewHeading, ReviewContainer, FilterBar, Label } from './css';
-import Accordion from '../../../src/components/Accordion';
-import GameReviewForm from '../../../src/components/GameReviewForm';
-import ReviewCard from '../../../src/components/ReviewCard';
-import useSetState from '../../../src/hooks/useSetState';
+import Accordion from '../../../components/Accordion';
+import GameReviewForm from '../../../components/GameReviewForm';
+import ReviewCard from '../../../components/ReviewCard';
+import useSetState from '../../../hooks/useSetState';
+import { useReviewState, useReviewDispatch } from './context';
 
 const Reviews = ({ user, gameId }) => {
-  const [
-    { gameReviews, limit, page, sortBy, rating, numTotalReviews, noUserReview },
-    setState
-  ] = useSetState({
-    gameReviews: [],
+  const [{ limit, page, sortBy, rating }, setState] = useSetState({
     limit: 5,
     page: 1,
     sortBy: '-createdAt',
-    rating: 0,
-    numTotalReviews: 0,
-    noUserReview: false
+    rating: 0
   });
+
+  const { reviews, numTotalReviews, noUserReview } = useReviewState();
+  const { setReviews } = useReviewDispatch();
 
   useEffect(() => {
     const getReviews = async () => {
@@ -31,29 +29,14 @@ const Reviews = ({ user, gameId }) => {
           url: `http://localhost:5000/api/v1/games/${gameId}/reviews?sort=${sortBy}&limit=${limit}&page=${page}${ratingStr}`,
           withCredentials: true
         });
-
-        setState({
-          gameReviews: response.data.reviews, // Current game reviews based on limit + page.
-          numTotalReviews: response.data.numTotalReviews, // Total number of reviews this game has.
-          noUserReview: response.data.noUserReview // Whether or not the current user has reviewed the current game.
-        });
+        const { reviews, noUserReview, numTotalReviews } = response.data;
+        setReviews(reviews, numTotalReviews, noUserReview);
       } catch (error) {
         console.log(error.response.data);
       }
     };
     getReviews();
   }, [limit, page, sortBy, rating]);
-
-  const addReview = review => {
-    setState({ gameReviews: [review, ...gameReviews], noUserReview: false });
-  };
-
-  const deleteReview = async reviewId => {
-    setState({
-      gameReviews: gameReviews.filter(review => review._id !== reviewId),
-      noUserReview: true
-    });
-  };
 
   const onChange = e => {
     setState({ [e.target.name]: e.target.value, page: 1 });
@@ -74,7 +57,7 @@ const Reviews = ({ user, gameId }) => {
               userPhoto={user.photo}
               userId={user.id}
               gameId={gameId}
-              addReview={addReview}
+              type="create"
             />
           </Accordion>
         </div>
@@ -132,8 +115,8 @@ const Reviews = ({ user, gameId }) => {
 
       {/* REVIEW LIST */}
       <ul>
-        {gameReviews &&
-          gameReviews.map(review => {
+        {reviews &&
+          reviews.map(review => {
             const {
               createdAt,
               description,
@@ -149,7 +132,6 @@ const Reviews = ({ user, gameId }) => {
               <ReviewContainer key={id}>
                 <ReviewCard
                   date={new Date(createdAt).toDateString()}
-                  deleteReviewUI={deleteReview}
                   description={description}
                   reviewLikes={likes}
                   reviewDislikes={dislikes}
@@ -160,6 +142,7 @@ const Reviews = ({ user, gameId }) => {
                   userPhoto={photo}
                   reviewUserId={reviewUserId}
                   reviewId={id}
+                  gameId={gameId}
                 />
               </ReviewContainer>
             );

@@ -17,13 +17,14 @@ import {
 
 import VideoBanner from '../../pagesContainers/gamePage/VideoBanner';
 import GameDetails from '../../pagesContainers/gamePage/GameDetails';
-import Reviews from '../../pagesContainers/gamePage/Reviews';
-
+import Reviews from '../../src/containers/gamePage/reviews';
 import GalleryModal from '../../src/components/GalleryModal';
 import { Wrapper } from '../../src/components/Wrapper';
 
 import useWindowWidth from '../../src/hooks/useWindowWidth';
 import useSetState from '../../src/hooks/useSetState';
+
+import { ReviewProvider } from '../../src/containers/gamePage/reviews/context';
 
 // SET STATIC PATHS
 export async function getStaticPaths() {
@@ -145,7 +146,9 @@ const GamePage = ({ game }) => {
           operatingSystems={operatingSystems}
         />
         {/* REVIEWS */}
-        <Reviews user={user} gameId={id} />
+        <ReviewProvider>
+          <Reviews user={user} gameId={id} />
+        </ReviewProvider>
       </Wrapper>
 
       {/* MODAL */}

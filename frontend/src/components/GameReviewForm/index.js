@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { withFormik } from 'formik';
-import { string, shape, func } from 'prop-types';
+import { string, shape, number } from 'prop-types';
 import * as Yup from 'yup';
-import axios from 'axios';
 
 import { Input } from '../Input';
 import StarsRating from '../StarsRating';
@@ -15,45 +14,32 @@ import {
 } from './css';
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
 
+import { useReviewDispatch } from '../../containers/gamePage/reviews/context';
+
 const GameReviewForm = ({
   userName,
   userPhoto,
   userId,
   gameId,
   values,
-  addReview
+  initialRating
 }) => {
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(initialRating);
+
+  const { addReview } = useReviewDispatch();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const { title, description } = values;
-    try {
-      const response = await axios({
-        method: 'POST',
-        url: `http://localhost:5000/api/v1/games/${gameId}/reviews`,
-        withCredentials: true,
-        data: {
-          title,
-          description,
-          game: gameId,
-          rating
-        }
-      });
 
-      addReview({
-        ...response.data.review,
-        likes: [],
-        dislikes: [],
-        user: {
-          id: userId,
-          name: userName,
-          photo: userPhoto
-        }
-      });
-    } catch (error) {
-      console.log(error.response);
-    }
+    const data = {
+      title: values.title,
+      description: values.description,
+      game: gameId,
+      rating
+    };
+
+    const user = { id: userId, name: userName, photo: userPhoto };
+    addReview(gameId, data, user);
   };
 
   return (
@@ -101,17 +87,25 @@ GameReviewForm.propTypes = {
   userId: string.isRequired,
   userPhoto: string.isRequired,
   gameId: string.isRequired,
+  initialRating: number,
+  title: string,
+  description: string,
   values: shape({
     title: string.isRequired,
     description: string.isRequired
-  }).isRequired,
-  addReview: func.isRequired
+  }).isRequired
+};
+
+GameReviewForm.defaultProps = {
+  initialRating: 1,
+  title: '',
+  description: ''
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    description: '',
-    title: ''
+  mapPropsToValues: ({ description, title }) => ({
+    description,
+    title
   }),
 
   validationSchema: Yup.object().shape({

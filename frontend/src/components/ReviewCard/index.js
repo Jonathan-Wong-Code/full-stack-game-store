@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, shape, func, array } from 'prop-types';
+import { string, number, shape, array } from 'prop-types';
 import axios from 'axios';
 
 import StarRating from '../StarsRating';
@@ -23,10 +23,14 @@ import { PrimaryButton } from '../Buttons';
 import UserProfile from '../UserProfile';
 import useSetState from '../../hooks/useSetState';
 
+import { useReviewDispatch } from '../../containers/gamePage/reviews/context';
+
+import GameReviewForm from '../GameReviewForm';
+
 const ReviewCard = ({
   date,
-  deleteReviewUI,
   description,
+  gameId,
   rating,
   reviewDislikes,
   reviewLikes,
@@ -38,15 +42,18 @@ const ReviewCard = ({
   userPhoto
 }) => {
   const [
-    { likes, dislikes, userHasLike, userHasDislike },
+    { likes, dislikes, userHasLike, userHasDislike, isBeingEdited },
     setState
   ] = useSetState({
     likes: reviewLikes.length,
     dislikes: reviewDislikes.length,
     userHasLike: user && reviewLikes.some(like => like.user === user.id),
     userHasDislike:
-      user && reviewDislikes.some(dislike => dislike.user === user.id)
+      user && reviewDislikes.some(dislike => dislike.user === user.id),
+    isBeingEdited: false
   });
+
+  const { deleteReview } = useReviewDispatch();
 
   const onLikeClick = async () => {
     try {
@@ -88,35 +95,20 @@ const ReviewCard = ({
     }
   };
 
-  const deleteReview = async () => {
-    try {
-      await axios({
-        method: 'DELETE',
-        url: `http://localhost:5000/api/v1/reviews/${reviewId}`,
-        withCredentials: true
-      });
-      deleteReviewUI(reviewId);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const editReview = async () => {
-    try {
-      await axios({
-        method: 'PATCH',
-        url: `http://localhost:5000/api/v1/reviews/${reviewId}`,
-        withCredentials: true
-      });
-      deleteReviewUI(reviewId);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
   const userOwnedReview = user ? reviewUserId === user.id : null;
 
-  return (
+  return isBeingEdited ? (
+    <GameReviewForm
+      userName={user.name}
+      userPhoto={user.photo}
+      userId={user.id}
+      gameId={gameId}
+      type="update"
+      title={title}
+      description={description}
+      initialRating={rating}
+    />
+  ) : (
     <ReviewContainer>
       <UserProfile userName={userName} userPhoto={userPhoto} />
       <RightSide className="rightSide">
@@ -127,6 +119,7 @@ const ReviewCard = ({
         <Date>{date}</Date>
         <Description>{description}</Description>
 
+        {/* If not the user's own review and user is logged in */}
         {user && !userOwnedReview ? (
           <ReviewFeedbackContainer className="helpful">
             <Feedback>
@@ -161,7 +154,13 @@ const ReviewCard = ({
             >
               Delete
             </PrimaryButton>
-            <PrimaryButton modifiers="small">Edit</PrimaryButton>
+
+            <PrimaryButton
+              modifiers="small"
+              onClick={() => setState({ isBeingEdited: true })}
+            >
+              Edit
+            </PrimaryButton>
           </ButtonContainer>
         )}
       </RightSide>
@@ -171,8 +170,8 @@ const ReviewCard = ({
 
 ReviewCard.propTypes = {
   date: string.isRequired,
-  deleteReviewUI: func.isRequired,
   description: string.isRequired,
+  gameId: string.isRequired,
   rating: number.isRequired,
   reviewDislikes: array.isRequired,
   reviewId: string.isRequired,

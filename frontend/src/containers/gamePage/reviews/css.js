@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { SubHeading } from '../common.css';
-import spacing from '../../../theme/spacing';
-import { typeWeight } from '../../../theme/typography';
+import { SubHeading } from '../../../../pagesContainers/gamePage/common.css';
+import spacing from '../../../../theme/spacing';
+import { typeWeight } from '../../../../theme/typography';
 // REVIEWS
 
 export const ReviewContainer = styled.li`
