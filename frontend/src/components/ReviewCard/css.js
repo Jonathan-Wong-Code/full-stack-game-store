@@ -12,7 +12,7 @@ export const ReviewContainer = styled.div`
   flex-direction: column;
   padding: ${spacing[6]};
   border-top: 1px solid ${({ theme }) => theme.dividerColor};
-
+  position: relative;
   @media screen and (min-width: ${breakpoints[0]}px) {
     flex-direction: row;
     padding: ${spacing[6]} 0;
@@ -79,4 +79,9 @@ export const Feedback = styled.div`
 
 export const FeedbackText = styled.p`
   margin-right: ${spacing[1]};
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: ${spacing[2]};
 `;

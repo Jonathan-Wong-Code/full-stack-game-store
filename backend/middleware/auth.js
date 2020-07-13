@@ -8,6 +8,8 @@ const User = require('../models/userModel');
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token = {};
+  console.log(req.cookies);
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer ')
@@ -54,3 +56,22 @@ exports.restrictToRole = (...roles) => {
     next();
   };
 };
+
+// Meant for grabbing user data if available but not for a secure route.
+exports.getUserData = catchAsync(async (req, res, next) => {
+  let token;
+  if (req.cookies && req.cookies.jwt) {
+    token = req.cookies.jwt;
+  } else {
+    token = null;
+  }
+
+  if (!token) {
+    return next();
+  }
+
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  const user = await User.findById(decoded.id);
+  req.user = user;
+  next();
+});

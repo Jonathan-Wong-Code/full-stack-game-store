@@ -9,6 +9,15 @@ const BUTTON_MODIFIERS = {
     width: 100%;
   `,
 
+  small: () => `
+    padding: ${spacing[1]} ${spacing[2]};
+    border-radius: 5px;
+    font-weight: ${typeScale.bold};
+    font-size:${typeScale.helperText};
+    min-width: auto;
+    border: 1px solid ${({ theme }) => theme.secondaryLight};
+  `,
+
   large: () => `
     font-size: ${typeScale.header4};
     

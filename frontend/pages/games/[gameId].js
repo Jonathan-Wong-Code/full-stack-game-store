@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { shape, string, array, number, arrayOf } from 'prop-types';
 
@@ -172,7 +172,7 @@ GamePage.propTypes = {
     description: string.isRequired,
     discount: number,
     galleryImages: arrayOf(string).isRequired,
-    genre: string,
+    genre: arrayOf(string),
     mobileGalleryImages: array,
     operatingSystems: array,
     price: string.isRequired,

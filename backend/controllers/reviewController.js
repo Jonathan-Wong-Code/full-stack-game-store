@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const catchAsync = require('../utils/catchAsync');
 const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
@@ -16,10 +18,6 @@ exports.createReview = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllReviewsPerGame = catchAsync(async (req, res, next) => {
-  // const reviews = await Review.find({
-  //   game: req.params.gameId,
-  // }).populate({ path: 'likes' });
-
   const reviewQuery = Review.find({
     game: req.params.gameId,
   });
@@ -31,9 +29,32 @@ exports.getAllReviewsPerGame = catchAsync(async (req, res, next) => {
 
   const reviews = await query.queryObj;
 
+  const stats = await Review.aggregate([
+    {
+      $match: {
+        game: mongoose.Types.ObjectId(req.params.gameId),
+        rating: req.query.rating
+          ? { $eq: Number(req.query.rating) }
+          : { $gte: 0 },
+      },
+    },
+    {
+      $group: {
+        _id: '',
+        numReviews: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const myReview = await Review.findOne({
+    user: req.user ? req.user._id : null,
+  });
+
   res.status(200).json({
     status: 'success',
     reviews,
+    numTotalReviews: stats[0].numReviews,
+    noUserReview: req.user ? !myReview : false,
   });
 });
 

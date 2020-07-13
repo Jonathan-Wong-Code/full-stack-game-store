@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { protect } = require('../middleware/auth');
+const { protect, getUserData } = require('../middleware/auth');
 const {
   createReview,
   getAllReviewsPerGame,
@@ -17,11 +17,14 @@ const router = express.Router({ mergeParams: true });
 router.use('/:reviewId/likes', likesRouter);
 router.use('/:reviewId/dislikes', dislikesRouter);
 
-router.route('/').post(protect, createReview).get(getAllReviewsPerGame);
+router
+  .route('/')
+  .post(protect, createReview)
+  .get(getUserData, getAllReviewsPerGame);
 
 router
   .route('/:reviewId')
-  .get(getReview)
+  .get(protect, getReview)
   .patch(protect, updateReview)
   .delete(protect, deleteReview);
 

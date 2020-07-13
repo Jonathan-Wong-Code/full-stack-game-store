@@ -1,10 +1,11 @@
 import React from 'react';
-import { string, number, shape } from 'prop-types';
+import { string, number, shape, func, array } from 'prop-types';
 import axios from 'axios';
 
 import StarRating from '../StarsRating';
 
 import {
+  ButtonContainer,
   Date,
   Description,
   Feedback,
@@ -17,17 +18,21 @@ import {
   ReviewFeedbackContainer
 } from './css';
 
+import { PrimaryButton } from '../Buttons';
+
 import UserProfile from '../UserProfile';
 import useSetState from '../../hooks/useSetState';
 
 const ReviewCard = ({
   date,
+  deleteReviewUI,
   description,
   rating,
   reviewDislikes,
   reviewLikes,
   title,
   reviewId,
+  reviewUserId,
   user,
   userName,
   userPhoto
@@ -48,9 +53,7 @@ const ReviewCard = ({
       await axios({
         method: 'POST',
         url: `http://localhost:5000/api/v1/reviews/${reviewId}/likes`,
-        data: {
-          review: reviewId
-        },
+        data: { review: reviewId },
         withCredentials: true
       });
 
@@ -70,9 +73,7 @@ const ReviewCard = ({
       await axios({
         method: 'POST',
         url: `http://localhost:5000/api/v1/reviews/${reviewId}/dislikes`,
-        data: {
-          review: reviewId
-        },
+        data: { review: reviewId },
         withCredentials: true
       });
 
@@ -87,6 +88,34 @@ const ReviewCard = ({
     }
   };
 
+  const deleteReview = async () => {
+    try {
+      await axios({
+        method: 'DELETE',
+        url: `http://localhost:5000/api/v1/reviews/${reviewId}`,
+        withCredentials: true
+      });
+      deleteReviewUI(reviewId);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const editReview = async () => {
+    try {
+      await axios({
+        method: 'PATCH',
+        url: `http://localhost:5000/api/v1/reviews/${reviewId}`,
+        withCredentials: true
+      });
+      deleteReviewUI(reviewId);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const userOwnedReview = user ? reviewUserId === user.id : null;
+
   return (
     <ReviewContainer>
       <UserProfile userName={userName} userPhoto={userPhoto} />
@@ -97,7 +126,8 @@ const ReviewCard = ({
         </ReviewTitleRating>
         <Date>{date}</Date>
         <Description>{description}</Description>
-        {user ? (
+
+        {user && !userOwnedReview ? (
           <ReviewFeedbackContainer className="helpful">
             <Feedback>
               <FeedbackText>Is this helpful to you?</FeedbackText>
@@ -120,6 +150,20 @@ const ReviewCard = ({
             {likes} of {likes + dislikes} people found this helpful
           </p>
         )}
+
+        {userOwnedReview && (
+          <ButtonContainer>
+            <PrimaryButton
+              modifiers="small"
+              style={{ marginRight: '.5rem' }}
+              onClick={() => deleteReview(reviewId)}
+              type="button"
+            >
+              Delete
+            </PrimaryButton>
+            <PrimaryButton modifiers="small">Edit</PrimaryButton>
+          </ButtonContainer>
+        )}
       </RightSide>
     </ReviewContainer>
   );
@@ -127,11 +171,13 @@ const ReviewCard = ({
 
 ReviewCard.propTypes = {
   date: string.isRequired,
+  deleteReviewUI: func.isRequired,
   description: string.isRequired,
   rating: number.isRequired,
-  reviewDislikes: number.isRequired,
+  reviewDislikes: array.isRequired,
   reviewId: string.isRequired,
-  reviewLikes: number.isRequired,
+  reviewLikes: array.isRequired,
+  reviewUserId: string,
   title: string.isRequired,
   userName: string.isRequired,
   userPhoto: string.isRequired,
@@ -140,6 +186,10 @@ ReviewCard.propTypes = {
     photo: string.isRequired,
     id: string.isRequired
   }).isRequired
+};
+
+ReviewCard.defaultProps = {
+  reviewUserId: ''
 };
 
 export default ReviewCard;

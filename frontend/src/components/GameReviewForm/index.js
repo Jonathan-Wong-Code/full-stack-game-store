@@ -15,7 +15,14 @@ import {
 } from './css';
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
 
-const GameReviewForm = ({ userName, userPhoto, gameId, values, addReview }) => {
+const GameReviewForm = ({
+  userName,
+  userPhoto,
+  userId,
+  gameId,
+  values,
+  addReview
+}) => {
   const [rating, setRating] = useState(1);
 
   const handleSubmit = async e => {
@@ -39,6 +46,7 @@ const GameReviewForm = ({ userName, userPhoto, gameId, values, addReview }) => {
         likes: [],
         dislikes: [],
         user: {
+          id: userId,
           name: userName,
           photo: userPhoto
         }
@@ -90,6 +98,7 @@ const GameReviewForm = ({ userName, userPhoto, gameId, values, addReview }) => {
 
 GameReviewForm.propTypes = {
   userName: string.isRequired,
+  userId: string.isRequired,
   userPhoto: string.isRequired,
   gameId: string.isRequired,
   values: shape({
