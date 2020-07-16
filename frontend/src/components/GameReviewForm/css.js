@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import spacing from '../../../theme/spacing';
 import { breakpoints } from '../../../theme/breakpoints';
+import { ErrorMsg } from '../Forms/AuthForm';
 
 export const Section = styled.section`
   display: flex;
@@ -28,8 +29,13 @@ export const ReviewRatingTitle = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-bottom: ${spacing[5]};
 
   & button:not(:last-child) {
     margin-right: 5px;
   }
+`;
+
+export const ReviewError = styled(ErrorMsg)`
+  opacity: ${({ showError }) => (showError ? 1 : 0)};
 `;

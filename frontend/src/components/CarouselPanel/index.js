@@ -26,7 +26,8 @@ const CarouselPanel = ({
   isAddToCart,
   buttonText,
   textColorLight,
-  gameTitle
+  gameTitle,
+  tabIndex
 }) => {
   const renderButtons = isAddToCart =>
     isAddToCart ? (
@@ -34,6 +35,7 @@ const CarouselPanel = ({
         Icon={Cart}
         buttonText={buttonText}
         variants={['large', 'fullWidth']}
+        tabIndex={tabIndex}
       />
     ) : (
       <PrimaryButton>{buttonText}</PrimaryButton>

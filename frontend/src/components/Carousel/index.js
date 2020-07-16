@@ -156,11 +156,12 @@ const Carousel = ({ slides }) => {
       translate: isMobile() ? windowWidth * 2 : windowWidth * 0.7 * 2
     });
   };
-
   if (!renderedSlides) return null;
   return (
     <>
       <CarouselContainer>
+        <Arrow direction="left" handleClick={prevSlide} left="25px" />
+        <Arrow direction="right" handleClick={nextSlide} right="45px" />
         <CarouselContent
           translate={translate}
           transition={transition}
@@ -172,7 +173,7 @@ const Carousel = ({ slides }) => {
           className="carousel-content"
           ref={contentBoxRef}
         >
-          {renderedSlides.map(game => (
+          {renderedSlides.map((game, i) => (
             <CarouselPanel
               key={uuidv4()}
               promoText={game.promoText}
@@ -184,11 +185,10 @@ const Carousel = ({ slides }) => {
               hasButton
               textColorLight
               gameTitle={game.title}
+              tabIndex={i === 2 ? 0 : -1}
             />
           ))}
         </CarouselContent>
-        <Arrow direction="left" handleClick={prevSlide} left="25px" />
-        <Arrow direction="right" handleClick={nextSlide} right="45px" />
       </CarouselContainer>
       <Dots slides={slides} activeIndex={activePanel} />
     </>

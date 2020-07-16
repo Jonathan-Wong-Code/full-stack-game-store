@@ -5,7 +5,9 @@ import {
   SET_REVIEWS,
   ADD_REVIEW,
   UPDATE_REVIEW,
-  DELETE_REVIEW
+  DELETE_REVIEW,
+  START_LOADING,
+  SET_ERROR
 } from './constants';
 
 const ReviewStateContext = createContext();
@@ -26,7 +28,9 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         reviews: [action.payload.review, ...state.reviews],
-        noUserReview: false
+        noUserReview: false,
+        numTotalReviews: state.numTotalReviews + 1,
+        loading: false
       };
 
     case DELETE_REVIEW: {
@@ -35,7 +39,9 @@ const reducer = (state = {}, action) => {
         reviews: state.reviews.filter(
           review => review.id !== action.payload.id
         ),
-        noUserReview: true
+        noUserReview: true,
+        numTotalReviews: state.numTotalReviews - 1,
+        loading: false
       };
     }
 
@@ -44,8 +50,18 @@ const reducer = (state = {}, action) => {
         ...state,
         reviews: state.reviews.map(review =>
           review.id === action.payload.id ? action.payload.review : review
-        )
+        ),
+        loading: false
       };
+
+    case START_LOADING: {
+      return { ...state, loading: true };
+    }
+
+    case SET_ERROR: {
+      console.log(action);
+      return { ...state, error: action.payload.error, loading: false };
+    }
 
     default:
       return state;
@@ -56,7 +72,9 @@ export const ReviewProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     gameReviews: [],
     noUserReview: false,
-    numTotalReviews: 0
+    numTotalReviews: 0,
+    loading: false,
+    error: null
   });
 
   return (
@@ -121,7 +139,10 @@ export const useReviewDispatch = () => {
         }
       });
     } catch (error) {
-      console.log(error.response);
+      dispatch({
+        type: SET_ERROR,
+        payload: { error: error.response.data.message }
+      });
     }
   };
 
@@ -136,6 +157,10 @@ export const useReviewDispatch = () => {
       dispatch({ type: DELETE_REVIEW, payload: { id: reviewId } });
     } catch (error) {
       console.log(error.response);
+      dispatch({
+        type: SET_ERROR,
+        payload: { error: error.response.data.message }
+      });
     }
   };
 
@@ -152,8 +177,14 @@ export const useReviewDispatch = () => {
         type: UPDATE_REVIEW,
         payload: { id: reviewId, review: response.data.review }
       });
+
+      return true;
     } catch (error) {
-      console.log(error.response);
+      dispatch({
+        type: SET_ERROR,
+        payload: { error: error.response.data.message }
+      });
+      return false;
     }
   };
 

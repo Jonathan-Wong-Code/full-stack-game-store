@@ -8,12 +8,19 @@ import { StarFilled, StarUnfilled } from '../../assets/icons';
 import useTheme from '../../hooks/useTheme';
 import { StarsContainer } from './css';
 
-const Stars = ({ rating, setRating, isForReview = true }) => {
+const Stars = ({ rating, setRating, isForReview, tabIndex }) => {
   const theme = useTheme();
 
   const getStarFilledType = i =>
     isForReview ? (
-      <button type="button" onClick={() => setRating(i + 1)}>
+      <button
+        type="button"
+        onClick={() => setRating(i + 1)}
+        tabIndex={tabIndex}
+      >
+        <span className="screen-reader-only">
+          Set rating to {rating} out of 5 stars.
+        </span>
         <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
           <StarFilled />
         </Icon>
@@ -30,7 +37,11 @@ const Stars = ({ rating, setRating, isForReview = true }) => {
         type="button"
         onClick={() => setRating(rating + i + 1)}
         key={uuidv4()}
+        tabIndex={tabIndex}
       >
+        <span className="screen-reader-only">
+          Set rating to {rating} out of 5 stars.
+        </span>
         <Icon iconColor={theme.primaryLight} variants="small">
           <StarUnfilled />
         </Icon>
@@ -76,7 +87,8 @@ const Stars = ({ rating, setRating, isForReview = true }) => {
 Stars.propTypes = {
   rating: number.isRequired,
   setRating: func,
-  isForReview: bool
+  isForReview: bool,
+  tabIndex: number.isRequired
 };
 
 Stars.defaultProps = {

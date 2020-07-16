@@ -10,9 +10,11 @@ export const ModalBackground = styled.div`
   right: 0;
   background: rgba(0, 0, 0, 0.75);
   display: flex;
+  z-index: 100;
 `;
 
 export const ModalBody = styled.div`
+  z-index: 101;
   margin: auto;
   position: relative;
   animation: 0.5s ease fadeIn;

@@ -48,12 +48,16 @@ const ReviewCard = ({
     likes: reviewLikes.length,
     dislikes: reviewDislikes.length,
     userHasLike: user && reviewLikes.some(like => like.user === user.id),
+
     userHasDislike:
       user && reviewDislikes.some(dislike => dislike.user === user.id),
+
     isBeingEdited: false
   });
 
   const { deleteReview } = useReviewDispatch();
+
+  const closeEditForm = () => setState({ isBeingEdited: false });
 
   const onLikeClick = async () => {
     try {
@@ -99,14 +103,17 @@ const ReviewCard = ({
 
   return isBeingEdited ? (
     <GameReviewForm
-      userName={user.name}
-      userPhoto={user.photo}
-      userId={user.id}
+      userName={user && user.name}
+      userPhoto={user && user.photo}
+      userId={user && user.id}
       gameId={gameId}
       type="update"
       title={title}
       description={description}
       initialRating={rating}
+      reviewId={reviewId}
+      closeEditForm={closeEditForm}
+      isBeingEdited={isBeingEdited}
     />
   ) : (
     <ReviewContainer>
@@ -114,6 +121,7 @@ const ReviewCard = ({
       <RightSide className="rightSide">
         <ReviewTitleRating className="Title">
           <ReviewTitle>{title}</ReviewTitle>
+          <p className="screen-reader-only">{rating} star rating</p>
           <StarRating rating={rating} />
         </ReviewTitleRating>
         <Date>{date}</Date>
@@ -144,6 +152,7 @@ const ReviewCard = ({
           </p>
         )}
 
+        {/* If user wrote review they can edit/delete it */}
         {userOwnedReview && (
           <ButtonContainer>
             <PrimaryButton

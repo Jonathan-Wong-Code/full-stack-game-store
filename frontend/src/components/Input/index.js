@@ -4,6 +4,7 @@ import { typeScale } from '../../../theme/typography';
 import spacing from '../../../theme/spacing';
 
 export const Input = styled(Field)`
+  outline: none;
   border-radius: 5px;
   font-size: ${typeScale.paragraph};
   width: 100%;

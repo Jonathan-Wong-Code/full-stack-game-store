@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { withFormik } from 'formik';
-import { string, shape, number } from 'prop-types';
+import { Form, Formik } from 'formik';
+import { string, number, func, bool } from 'prop-types';
 import * as Yup from 'yup';
 
 import { Input } from '../Input';
@@ -10,79 +10,176 @@ import {
   ReviewContainer,
   ReviewRatingTitle,
   Section,
-  ButtonContainer
+  ButtonContainer,
+  ReviewError
 } from './css';
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
 
-import { useReviewDispatch } from '../../containers/gamePage/reviews/context';
+import {
+  useReviewDispatch,
+  useReviewState
+} from '../../containers/gamePage/reviews/context';
 
-const GameReviewForm = ({
-  userName,
-  userPhoto,
-  userId,
-  gameId,
-  values,
-  initialRating
-}) => {
+const validationSchema = Yup.object().shape({
+  description: Yup.string()
+    .min(20, 'Review must be 20 characters long at least.')
+    .required('A review description is required'),
+
+  title: Yup.string().required('A review title is required')
+});
+
+const GameReviewForm = props => {
+  const {
+    active,
+    description,
+    closeEditForm,
+    isBeingEdited,
+    userName,
+    userPhoto,
+    userId,
+    gameId,
+    initialRating,
+    reviewId,
+    title,
+    type
+  } = props;
+
   const [rating, setRating] = useState(initialRating);
 
-  const { addReview } = useReviewDispatch();
+  const { addReview, updateReview } = useReviewDispatch();
+  const { error } = useReviewState();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
+  const onSubmit = async values => {
+    if (error) return;
     const data = {
-      title: values.title,
-      description: values.description,
+      ...values,
       game: gameId,
       rating
     };
 
     const user = { id: userId, name: userName, photo: userPhoto };
-    addReview(gameId, data, user);
+    if (type === 'create') {
+      addReview(gameId, data, user);
+    } else {
+      const success = await updateReview(reviewId, { ...values, rating });
+      if (success) {
+        closeEditForm();
+      }
+    }
+  };
+
+  const getTabIndex = () => {
+    if (active && !isBeingEdited) {
+      return 0;
+    }
+
+    if (isBeingEdited && !active) {
+      return 0;
+    }
+
+    return -1;
   };
 
   return (
     <Section>
       <UserProfile userName={userName} userPhoto={userPhoto} />
       <ReviewContainer>
-        <form onSubmit={handleSubmit} method="">
-          <ReviewRatingTitle>
-            <StarsRating rating={rating} setRating={setRating} isForReview />
-            <label htmlFor="game-review-title" className="screen-reader-only">
-              Enter review title:
-            </label>
-            <Input
-              name="title"
-              id="game-review-title"
-              placeholder="Review title"
-            />
-          </ReviewRatingTitle>
+        <Formik
+          initialValues={{
+            title,
+            description
+          }}
+          validationSchema={validationSchema}
+          onSubmit={values => onSubmit(values)}
+        >
+          {({ errors, touched }) => (
+            <Form method="">
+              <div
+                style={{
+                  width: '100%',
+                  marginLeft: '12rem',
+                  marginBottom: '.5rem'
+                }}
+              >
+                <ReviewError
+                  role="alert"
+                  showError={errors.title && touched.title}
+                >
+                  Error: {errors.title}
+                </ReviewError>
+              </div>
+              <ReviewRatingTitle>
+                <StarsRating
+                  rating={rating}
+                  setRating={setRating}
+                  isForReview
+                  tabIndex={getTabIndex()}
+                />
 
-          <label
-            htmlFor="game-review-description"
-            className="screen-reader-only"
-          >
-            Enter review description:
-          </label>
-          <Input
-            component="textarea"
-            name="description"
-            rows="10"
-            id="game-review-description"
-            placeholder="Review text"
-          />
-          <ButtonContainer>
-            <PrimaryInvertedButton type="reset">Reset</PrimaryInvertedButton>
-            <PrimaryButton type="submit">Save Review</PrimaryButton>
-          </ButtonContainer>
-        </form>
+                <label
+                  htmlFor="game-review-title"
+                  className="screen-reader-only"
+                >
+                  Enter review title:
+                </label>
+                <Input
+                  name="title"
+                  id="game-review-title"
+                  placeholder="Review title"
+                  tabIndex={getTabIndex()}
+                />
+              </ReviewRatingTitle>
+
+              <>
+                <label
+                  htmlFor="game-review-description"
+                  className="screen-reader-only"
+                >
+                  Enter review description:
+                </label>
+                <Input
+                  component="textarea"
+                  name="description"
+                  rows="10"
+                  id="game-review-description"
+                  placeholder="Review text"
+                  tabIndex={getTabIndex()}
+                />
+
+                {errors.description && touched.description && (
+                  <ReviewError
+                    role="alert"
+                    showError={errors.description && touched.description}
+                  >
+                    Error: {errors.description}
+                  </ReviewError>
+                )}
+
+                {error && (
+                  <ReviewError role="alert" showError={error}>
+                    Error: {error}
+                  </ReviewError>
+                )}
+              </>
+
+              <ButtonContainer>
+                <PrimaryInvertedButton type="reset" tabIndex={getTabIndex()}>
+                  Reset
+                </PrimaryInvertedButton>
+                <PrimaryButton type="submit" tabIndex={getTabIndex()}>
+                  Save Review
+                </PrimaryButton>
+              </ButtonContainer>
+            </Form>
+          )}
+        </Formik>
       </ReviewContainer>
     </Section>
   );
 };
 
 GameReviewForm.propTypes = {
+  closeEditForm: func,
   userName: string.isRequired,
   userId: string.isRequired,
   userPhoto: string.isRequired,
@@ -90,29 +187,20 @@ GameReviewForm.propTypes = {
   initialRating: number,
   title: string,
   description: string,
-  values: shape({
-    title: string.isRequired,
-    description: string.isRequired
-  }).isRequired
+  reviewId: string,
+  active: bool,
+  isBeingEdited: bool,
+  type: string.isRequired
 };
 
 GameReviewForm.defaultProps = {
+  closeEditForm: () => {},
   initialRating: 1,
   title: '',
-  description: ''
+  description: '',
+  reviewId: '',
+  active: false,
+  isBeingEdited: false
 };
 
-export default withFormik({
-  mapPropsToValues: ({ description, title }) => ({
-    description,
-    title
-  }),
-
-  validationSchema: Yup.object().shape({
-    description: Yup.string()
-      .min(20, 'Review must be 20 characters long at least.')
-      .required('A review description is required'),
-
-    title: Yup.string().required('A review title is required')
-  })
-})(GameReviewForm);
+export default GameReviewForm;

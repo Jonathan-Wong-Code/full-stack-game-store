@@ -68,33 +68,36 @@ const Login = () => {
             </H2>
 
             <StyledForm>
-              <label htmlFor="login-email" className="screen-reader-only">
-                Email:
-              </label>
-              <Input
-                type="email"
-                name="email"
-                id="login-email"
-                placeholder="Email"
-              />
+              <>
+                <label htmlFor="login-email" className="screen-reader-only">
+                  Email:
+                </label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="login-email"
+                  placeholder="Email"
+                />
+                {errors.email && touched.email && !loginLoading && (
+                  <ErrorMsg>{errors.email}</ErrorMsg>
+                )}
+              </>
 
-              {errors.email && touched.email && !loginLoading && (
-                <ErrorMsg>{errors.email}</ErrorMsg>
-              )}
+              <>
+                <label htmlFor="login-password" className="screen-reader-only">
+                  Password:
+                </label>
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  id="login-password"
+                />
+                {errors.password && touched.password && !loginLoading && (
+                  <ErrorMsg>{errors.password}</ErrorMsg>
+                )}
+              </>
 
-              <label htmlFor="login-password" className="screen-reader-only">
-                Password:
-              </label>
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                id="login-password"
-              />
-
-              {errors.password && touched.password && !loginLoading && (
-                <ErrorMsg>{errors.password}</ErrorMsg>
-              )}
               {loginLoading && <p>Logging in...</p>}
               <PrimaryButton>Login</PrimaryButton>
               {loginError && !loginLoading && <ErrorMsg>{loginError}</ErrorMsg>}

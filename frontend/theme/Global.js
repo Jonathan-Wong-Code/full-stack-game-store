@@ -62,7 +62,6 @@ export const GlobalStyle = createGlobalStyle`
 
   [data-whatintent='mouse'] *:focus {
     outline: none;
-    border: none;
   }
 
   *:focus {

@@ -12,6 +12,7 @@ const ArrowComponent = styled.div`
   ${({ direction, left, right }) =>
     direction === 'right' ? `right: ${right}` : `left: ${left}`};
   transform: translateY(-50%);
+  z-index: 10;
 `;
 
 const CenteredArrow = ({
@@ -31,7 +32,7 @@ const CenteredArrow = ({
   }, []);
 
   return (
-    <ArrowComponent direction={direction} left={left} right={right}>
+    <ArrowComponent direction={direction} left={left} right={right} aria-hidden>
       {direction === 'left' ? (
         <IconButton
           Icon={arrowLeft}

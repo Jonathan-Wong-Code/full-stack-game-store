@@ -5,7 +5,7 @@ import { ModalBackground, ModalBody, CloseButton } from './css';
 
 const Modal = ({ children, closeModal }) => {
   return (
-    <ModalBackground onClick={closeModal}>
+    <ModalBackground onClick={closeModal} aria-modal="true" role="dialog">
       <ModalBody onClick={e => e.stopPropagation()}>
         {children}
         <CloseButton onClick={closeModal}>&#x2715;</CloseButton>

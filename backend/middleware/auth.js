@@ -8,7 +8,6 @@ const User = require('../models/userModel');
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token = {};
-  console.log(req.cookies);
 
   if (
     req.headers.authorization &&

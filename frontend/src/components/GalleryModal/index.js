@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { string, func, array, number } from 'prop-types';
@@ -20,6 +20,14 @@ const GalleryModal = ({
   const [{ currentActiveImg }, setState] = useSetState({
     currentActiveImg: index
   });
+
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.focus();
+    }
+  }, []);
 
   const displayNextImg = () => {
     const getNextImage = () =>
@@ -74,6 +82,7 @@ const GalleryModal = ({
         </>
       ) : (
         <iframe
+          ref={videoRef}
           src={mediaLink}
           frameBorder="0"
           allow="autoplay; encrypted-media"

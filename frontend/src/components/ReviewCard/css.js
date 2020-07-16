@@ -37,6 +37,7 @@ export const Date = styled.p`
 
 export const Description = styled.p`
   margin-bottom: ${spacing[5]};
+  word-wrap: break-word;
 `;
 
 export const ReviewFeedbackContainer = styled.div`

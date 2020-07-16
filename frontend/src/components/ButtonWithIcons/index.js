@@ -1,19 +1,24 @@
 import React from 'react';
-import { func, string, array, oneOfType } from 'prop-types';
+import { func, string, array, oneOfType, number } from 'prop-types';
 
 import { PrimaryStyles, SecondaryStyles } from './css';
 import IconComponent from '../Icon';
 
 import useTheme from '../../hooks/useTheme';
 
-export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
+export const PrimaryBtnWithIcon = ({
+  Icon,
+  buttonText,
+  variants,
+  tabIndex
+}) => {
   const theme = useTheme();
   return (
-    <PrimaryStyles modifiers={variants}>
+    <PrimaryStyles modifiers={variants} tabIndex={tabIndex}>
       <IconComponent iconColor={theme.textInverted}>
         <Icon />
       </IconComponent>
-      {buttonText}
+      <span>{buttonText}</span>
     </PrimaryStyles>
   );
 };
@@ -21,16 +26,27 @@ export const PrimaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
 PrimaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
-  variants: oneOfType([string, array])
+  variants: oneOfType([string, array]),
+  tabIndex: number
 };
 
 PrimaryBtnWithIcon.defaultProps = {
-  variants: null
+  variants: null,
+  tabIndex: 0
 };
 
-export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
+export const SecondaryBtnWithIcon = ({
+  Icon,
+  buttonText,
+  variants,
+  tabIndex
+}) => {
   return (
-    <SecondaryStyles modifiers={variants} className="button-component">
+    <SecondaryStyles
+      modifiers={variants}
+      className="button-component"
+      tabIndex={tabIndex}
+    >
       <IconComponent>
         <Icon />
       </IconComponent>
@@ -42,9 +58,11 @@ export const SecondaryBtnWithIcon = ({ Icon, buttonText, variants }) => {
 SecondaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
-  variants: oneOfType([string, array])
+  variants: oneOfType([string, array]),
+  tabIndex: number
 };
 
 SecondaryBtnWithIcon.defaultProps = {
-  variants: null
+  variants: null,
+  tabIndex: 0
 };

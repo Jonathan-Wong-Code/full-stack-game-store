@@ -1,10 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, cloneElement } from 'react';
 import { node, string } from 'prop-types';
 
 import { AccordionBody, AccordionButton, AccordionContent } from './css';
 const Accordion = ({ children, title }) => {
   const [active, setActive] = useState(false);
   const contentRef = useRef(null);
+
+  const childWithProps = React.Children.map(children, child =>
+    cloneElement(child, { active })
+  );
 
   return (
     <AccordionBody>
@@ -19,7 +23,7 @@ const Accordion = ({ children, title }) => {
         style={{ height: active ? `${contentRef.current.scrollHeight}px` : 0 }}
         ref={contentRef}
       >
-        {children}
+        {childWithProps}
       </AccordionContent>
     </AccordionBody>
   );

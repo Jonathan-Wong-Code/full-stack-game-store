@@ -1,5 +1,5 @@
 const spacing = [
-  0, // 0 0
+  0, // 0px 0
   '.25rem', // 4px 1
   '.5rem', // 8px 2
   '.75rem', // 12px 3

@@ -56,4 +56,5 @@ export const GameCardContainer = styled.div`
   justify-self: end;
   grid-row: 1/1;
   grid-column: 1/1;
+  z-index: 10;
 `;
