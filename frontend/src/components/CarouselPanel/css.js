@@ -6,6 +6,7 @@ import { typeScale, typeWeight } from '../../../theme/typography';
 export const Container = styled.section`
   width: 100%;
   height: 450px;
+
   background-image: url(${({ gameImage }) => gameImage});
   background-size: cover;
   background-position: center;
@@ -25,6 +26,7 @@ export const Container = styled.section`
 
     background-size: cover;
     background-position: center top;
+
     padding: ${spacing[5]};
     margin-right: ${spacing[5]};
   }

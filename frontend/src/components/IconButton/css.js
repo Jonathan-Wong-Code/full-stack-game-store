@@ -8,19 +8,7 @@ const BUTTON_MODIFIERS = {
     &:hover {
       background-color: ${theme.secondaryLight};
     }
-    `,
-
-  tertiary: ({ theme }) => `
-    background-color: ${theme.grey};
-
-    &:hover {
-      background-color: ${theme.lightGrey};
-    }
-    `,
-
-  circular: () => `
-    border-radius: 50%;
-  `
+    `
 };
 
 export const Button = styled.button`

@@ -1,0 +1,46 @@
+import { Preview, Meta, Story, Props } from '@storybook/addon-docs/blocks';
+import Arrow from './index';
+import { action } from '@storybook/addon-actions';
+
+<Meta title="Design System|Components" component={Arrow} />
+
+# CenteredArrow
+
+## Usage
+
+The Arrow component is an absolutely positioned arrow that is centered vertically within its container.
+
+It takes a left and right prop which species if absolutely positioned left and right value
+
+### Left Arrow
+
+<Preview>
+  <Story name="ArrowLeft">
+    <Arrow
+      title="click me"
+      direction={'left'}
+      left="20px"
+      handleClick={action('button-click')}
+    />
+  </Story>
+</Preview>
+
+### Right Arrow
+
+Right arrow variation with secondary variant
+
+<Preview>
+  <Story name="ArrowRight">
+    <Arrow
+      title="click me"
+      direction={'right'}
+      right="80px"
+      variants="secondary"
+      handleClick={action('button-click')}
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Arrow} />

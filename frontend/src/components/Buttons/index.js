@@ -45,7 +45,7 @@ export const BaseButton = styled.button`
   &:disabled {
     background-color: ${({ theme }) => theme.disabledColor};
     color: ${({ theme }) => theme.textInverted};
-    border: ${({ theme }) => theme.disabledColor};
+    border: ${({ theme }) => `1px solid ${theme.disabledColor}`};
   }
 `;
 

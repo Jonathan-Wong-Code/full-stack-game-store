@@ -35,7 +35,12 @@ Secondary buttons are used as a call to action and indicate the most important a
 
 <Preview withToolbar>
   <Story name="secondary">
-    <SecondaryButton onClick={action('button-click')}>Hello world</SecondaryButton>
+    <SecondaryButton       
+      disabled={boolean('Disabled', false)}
+      onClick={action('button-click')} 
+    >
+     Hello world
+    </SecondaryButton>
   </Story>
 </Preview>
 
@@ -45,7 +50,9 @@ Secondary buttons are used as a call to action and indicate the most important a
 
 <Preview withToolbar>
   <Story name="primary-inverted">
-    <PrimaryInvertedButton onClick={action('button-click')}>Hello world</PrimaryInvertedButton>
+    <PrimaryInvertedButton onClick={action('button-click')}  disabled={boolean('Disabled', false)}>
+      Hello world
+    </PrimaryInvertedButton>
   </Story>
 </Preview>
 
@@ -55,7 +62,9 @@ Secondary buttons are used as a call to action and indicate the most important a
 
 <Preview withToolbar>
   <Story name="secondary-inverted">
-    <SecondaryInvertedButton onClick={action('button-click')}>Hello world</SecondaryInvertedButton>
+    <SecondaryInvertedButton onClick={action('button-click')}  disabled={boolean('Disabled', false)}>
+      Hello world
+    </SecondaryInvertedButton>
   </Story>
 </Preview>
 

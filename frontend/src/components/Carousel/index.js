@@ -161,7 +161,7 @@ const Carousel = ({ slides }) => {
     <>
       <CarouselContainer>
         <Arrow direction="left" handleClick={prevSlide} left="25px" />
-        <Arrow direction="right" handleClick={nextSlide} right="45px" />
+        <Arrow direction="right" handleClick={nextSlide} right="41px" />
         <CarouselContent
           translate={translate}
           transition={transition}

@@ -41,6 +41,8 @@ const ReviewCard = ({
   userName,
   userPhoto
 }) => {
+  console.log(reviewLikes);
+  console.log(reviewDislikes);
   const [
     { likes, dislikes, userHasLike, userHasDislike, isBeingEdited },
     setState

@@ -10,11 +10,12 @@ export const PrimaryBtnWithIcon = ({
   Icon,
   buttonText,
   variants,
-  tabIndex
+  tabIndex,
+  disabled
 }) => {
   const theme = useTheme();
   return (
-    <PrimaryStyles modifiers={variants} tabIndex={tabIndex}>
+    <PrimaryStyles modifiers={variants} tabIndex={tabIndex} disabled={disabled}>
       <IconComponent iconColor={theme.textInverted}>
         <Icon />
       </IconComponent>
@@ -39,13 +40,15 @@ export const SecondaryBtnWithIcon = ({
   Icon,
   buttonText,
   variants,
-  tabIndex
+  tabIndex,
+  disabled
 }) => {
   return (
     <SecondaryStyles
       modifiers={variants}
       className="button-component"
       tabIndex={tabIndex}
+      disabled={disabled}
     >
       <IconComponent>
         <Icon />

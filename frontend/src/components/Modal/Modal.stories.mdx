@@ -1,0 +1,28 @@
+import { Preview, Meta, Story, Props } from '@storybook/addon-docs/blocks';
+import { useState } from 'react';
+import Modal from './index';
+import { action } from "@storybook/addon-actions";
+
+<Meta title="Design System|Components" component={Modal} />
+
+# Modal
+
+## Usage
+
+The Modal opens a modal showing the content inside of it. The button in the top right corner acts as a close button.
+Also able to close the modal by clicking outside of it
+
+<Preview>
+  <Story name="Modal">
+    <Modal closeModal={action('button-click')}>
+      <div style={{ backgroundColor: 'white', padding: "30px 20px"}}>
+        <h2>This is the modal content</h2>
+      </div>
+      
+    </Modal>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Modal} />

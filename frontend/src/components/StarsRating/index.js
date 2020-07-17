@@ -17,11 +17,12 @@ const Stars = ({ rating, setRating, isForReview, tabIndex }) => {
         type="button"
         onClick={() => setRating(i + 1)}
         tabIndex={tabIndex}
+        key={uuidv4()}
       >
         <span className="screen-reader-only">
           Set rating to {rating} out of 5 stars.
         </span>
-        <Icon iconColor={theme.primaryLight} variants="small" key={uuidv4()}>
+        <Icon iconColor={theme.primaryLight} variants="small">
           <StarFilled />
         </Icon>
       </button>
@@ -88,11 +89,12 @@ Stars.propTypes = {
   rating: number.isRequired,
   setRating: func,
   isForReview: bool,
-  tabIndex: number.isRequired
+  tabIndex: number
 };
 
 Stars.defaultProps = {
   setRating: () => {},
-  isForReview: false
+  isForReview: false,
+  tabIndex: 0
 };
 export default Stars;

@@ -1,0 +1,23 @@
+import { Preview, Meta, Story, Props } from '@storybook/addon-docs/blocks';
+import Accordion from './index';
+
+<Meta title="Design System|Components" component={Accordion} />
+
+# Accordion
+
+## Usage
+
+The Accordion uses it's content as an accordion that reveals itself when you click the button or "head" of the Accordion
+
+<Preview>
+  <Story name="Accordion">
+    <Accordion title="click me">
+      <p>Hello</p>
+      <p>This is my accordion</p>
+    </Accordion>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Accordion} />
