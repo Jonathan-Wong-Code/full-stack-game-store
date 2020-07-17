@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Wrapper } from '../src/components/Wrapper';
-import spacing from '../theme/spacing';
-import { breakpoints } from '../theme/breakpoints';
-import { typeScale, typeWeight } from '../theme/typography';
+import { Wrapper } from '../../components/Wrapper';
+import spacing from '../../../theme/spacing';
+import { breakpoints } from '../../../theme/breakpoints';
+import { typeScale, typeWeight } from '../../../theme/typography';
 
 export const GridContainer = styled(Wrapper)`
   display: grid;

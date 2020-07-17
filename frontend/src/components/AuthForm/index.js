@@ -28,11 +28,13 @@ export const StyledSection = styled.section`
 
 export const InnerSection = styled.div`
   max-width: 450px;
+
   padding: ${spacing[7]} ${spacing[7]};
-  border: 1px solid ${({ theme }) => theme.dividerColor};
-  flex-direction: column;
-  border-radius: 5px;
   margin: 0 auto;
+
+  border: 1px solid ${({ theme }) => theme.dividerColor};
+
+  border-radius: 5px;
   background-color: ${({ theme }) => theme.contentBackgroundLight};
 `;
 
@@ -44,4 +46,11 @@ export const ErrorMsg = styled.p`
 export const Links = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  text-align: center;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[0]}px) {
+    text-align: left;
+    flex-direction: row;
+  }
 `;

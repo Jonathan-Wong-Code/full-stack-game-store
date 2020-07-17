@@ -10,9 +10,12 @@ export const RightSide = styled.div`
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${spacing[6]};
+
+  padding: ${spacing[6]} 0 ${spacing[6]} ${spacing[6]};
   border-top: 1px solid ${({ theme }) => theme.dividerColor};
+
   position: relative;
+
   @media screen and (min-width: ${breakpoints[0]}px) {
     flex-direction: row;
     padding: ${spacing[6]} 0;
@@ -21,13 +24,24 @@ export const ReviewContainer = styled.div`
 
 export const ReviewTitleRating = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
+  @media screen and (min-width: ${breakpoints[0]}px) {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 export const ReviewTitle = styled.h3`
-  line-height: 1;
   font-size: ${typeScale.header6};
+  line-height: 1;
+
   margin-right: ${spacing[3]};
+  margin-bottom: ${spacing[1]};
+
+  @media screen and (min-width: ${breakpoints[0]}px) {
+    margin-bottom: 0;
+  }
 `;
 
 export const Date = styled.p`
@@ -43,6 +57,7 @@ export const Description = styled.p`
 export const ReviewFeedbackContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   font-size: ${typeScale.helperText};
   font-weight: ${typeWeight.light};
 
@@ -55,15 +70,15 @@ export const ReviewFeedbackContainer = styled.div`
 export const FeedbackButton = styled.button`
   color: ${({ theme }) => theme.textInverted};
   background: ${({ theme }) => theme.primaryColor};
+
   padding: ${spacing[1]} ${spacing[2]};
-
   margin-right: ${spacing[1]};
-
   border-radius: 5px;
+
   font-weight: ${typeScale.bold};
 
   &:disabled {
-    background: grey;
+    background: ${({ theme }) => theme.disabledColor};
     color: white;
   }
 `;

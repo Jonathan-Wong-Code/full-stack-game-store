@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { string, func, oneOfType, array, bool } from 'prop-types';
 
 import IconButton from '../IconButton';
-import arrowLeft from '../../assets/icons/arrowLeft.svg';
-import arrowRight from '../../assets/icons/arrowRight.svg';
+import { ArrowLeft, ArrowRight } from '../../assets/icons';
 
 const ArrowComponent = styled.div`
   position: absolute;
@@ -35,7 +34,7 @@ const CenteredArrow = ({
     <ArrowComponent direction={direction} left={left} right={right} aria-hidden>
       {direction === 'left' ? (
         <IconButton
-          Icon={arrowLeft}
+          Icon={ArrowLeft}
           onClick={handleClick}
           description="Previous game"
           variants={variants}
@@ -43,7 +42,7 @@ const CenteredArrow = ({
         />
       ) : (
         <IconButton
-          Icon={arrowRight}
+          Icon={ArrowRight}
           onClick={handleClick}
           description="Next game"
           variants={variants}

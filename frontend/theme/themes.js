@@ -8,6 +8,7 @@ export const defaultTheme = {
   secondaryColor: green[200],
   secondaryLight: green[100],
   secondaryDark: green[300],
+  disabledColor: neutral[400],
   textColor: neutral[600],
   textColorLight: neutral[500],
   textInverted: neutral[100],

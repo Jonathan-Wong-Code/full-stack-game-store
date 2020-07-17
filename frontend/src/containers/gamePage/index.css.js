@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { H1 } from '../src/components/Tyopgrahy';
-import { typeScale } from '../theme/typography';
+import { H1 } from '../../components/Tyopgrahy';
+import { typeScale } from '../../../theme/typography';
 
-import spacing from '../theme/spacing';
+import spacing from '../../../theme/spacing';
 
 export const GameTitleCardContainer = styled.section`
   display: flex;
@@ -55,4 +55,10 @@ export const SubHeading = styled.h2`
   padding-bottom: ${spacing[5]};
   border-bottom: 1px solid ${({ theme }) => theme.dividerColor};
   margin-bottom: ${spacing[5]};
+`;
+
+export const PurchaseCardContainer = styled.div`
+  margin-top: ${spacing[5]};
+  margin-bottom: ${spacing[5]};
+  padding: 0 ${spacing[6]};
 `;

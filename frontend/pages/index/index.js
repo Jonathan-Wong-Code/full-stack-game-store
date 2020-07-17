@@ -11,7 +11,7 @@ import {
   GridContainer,
   GameCardSection,
   SectionHeading
-} from '../../pagesStyles/index.css';
+} from '../../src/containers/homePage/index.css';
 
 export async function getStaticProps() {
   const response = await axios.get(

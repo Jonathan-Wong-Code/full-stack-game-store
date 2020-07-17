@@ -4,8 +4,9 @@ import spacing from '../../../theme/spacing';
 
 export const PriceFlexBox = styled.div`
   display: flex;
-  font-weight: ${typeWeight.bold};
   align-items: center;
+
+  font-weight: ${typeWeight.bold};
 `;
 
 export const PriceInformation = styled.div`

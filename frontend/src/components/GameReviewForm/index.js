@@ -5,20 +5,25 @@ import * as Yup from 'yup';
 
 import { Input } from '../Input';
 import StarsRating from '../StarsRating';
+
 import UserProfile from '../UserProfile';
 import {
   ReviewContainer,
   ReviewRatingTitle,
   Section,
   ButtonContainer,
-  ReviewError
+  ReviewError,
+  TitleErrorDesktop
 } from './css';
+
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
+
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 import {
   useReviewDispatch,
   useReviewState
-} from '../../containers/gamePage/reviews/context';
+} from '../../containers/gamePage/Reviews/context';
 
 const validationSchema = Yup.object().shape({
   description: Yup.string()
@@ -48,6 +53,8 @@ const GameReviewForm = props => {
 
   const { addReview, updateReview } = useReviewDispatch();
   const { error } = useReviewState();
+
+  const { windowWidth } = useWindowWidth();
 
   const onSubmit = async values => {
     if (error) return;
@@ -94,20 +101,14 @@ const GameReviewForm = props => {
         >
           {({ errors, touched }) => (
             <Form method="">
-              <div
-                style={{
-                  width: '100%',
-                  marginLeft: '12rem',
-                  marginBottom: '.5rem'
-                }}
-              >
-                <ReviewError
-                  role="alert"
-                  showError={errors.title && touched.title}
-                >
-                  Error: {errors.title}
-                </ReviewError>
-              </div>
+              {windowWidth > 576 && (
+                <TitleErrorDesktop>
+                  <ReviewError role="alert" showError={errors.title}>
+                    Error: {errors.title}
+                  </ReviewError>
+                </TitleErrorDesktop>
+              )}
+
               <ReviewRatingTitle>
                 <StarsRating
                   rating={rating}
@@ -122,12 +123,18 @@ const GameReviewForm = props => {
                 >
                   Enter review title:
                 </label>
+
                 <Input
                   name="title"
                   id="game-review-title"
                   placeholder="Review title"
                   tabIndex={getTabIndex()}
                 />
+                {errors.title && windowWidth < 576 && (
+                  <ReviewError role="alert" showError>
+                    Error: {errors.title}
+                  </ReviewError>
+                )}
               </ReviewRatingTitle>
 
               <>

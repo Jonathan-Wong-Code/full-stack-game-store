@@ -43,9 +43,9 @@ export const BaseButton = styled.button`
   transition: background-color 0.2s linear, color 0.2s linear;
 
   &:disabled {
-    background-color: ${({ theme }) => theme.grey};
-    color: ${({ theme }) => theme.darkGrey};
-    border: ${({ theme }) => theme.darkGrey};
+    background-color: ${({ theme }) => theme.disabledColor};
+    color: ${({ theme }) => theme.textInverted};
+    border: ${({ theme }) => theme.disabledColor};
   }
 `;
 

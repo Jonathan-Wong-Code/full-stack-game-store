@@ -12,7 +12,7 @@ import {
   InnerSection,
   Links,
   ErrorMsg
-} from '../../src/components/Forms/AuthForm';
+} from '../../src/components/AuthForm';
 
 import { selectAuthError, selectAuthLoading } from '../../src/selectors/auth';
 import { startSignup, clearLoginError } from '../../src/actions/auth';
@@ -141,7 +141,7 @@ const Signup = () => {
               <Link href="/login" as="/login">
                 <a>Login to Account</a>
               </Link>
-              <Link href="/signup" as="/forgotPassword">
+              <Link href="/forgotPassword" as="/forgotPassword">
                 <a>Forgot your password?</a>
               </Link>
             </Links>

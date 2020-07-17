@@ -2,12 +2,24 @@ import React, { useEffect } from 'react';
 import { string, shape } from 'prop-types';
 import axios from 'axios';
 
-import { ReviewHeading, ReviewContainer, FilterBar, Label } from './css';
+import {
+  ReviewHeading,
+  ReviewContainer,
+  FilterBar,
+  Label,
+  Pagination,
+  Section,
+  Select,
+  SelectContainer
+} from './css';
 import Accordion from '../../../components/Accordion';
 import GameReviewForm from '../../../components/GameReviewForm';
 import ReviewCard from '../../../components/ReviewCard';
 import useSetState from '../../../hooks/useSetState';
 import { useReviewState, useReviewDispatch } from './context';
+
+import { ArrowRight, ArrowLeft } from '../../../assets/icons';
+import IconButton from '../../../components/IconButton';
 
 const Reviews = ({ user, gameId }) => {
   const [{ limit, page, sortBy, rating }, setState] = useSetState({
@@ -43,9 +55,8 @@ const Reviews = ({ user, gameId }) => {
   };
 
   const totalNumPages = Math.ceil(numTotalReviews / limit);
-
   return (
-    <section aria-labelledby="reviews-subheading">
+    <Section aria-labelledby="reviews-subheading">
       <ReviewHeading id="reviews-subheading">User reviews</ReviewHeading>
 
       {/* REVIEW FORM */}
@@ -65,52 +76,59 @@ const Reviews = ({ user, gameId }) => {
 
       {/* FILTER BAR */}
       <FilterBar noUserReview={noUserReview}>
-        <Label
-          htmlFor="filter-number-of-reviews"
-          style={{ marginRight: '.5rem' }}
-        >
-          Show:
-        </Label>
-        <select
-          id="filter-number-of-reviews"
-          value={limit}
-          name="limit"
-          onChange={onChange}
-        >
-          <option value={1}>1 on page</option>
-          <option value={5}>5 on page</option>
-          <option value={10}>10 on page</option>
-          <option value={15}>15 on page</option>
-          <option value={20}>20 on page</option>
-        </select>
-
-        <Label htmlFor="filter-review-rating" style={{ marginRight: '.5rem' }}>
-          Rating:
-        </Label>
-        <select
-          id="filter-review-rating"
-          value={rating}
-          name="rating"
-          onChange={onChange}
-        >
-          <option value={0}>All</option>
-          <option value={1}>1 Star</option>
-          <option value={2}>2 Stars</option>
-          <option value={3}>3 Stars</option>
-          <option value={4}>4 Stars</option>
-          <option value={5}>5 Stars</option>
-        </select>
-
-        <Label htmlFor="filter-order-reviews">Order by:</Label>
-        <select
-          id="filter-order-reviews"
-          value={sortBy}
-          name="sortBy"
-          onChange={onChange}
-        >
-          <option value="-rating, -createdAt">Highest rating</option>
-          <option value="-createdAt">Date</option>
-        </select>
+        <SelectContainer>
+          <Label
+            htmlFor="filter-number-of-reviews"
+            style={{ marginRight: '.5rem' }}
+          >
+            Show:
+          </Label>
+          <Select
+            id="filter-number-of-reviews"
+            value={limit}
+            name="limit"
+            onChange={onChange}
+          >
+            <option value={1}>1 on page</option>
+            <option value={5}>5 on page</option>
+            <option value={10}>10 on page</option>
+            <option value={15}>15 on page</option>
+            <option value={20}>20 on page</option>
+          </Select>
+        </SelectContainer>
+        <SelectContainer>
+          <Label
+            htmlFor="filter-review-rating"
+            style={{ marginRight: '.5rem' }}
+          >
+            Rating:
+          </Label>
+          <Select
+            id="filter-review-rating"
+            value={rating}
+            name="rating"
+            onChange={onChange}
+          >
+            <option value={0}>All</option>
+            <option value={1}>1 Star</option>
+            <option value={2}>2 Stars</option>
+            <option value={3}>3 Stars</option>
+            <option value={4}>4 Stars</option>
+            <option value={5}>5 Stars</option>
+          </Select>
+        </SelectContainer>
+        <SelectContainer>
+          <Label htmlFor="filter-order-reviews">Order by:</Label>
+          <Select
+            id="filter-order-reviews"
+            value={sortBy}
+            name="sortBy"
+            onChange={onChange}
+          >
+            <option value="-rating, -createdAt">Highest rating</option>
+            <option value="-createdAt">Date</option>
+          </Select>
+        </SelectContainer>
       </FilterBar>
 
       {/* REVIEW LIST */}
@@ -150,20 +168,22 @@ const Reviews = ({ user, gameId }) => {
       </ul>
 
       {/* PAGINATION */}
-      <div>
-        {page > 1 && (
-          <button type="button" onClick={() => setState({ page: page - 1 })}>
-            prev
-          </button>
-        )}
+      <Pagination>
+        <IconButton
+          Icon={ArrowLeft}
+          onClick={() => setState({ page: page - 1 })}
+          description={`Go back to previous ${limit} reviews`}
+          disabled={page === 1}
+        />
 
-        {totalNumPages > page && (
-          <button type="button" onClick={() => setState({ page: page + 1 })}>
-            next
-          </button>
-        )}
-      </div>
-    </section>
+        <IconButton
+          Icon={ArrowRight}
+          onClick={() => setState({ page: page + 1 })}
+          description={`Go to next ${limit} reviews`}
+          disabled={totalNumPages <= page}
+        />
+      </Pagination>
+    </Section>
   );
 };
 

@@ -7,6 +7,7 @@ const BaseIconButtonStyles = () => `
   display: flex;
   align-items: center;
   justify-content: center;
+  
   padding: ${spacing[1]};
   padding-right: ${spacing[6]};
 

@@ -8,8 +8,8 @@ const spacing = [
   '1.5rem', // 24px 6
   '2rem', // 32px 7
   '2.5rem', // 40px 8
-  '3rem', // 9
-  '4rem', // 10
+  '3rem', // 9 48px
+  '4rem', // 10 64px
   '6rem' // 11
 ];
 

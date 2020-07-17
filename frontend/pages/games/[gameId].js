@@ -12,19 +12,21 @@ import {
   GameTitleRating,
   Img,
   ImgGallery,
-  ImgContainer
-} from '../../pagesStyles/games.css';
+  ImgContainer,
+  PurchaseCardContainer
+} from '../../src/containers/gamePage/index.css';
 
-import VideoBanner from '../../pagesContainers/gamePage/VideoBanner';
-import GameDetails from '../../pagesContainers/gamePage/GameDetails';
-import Reviews from '../../src/containers/gamePage/reviews';
+import VideoBanner from '../../src/containers/gamePage/VideoBanner';
+import GameDetails from '../../src/containers/gamePage/GameDetails';
+import Reviews from '../../src/containers/gamePage/Reviews';
 import GalleryModal from '../../src/components/GalleryModal';
+import PurchaseGameCard from '../../src/components/PurchaseGameCard';
 import { Wrapper } from '../../src/components/Wrapper';
 
 import useWindowWidth from '../../src/hooks/useWindowWidth';
 import useSetState from '../../src/hooks/useSetState';
 
-import { ReviewProvider } from '../../src/containers/gamePage/reviews/context';
+import { ReviewProvider } from '../../src/containers/gamePage/Reviews/context';
 
 // SET STATIC PATHS
 export async function getStaticPaths() {
@@ -116,6 +118,16 @@ const GamePage = ({ game }) => {
         price={price}
         discount={discount}
       />
+
+      {windowWidth < 576 && (
+        <PurchaseCardContainer>
+          <PurchaseGameCard
+            gameTitle={title}
+            gamePrice={price}
+            gameDiscount={discount}
+          />
+        </PurchaseCardContainer>
+      )}
 
       <Wrapper>
         {/* GAME TITLE AND RATING */}

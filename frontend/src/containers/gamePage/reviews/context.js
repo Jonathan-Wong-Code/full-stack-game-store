@@ -59,7 +59,6 @@ const reducer = (state = {}, action) => {
     }
 
     case SET_ERROR: {
-      console.log(action);
       return { ...state, error: action.payload.error, loading: false };
     }
 
@@ -156,7 +155,6 @@ export const useReviewDispatch = () => {
 
       dispatch({ type: DELETE_REVIEW, payload: { id: reviewId } });
     } catch (error) {
-      console.log(error.response);
       dispatch({
         type: SET_ERROR,
         payload: { error: error.response.data.message }

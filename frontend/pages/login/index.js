@@ -15,7 +15,7 @@ import {
   InnerSection,
   Links,
   ErrorMsg
-} from '../../src/components/Forms/AuthForm';
+} from '../../src/components/AuthForm';
 import { Input } from '../../src/components/Input';
 
 import { startLogin, clearLoginError } from '../../src/actions/auth';

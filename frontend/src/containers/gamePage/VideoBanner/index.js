@@ -1,13 +1,8 @@
 import React from 'react';
 import { string, func, number } from 'prop-types';
 
-import {
-  GameBanner,
-  InnerBanner,
-  PlayButton,
-  GameCardContainer
-} from './VideoBanner.css';
-import PurchaseGameCard from '../../src/components/PurchaseGameCard';
+import { GameBanner, InnerBanner, PlayButton, GameCardContainer } from './css';
+import PurchaseGameCard from '../../../components/PurchaseGameCard';
 
 const VideoBanner = ({
   coverImage,
@@ -25,14 +20,18 @@ const VideoBanner = ({
       mobileImage={coverImageSmall}
     >
       <InnerBanner>
-        {windowWidth > 576 && <PlayButton onClick={openVideoModal} />}
-        <GameCardContainer>
-          <PurchaseGameCard
-            gameTitle={title}
-            gamePrice={price}
-            gameDiscount={discount}
-          />
-        </GameCardContainer>
+        {windowWidth > 576 && (
+          <>
+            <PlayButton onClick={openVideoModal} />
+            <GameCardContainer>
+              <PurchaseGameCard
+                gameTitle={title}
+                gamePrice={price}
+                gameDiscount={discount}
+              />
+            </GameCardContainer>
+          </>
+        )}
       </InnerBanner>
     </GameBanner>
   );

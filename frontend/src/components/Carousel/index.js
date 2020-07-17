@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import useSetState from '../../hooks/useSetState';
 import { CarouselContainer, CarouselContent } from './css';
 import CarouselPanel from '../CarouselPanel';
-import Arrow from './Arrow';
+import Arrow from '../CenteredArrow';
 import Dots from './Dots';
 
 const Carousel = ({ slides }) => {

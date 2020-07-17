@@ -6,7 +6,7 @@ import { Thumbnails, ThumbNailImg, Button, ImgContainer } from './css';
 import Modal from '../Modal';
 
 import useSetState from '../../hooks/useSetState';
-import Arrow from '../Carousel/Arrow';
+import Arrow from '../CenteredArrow';
 import spacing from '../../../theme/spacing';
 const GalleryModal = ({
   mediaLink,

@@ -1,16 +1,16 @@
 import React from 'react';
 import { string, arrayOf } from 'prop-types';
 
-import { renderArrayText } from '../../src/utils/utils';
+import { renderArrayText } from '../../../utils/utils';
 import {
   DescriptionDetailsSection,
   DescriptionContainer,
   DetailList,
   Detail,
   GameDetailsContainer
-} from './GameDetails.css';
+} from './css';
 
-import { SubHeading } from './common.css';
+import { SubHeading } from '../index.css';
 
 const GameDetails = ({
   description,

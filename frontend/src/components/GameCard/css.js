@@ -13,9 +13,12 @@ const CONTAINER_MODIFIERS = {
 export const Container = styled.div`
   font-size: ${typeScale.paragraph};
   font-weight: ${typeWeight.bold};
+
   list-style-type: none;
+
   max-width: 350px;
   height: 100%;
+
   box-shadow: 0px 0px 31px -15px rgba(0, 0, 0, 0.75);
   cursor: pointer;
   background-color: ${({ theme }) => theme.contentBackground};
@@ -42,6 +45,7 @@ export const PriceInformation = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: ${spacing[10]};
 `;
 
 export const Prices = styled.div`
@@ -63,6 +67,7 @@ export const ImgContainer = styled.div`
 export const Img = styled.img`
   height: 100%;
   width: 100%;
+
   display: block;
   object-fit: cover;
   object-position: center top;

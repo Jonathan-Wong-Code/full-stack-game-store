@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Wrapper } from '../../src/components/Wrapper';
+import { Wrapper } from '../../../components/Wrapper';
 
 // IMG BANNER STYLES
 export const GameBanner = styled.section`
@@ -51,10 +51,15 @@ export const PlayButton = styled.button`
 `;
 
 export const GameCardContainer = styled.div`
-  transform: translateY(50%);
-  align-self: end;
-  justify-self: end;
-  grid-row: 1/1;
-  grid-column: 1/1;
+  transform: translateY(0);
+
   z-index: 10;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[0]}px) {
+    grid-row: 1/1;
+    grid-column: 1/1;
+    transform: translateY(50%);
+    align-self: end;
+    justify-self: end;
+  }
 `;

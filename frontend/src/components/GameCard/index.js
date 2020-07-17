@@ -54,7 +54,6 @@ const GameCard = ({
                 variants="secondary"
                 onClick={e => {
                   e.stopPropagation();
-                  console.log('hello');
                 }}
               />
             </PriceInformation>

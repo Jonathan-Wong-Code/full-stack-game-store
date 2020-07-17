@@ -14,7 +14,7 @@ import {
   StyledForm,
   StyledSection,
   InnerSection
-} from '../../src/components/Forms/AuthForm';
+} from '../../src/components/AuthForm';
 
 import { Input } from '../../src/components/Input';
 

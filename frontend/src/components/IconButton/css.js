@@ -24,16 +24,21 @@ const BUTTON_MODIFIERS = {
 };
 
 export const Button = styled.button`
-  border-radius: 5px;
-
   transition: 0.2s all;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-radius: 5px;
   background-color: ${({ theme }) => theme.primaryColor};
 
   &:hover {
     background-color: ${({ theme }) => theme.primaryLight};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.disabledColor};
   }
 
   ${applyStyleModifiers(BUTTON_MODIFIERS)};

@@ -15,7 +15,9 @@ export const CarouselContainer = styled.section`
 export const CarouselContent = styled.div`
   transform: translateX(-${({ translate }) => translate}px);
   transition: transform ease-out ${({ transition }) => transition}s;
+
   height: 100%;
-  display: flex;
   width: ${({ width }) => `${width}px`};
+
+  display: flex;
 `;
