@@ -1,7 +1,12 @@
 const COVERAGE = 70;
 
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{js,jsx}', 'pages/**/*.{jsx,jsx}'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx}',
+    'pages/**/*.{jsx,jsx}',
+    '!src/**/*.test.{js,jsx}',
+    '!src/**/*.mock.{js,jsx}'
+  ],
 
   coverageThreshold: {
     global: {
@@ -12,7 +17,7 @@ module.exports = {
     }
   },
 
-  moduleDirectories: ['node_modules', 'src'],
+  // moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '.*\\.(css|less|styl|scss|sass)$':
       '<rootDir>/src/common/tests/mocks/cssModule.js',

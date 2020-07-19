@@ -75,7 +75,8 @@ CarouselPanel.propTypes = {
   /* Dictates if the button should be an Add to Cart or regular button */
   isAddToCart: bool,
   promoText: string,
-  textColorLight: bool
+  textColorLight: bool,
+  tabIndex: number
 };
 
 CarouselPanel.defaultProps = {
@@ -85,7 +86,8 @@ CarouselPanel.defaultProps = {
   gameTitle: '',
   isAddToCart: true,
   promoText: '',
-  textColorLight: true
+  textColorLight: true,
+  tabIndex: 0
 };
 
 export default CarouselPanel;

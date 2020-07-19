@@ -41,8 +41,6 @@ const ReviewCard = ({
   userName,
   userPhoto
 }) => {
-  console.log(reviewLikes);
-  console.log(reviewDislikes);
   const [
     { likes, dislikes, userHasLike, userHasDislike, isBeingEdited },
     setState
@@ -195,11 +193,12 @@ ReviewCard.propTypes = {
     name: string.isRequired,
     photo: string.isRequired,
     id: string.isRequired
-  }).isRequired
+  })
 };
 
 ReviewCard.defaultProps = {
-  reviewUserId: ''
+  reviewUserId: '',
+  user: null
 };
 
 export default ReviewCard;

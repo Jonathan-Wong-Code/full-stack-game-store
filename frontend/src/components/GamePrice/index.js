@@ -13,17 +13,27 @@ const GamePrice = ({ gameDiscount, gamePrice, isLarge, discountColor }) => {
       {!!gameDiscount && (
         <>
           <ScreenReaderOnly>Original price is:</ScreenReaderOnly>
-          <OriginalGamePrice isLarge={isLarge} discountColor={discountColor}>
+          <OriginalGamePrice
+            isLarge={isLarge}
+            discountColor={discountColor}
+            data-testid="game-price-original-price-before-discount"
+          >
             {formatPricing(gamePrice, 2)}
           </OriginalGamePrice>
         </>
       )}
+
       <ScreenReaderOnly>Current price is:</ScreenReaderOnly>
       <FinalGamePrice isLarge={isLarge}>
         {gameDiscount && gameDiscount > 0 ? (
-          <p> {formatPricing(finalPrice, 2)}</p>
+          <p data-testid="game-price-discounted-price">
+            {formatPricing(finalPrice, 2)}
+          </p>
         ) : (
-          <PriceHighlight modifiers={isLarge && 'large'}>
+          <PriceHighlight
+            modifiers={isLarge && 'large'}
+            data-testid="game-price-no-discount-price"
+          >
             {formatPricing(gamePrice, 2)}
           </PriceHighlight>
         )}

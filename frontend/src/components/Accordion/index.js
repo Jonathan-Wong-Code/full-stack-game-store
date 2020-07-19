@@ -1,13 +1,16 @@
-import React, { useState, useRef, cloneElement } from 'react';
+import React, { useState, useRef, cloneElement, createContext } from 'react';
 import { node, string } from 'prop-types';
 
 import { AccordionBody, AccordionButton, AccordionContent } from './css';
+
+export const AccordionContext = createContext();
+
 const Accordion = ({ children, title }) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState();
   const contentRef = useRef(null);
 
   const childWithProps = React.Children.map(children, child =>
-    cloneElement(child, { active })
+    cloneElement(child, { active, setActive })
   );
 
   return (
@@ -18,13 +21,16 @@ const Accordion = ({ children, title }) => {
       >
         {title}
       </AccordionButton>
-
-      <AccordionContent
-        style={{ height: active ? `${contentRef.current.scrollHeight}px` : 0 }}
-        ref={contentRef}
-      >
-        {childWithProps}
-      </AccordionContent>
+      <AccordionContext.Provider value={{ active, setActive }}>
+        <AccordionContent
+          style={{
+            height: active ? `${contentRef.current.scrollHeight}px` : 0
+          }}
+          ref={contentRef}
+        >
+          {childWithProps}
+        </AccordionContent>
+      </AccordionContext.Provider>
     </AccordionBody>
   );
 };

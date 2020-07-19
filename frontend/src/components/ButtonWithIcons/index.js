@@ -1,5 +1,5 @@
 import React from 'react';
-import { func, string, array, oneOfType, number } from 'prop-types';
+import { func, string, array, oneOfType, number, bool } from 'prop-types';
 
 import { PrimaryStyles, SecondaryStyles } from './css';
 import IconComponent from '../Icon';
@@ -11,11 +11,17 @@ export const PrimaryBtnWithIcon = ({
   buttonText,
   variants,
   tabIndex,
-  disabled
+  disabled,
+  handleClick
 }) => {
   const theme = useTheme();
   return (
-    <PrimaryStyles modifiers={variants} tabIndex={tabIndex} disabled={disabled}>
+    <PrimaryStyles
+      modifiers={variants}
+      tabIndex={tabIndex}
+      disabled={disabled}
+      onClick={handleClick}
+    >
       <IconComponent iconColor={theme.textInverted}>
         <Icon />
       </IconComponent>
@@ -28,12 +34,15 @@ PrimaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
   variants: oneOfType([string, array]),
-  tabIndex: number
+  tabIndex: number,
+  disabled: bool,
+  handleClick: func.isRequired
 };
 
 PrimaryBtnWithIcon.defaultProps = {
   variants: null,
-  tabIndex: 0
+  tabIndex: 0,
+  disabled: false
 };
 
 export const SecondaryBtnWithIcon = ({
@@ -41,7 +50,8 @@ export const SecondaryBtnWithIcon = ({
   buttonText,
   variants,
   tabIndex,
-  disabled
+  disabled,
+  handleClick
 }) => {
   return (
     <SecondaryStyles
@@ -49,6 +59,7 @@ export const SecondaryBtnWithIcon = ({
       className="button-component"
       tabIndex={tabIndex}
       disabled={disabled}
+      onClick={handleClick}
     >
       <IconComponent>
         <Icon />
@@ -62,10 +73,13 @@ SecondaryBtnWithIcon.propTypes = {
   Icon: func.isRequired,
   buttonText: string.isRequired,
   variants: oneOfType([string, array]),
-  tabIndex: number
+  tabIndex: number,
+  disabled: bool,
+  handleClick: func.isRequired
 };
 
 SecondaryBtnWithIcon.defaultProps = {
   variants: null,
-  tabIndex: 0
+  tabIndex: 0,
+  disabled: false
 };

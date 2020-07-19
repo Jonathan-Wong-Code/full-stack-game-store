@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import axios from 'axios';
 import { shape, string, array, number, arrayOf } from 'prop-types';
 
@@ -25,7 +25,8 @@ import { Wrapper } from '../../src/components/Wrapper';
 
 import useWindowWidth from '../../src/hooks/useWindowWidth';
 import useSetState from '../../src/hooks/useSetState';
-
+import useModal from '../../src/hooks/useModal';
+import Modal from '../../src/components/Modal';
 import { ReviewProvider } from '../../src/containers/gamePage/Reviews/context';
 
 // SET STATIC PATHS
@@ -61,31 +62,32 @@ export async function getStaticProps(context) {
 
 // COMPONENT
 const GamePage = ({ game }) => {
-  const [{ isOpen, modalType, modalLink, imgIndex }, setState] = useSetState({
-    isOpen: false,
+  const [{ isGalleryOpen, imgIndex }, setState] = useSetState({
+    isGalleryOpen: false,
     showGameReviewForm: false,
-    modalType: null,
-    modalLink: null,
+
     imgIndex: 0
   });
 
   const user = useSelector(selectAuthUser);
   const { windowWidth } = useWindowWidth();
+  const videoRef = useRef(null);
+
+  const {
+    toggleModal: toggleVideoModal,
+    isOpen: isVideoModalOpen
+  } = useModal();
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.focus();
+    }
+  }, [isVideoModalOpen]);
 
   if (!game) return null;
 
-  const openVideoModal = () =>
-    setState({
-      isOpen: true,
-      modalType: 'video',
-      modalLink: youtubeTrailerLink
-    });
-
-  const openImgModal = i =>
-    setState({ isOpen: true, modalType: 'img', imgIndex: i });
-
-  const closeModal = () =>
-    setState({ isOpen: false, modalType: null, modalLink: null });
+  const openImgModal = i => setState({ isGalleryOpen: true, imgIndex: i });
+  const closeModal = () => setState({ isGalleryOpen: false });
 
   const {
     company,
@@ -113,7 +115,7 @@ const GamePage = ({ game }) => {
         coverImage={coverImage}
         coverImageSmall={coverImageSmall}
         windowWidth={windowWidth}
-        openVideoModal={openVideoModal}
+        openVideoModal={toggleVideoModal}
         title={title}
         price={price}
         discount={discount}
@@ -157,22 +159,38 @@ const GamePage = ({ game }) => {
           company={company}
           operatingSystems={operatingSystems}
         />
+
         {/* REVIEWS */}
         <ReviewProvider>
           <Reviews user={user} gameId={id} />
         </ReviewProvider>
       </Wrapper>
 
-      {/* MODAL */}
-      {isOpen && windowWidth > 576 && (
+      {/* GALLERY MODAL */}
+      {isGalleryOpen && windowWidth > 576 && (
         <GalleryModal
-          type={modalType}
-          mediaLink={modalLink}
           closeModal={closeModal}
           thumbnails={thumbnails}
           galleryImages={galleryImages}
           index={imgIndex}
+          gameTitle={title}
         />
+      )}
+
+      {/* VIDEO MODAL */}
+      {isVideoModalOpen && (
+        <Modal closeModal={toggleVideoModal}>
+          <iframe
+            ref={videoRef}
+            src={youtubeTrailerLink}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="video"
+            width="560"
+            height="315"
+          />
+        </Modal>
       )}
     </section>
   );
@@ -190,7 +208,7 @@ GamePage.propTypes = {
     genre: arrayOf(string),
     mobileGalleryImages: array,
     operatingSystems: array,
-    price: string.isRequired,
+    price: number.isRequired,
     title: string.isRequired,
     releaseDate: string.isRequired,
     thumbnails: arrayOf(string).isRequired,

@@ -40,6 +40,7 @@ export const SelectContainer = styled.div`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints[0]}px) {
     flex-direction: row;
     align-items: center;
+    margin-bottom: 0;
   }
 `;
 

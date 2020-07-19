@@ -60,7 +60,7 @@ const Reviews = ({ user, gameId }) => {
       <ReviewHeading id="reviews-subheading">User reviews</ReviewHeading>
 
       {/* REVIEW FORM */}
-      {noUserReview && (
+      {noUserReview && !!user && (
         <div>
           <Accordion title="+Add Your Review">
             <GameReviewForm
@@ -191,9 +191,13 @@ Reviews.propTypes = {
   user: shape({
     name: string.isRequired,
     photo: string.isRequired
-  }).isRequired,
+  }),
 
   gameId: string.isRequired
+};
+
+Reviews.defaultProps = {
+  user: null
 };
 
 export default Reviews;

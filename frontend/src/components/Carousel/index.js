@@ -160,8 +160,18 @@ const Carousel = ({ slides }) => {
   return (
     <>
       <CarouselContainer>
-        <Arrow direction="left" handleClick={prevSlide} left="25px" />
-        <Arrow direction="right" handleClick={nextSlide} right="41px" />
+        <Arrow
+          direction="left"
+          handleClick={prevSlide}
+          left="25px"
+          description="Previous"
+        />
+        <Arrow
+          direction="right"
+          handleClick={nextSlide}
+          right="41px"
+          description="Next"
+        />
         <CarouselContent
           translate={translate}
           transition={transition}

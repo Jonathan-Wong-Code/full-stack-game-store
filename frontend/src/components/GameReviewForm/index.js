@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Formik } from 'formik';
 import { string, number, func, bool } from 'prop-types';
 import * as Yup from 'yup';
@@ -19,6 +19,7 @@ import {
 import { PrimaryButton, PrimaryInvertedButton } from '../Buttons';
 
 import useWindowWidth from '../../hooks/useWindowWidth';
+import { AccordionContext } from '../Accordion';
 
 import {
   useReviewDispatch,
@@ -35,7 +36,6 @@ const validationSchema = Yup.object().shape({
 
 const GameReviewForm = props => {
   const {
-    active,
     description,
     closeEditForm,
     isBeingEdited,
@@ -55,6 +55,8 @@ const GameReviewForm = props => {
   const { error } = useReviewState();
 
   const { windowWidth } = useWindowWidth();
+
+  const accordion = useContext(AccordionContext);
 
   const onSubmit = async values => {
     if (error) return;
@@ -76,11 +78,11 @@ const GameReviewForm = props => {
   };
 
   const getTabIndex = () => {
-    if (active && !isBeingEdited) {
+    if (accordion?.active && !isBeingEdited) {
       return 0;
     }
 
-    if (isBeingEdited && !active) {
+    if (isBeingEdited && !accordion?.active) {
       return 0;
     }
 
@@ -100,7 +102,7 @@ const GameReviewForm = props => {
           onSubmit={values => onSubmit(values)}
         >
           {({ errors, touched }) => (
-            <Form method="">
+            <Form data-testid="game-review-form-form">
               {windowWidth > 576 && (
                 <TitleErrorDesktop>
                   <ReviewError role="alert" showError={errors.title}>
@@ -170,8 +172,16 @@ const GameReviewForm = props => {
               </>
 
               <ButtonContainer>
-                <PrimaryInvertedButton type="reset" tabIndex={getTabIndex()}>
-                  Reset
+                <PrimaryInvertedButton
+                  type="reset"
+                  tabIndex={getTabIndex()}
+                  onClick={
+                    type === 'create'
+                      ? () => accordion.setActive(false)
+                      : () => closeEditForm()
+                  }
+                >
+                  Cancel
                 </PrimaryInvertedButton>
                 <PrimaryButton type="submit" tabIndex={getTabIndex()}>
                   Save Review
@@ -195,7 +205,6 @@ GameReviewForm.propTypes = {
   title: string,
   description: string,
   reviewId: string,
-  active: bool,
   isBeingEdited: bool,
   type: string.isRequired
 };
@@ -206,7 +215,6 @@ GameReviewForm.defaultProps = {
   title: '',
   description: '',
   reviewId: '',
-  active: false,
   isBeingEdited: false
 };
 

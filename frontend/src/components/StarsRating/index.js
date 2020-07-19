@@ -18,6 +18,7 @@ const Stars = ({ rating, setRating, isForReview, tabIndex }) => {
         onClick={() => setRating(i + 1)}
         tabIndex={tabIndex}
         key={uuidv4()}
+        data-testid={`filled-star-${i}`}
       >
         <span className="screen-reader-only">
           Set rating to {rating} out of 5 stars.
@@ -39,6 +40,7 @@ const Stars = ({ rating, setRating, isForReview, tabIndex }) => {
         onClick={() => setRating(rating + i + 1)}
         key={uuidv4()}
         tabIndex={tabIndex}
+        data-testid={`unfilled-star-${i}`}
       >
         <span className="screen-reader-only">
           Set rating to {rating} out of 5 stars.

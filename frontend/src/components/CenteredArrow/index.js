@@ -20,7 +20,8 @@ const CenteredArrow = ({
   variants,
   left,
   right,
-  isFocusedOnMount
+  isFocusedOnMount,
+  description
 }) => {
   const buttonRef = useRef();
 
@@ -31,22 +32,30 @@ const CenteredArrow = ({
   }, []);
 
   return (
-    <ArrowComponent direction={direction} left={left} right={right} aria-hidden>
+    <ArrowComponent
+      direction={direction}
+      left={left}
+      right={right}
+      data-testid="arrow-component"
+      description
+    >
       {direction === 'left' ? (
         <IconButton
           Icon={ArrowLeft}
           onClick={handleClick}
-          description="Previous game"
+          description={description}
           variants={variants}
           ref={buttonRef}
+          data-testid="arrow-left"
         />
       ) : (
         <IconButton
           Icon={ArrowRight}
           onClick={handleClick}
-          description="Next game"
+          description={description}
           variants={variants}
           ref={buttonRef}
+          data-testid="arrow-right"
         />
       )}
     </ArrowComponent>
@@ -59,7 +68,8 @@ CenteredArrow.propTypes = {
   variants: oneOfType([string, array]),
   left: string,
   right: string,
-  isFocusedOnMount: bool
+  isFocusedOnMount: bool,
+  description: string.isRequired
 };
 
 CenteredArrow.defaultProps = {

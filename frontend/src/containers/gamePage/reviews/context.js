@@ -67,9 +67,9 @@ const reducer = (state = {}, action) => {
   }
 };
 
-export const ReviewProvider = ({ children }) => {
+export const ReviewProvider = ({ children, initialState }) => {
   const [state, dispatch] = useReducer(reducer, {
-    gameReviews: [],
+    reviews: initialState?.reviews || null,
     noUserReview: false,
     numTotalReviews: 0,
     loading: false,
@@ -86,7 +86,12 @@ export const ReviewProvider = ({ children }) => {
 };
 
 ReviewProvider.propTypes = {
-  children: object.isRequired
+  children: object.isRequired,
+  initialState: object
+};
+
+ReviewProvider.defaultProps = {
+  initialState: {}
 };
 
 export const useReviewState = () => {
