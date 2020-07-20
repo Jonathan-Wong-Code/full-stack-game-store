@@ -20,7 +20,10 @@ const PriceInfo = ({
       : undefined;
 
   const renderDiscount = () => (
-    <PriceHighlight modifiers={isLarge ? 'large' : null}>
+    <PriceHighlight
+      modifiers={isLarge ? 'large' : null}
+      data-testid="price-high-light-discount-percent"
+    >
       <ScreenReaderOnly>Discount on {gameTitle} is</ScreenReaderOnly>
       {discountPercentage}%
     </PriceHighlight>

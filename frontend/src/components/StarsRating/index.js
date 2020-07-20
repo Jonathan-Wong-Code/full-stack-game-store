@@ -21,7 +21,7 @@ const Stars = ({ rating, setRating, isForReview, tabIndex }) => {
         data-testid={`filled-star-${i}`}
       >
         <span className="screen-reader-only">
-          Set rating to {rating} out of 5 stars.
+          Set rating to {rating + 1} out of 5 stars.
         </span>
         <Icon iconColor={theme.primaryLight} variants="small">
           <StarFilled />
@@ -43,7 +43,7 @@ const Stars = ({ rating, setRating, isForReview, tabIndex }) => {
         data-testid={`unfilled-star-${i}`}
       >
         <span className="screen-reader-only">
-          Set rating to {rating} out of 5 stars.
+          Set rating to {rating + i + 1} out of 5 stars.
         </span>
         <Icon iconColor={theme.primaryLight} variants="small">
           <StarUnfilled />

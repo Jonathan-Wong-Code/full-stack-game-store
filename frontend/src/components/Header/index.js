@@ -68,7 +68,7 @@ const Header = () => {
                   <StyledLink>Profile</StyledLink>
                 </Link>
               </li>
-              <li>
+              <li role="none">
                 <Button type="button" onClick={() => dispatch(startLogout())}>
                   Logout
                 </Button>

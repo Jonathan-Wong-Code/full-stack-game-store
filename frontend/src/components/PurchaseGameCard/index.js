@@ -23,11 +23,16 @@ const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
         isLarge
       />
       <ButtonContainer>
-        <SecondaryBtnWithIcon Icon={Cart} buttonText="Add to Cart" />
+        <SecondaryBtnWithIcon
+          Icon={Cart}
+          buttonText="Add to Cart"
+          handleClick={() => {}}
+        />
         <PrimaryBtnWithIcon
           Icon={HeartUnfilled}
           primaryIcon
           buttonText="Add to Wishlist"
+          handleClick={() => {}}
         />
       </ButtonContainer>
     </Container>
@@ -37,7 +42,7 @@ const PurchaseGameCard = ({ gamePrice = 60, gameDiscount = 40, gameTitle }) => {
 PurchaseGameCard.propTypes = {
   gameTitle: string.isRequired,
   gamePrice: number.isRequired,
-  gameDiscount: number.isRequired,
+  gameDiscount: number.isRequired
 };
 
 export default PurchaseGameCard;

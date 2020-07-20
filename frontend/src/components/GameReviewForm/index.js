@@ -90,7 +90,7 @@ const GameReviewForm = props => {
   };
 
   return (
-    <Section>
+    <Section data-testid="game-review-form-component">
       <UserProfile userName={userName} userPhoto={userPhoto} />
       <ReviewContainer>
         <Formik
@@ -105,7 +105,11 @@ const GameReviewForm = props => {
             <Form data-testid="game-review-form-form">
               {windowWidth > 576 && (
                 <TitleErrorDesktop>
-                  <ReviewError role="alert" showError={errors.title}>
+                  <ReviewError
+                    role="alert"
+                    showError={errors.title}
+                    data-testid="game-review-form-error-title-desktop"
+                  >
                     Error: {errors.title}
                   </ReviewError>
                 </TitleErrorDesktop>
@@ -133,7 +137,11 @@ const GameReviewForm = props => {
                   tabIndex={getTabIndex()}
                 />
                 {errors.title && windowWidth < 576 && (
-                  <ReviewError role="alert" showError>
+                  <ReviewError
+                    role="alert"
+                    showError
+                    data-testid="game-review-form-error-title-mobile"
+                  >
                     Error: {errors.title}
                   </ReviewError>
                 )}
@@ -159,13 +167,18 @@ const GameReviewForm = props => {
                   <ReviewError
                     role="alert"
                     showError={errors.description && touched.description}
+                    data-testid="game-review-form-error-description"
                   >
                     Error: {errors.description}
                   </ReviewError>
                 )}
 
                 {error && (
-                  <ReviewError role="alert" showError={error}>
+                  <ReviewError
+                    role="alert"
+                    showError={error}
+                    data-testid="game-review-form-error-review-api"
+                  >
                     Error: {error}
                   </ReviewError>
                 )}

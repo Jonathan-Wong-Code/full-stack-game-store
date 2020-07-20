@@ -8,6 +8,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import { Content, Main } from './css';
 import { selectAuthLoading } from '../../selectors/auth';
+
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAuthLoading);

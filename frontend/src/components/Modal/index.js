@@ -8,7 +8,9 @@ const Modal = ({ children, closeModal }) => {
     <ModalBackground onClick={closeModal} aria-modal="true" role="dialog">
       <ModalBody onClick={e => e.stopPropagation()}>
         {children}
-        <CloseButton onClick={closeModal}>&#x2715;</CloseButton>
+        <CloseButton onClick={closeModal} data-testid="modal-close-button">
+          &#x2715;
+        </CloseButton>
       </ModalBody>
     </ModalBackground>
   );

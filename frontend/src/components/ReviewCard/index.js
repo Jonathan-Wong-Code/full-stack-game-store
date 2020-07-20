@@ -129,7 +129,10 @@ const ReviewCard = ({
 
         {/* If not the user's own review and user is logged in */}
         {user && !userOwnedReview ? (
-          <ReviewFeedbackContainer className="helpful">
+          <ReviewFeedbackContainer
+            className="helpful"
+            data-testid="review-card-feedback-buttons"
+          >
             <Feedback>
               <FeedbackText>Is this helpful to you?</FeedbackText>
               <FeedbackButton onClick={onLikeClick} disabled={userHasLike}>
@@ -142,19 +145,19 @@ const ReviewCard = ({
                 No
               </FeedbackButton>
             </Feedback>
-            <p>
+            <p data-testid="review-card-feedback-info">
               ({likes} of {likes + dislikes} people found this helpful)
             </p>
           </ReviewFeedbackContainer>
         ) : (
-          <p>
+          <p data-testid="review-card-no-feedback-buttons">
             {likes} of {likes + dislikes} people found this helpful
           </p>
         )}
 
         {/* If user wrote review they can edit/delete it */}
         {userOwnedReview && (
-          <ButtonContainer>
+          <ButtonContainer data-testid="review-card-modify-container">
             <PrimaryButton
               modifiers="small"
               style={{ marginRight: '.5rem' }}
