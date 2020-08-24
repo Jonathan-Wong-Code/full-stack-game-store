@@ -116,7 +116,7 @@ const ReviewCard = ({
       isBeingEdited={isBeingEdited}
     />
   ) : (
-    <ReviewContainer>
+    <ReviewContainer data-testid="review-card-component">
       <UserProfile userName={userName} userPhoto={userPhoto} />
       <RightSide className="rightSide">
         <ReviewTitleRating className="Title">

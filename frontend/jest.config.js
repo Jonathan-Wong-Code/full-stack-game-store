@@ -2,7 +2,8 @@ const COVERAGE = 70;
 
 module.exports = {
   collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
+    'src/components/**/*.{js,jsx}',
+    'src/containers/**/*.{js,jsx}',
     'pages/**/*.{jsx,jsx}',
     '!src/**/*.test.{js,jsx}',
     '!src/**/*.mock.{js,jsx}'

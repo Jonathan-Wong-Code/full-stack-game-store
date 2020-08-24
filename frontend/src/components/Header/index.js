@@ -16,12 +16,14 @@ import {
 import { selectAuthUser } from '../../selectors/auth';
 import { startLogout } from '../../actions/auth';
 
+/* eslint-disable */
+
 const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = !!useSelector(selectAuthUser);
 
   return (
-    <HeaderSection>
+    <HeaderSection id="header">
       <Nav>
         <LeftNav>
           <Logo>

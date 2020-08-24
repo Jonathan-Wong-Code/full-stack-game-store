@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import { object, func } from 'prop-types';
 import { Provider } from 'react-redux';
+import 'wicg-inert';
 
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from '../theme/themes';

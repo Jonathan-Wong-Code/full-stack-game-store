@@ -109,73 +109,64 @@ const GamePage = ({ game }) => {
   } = game;
 
   return (
-    <section>
-      {/* GAME BANNER SECTION */}
-      <VideoBanner
-        coverImage={coverImage}
-        coverImageSmall={coverImageSmall}
-        windowWidth={windowWidth}
-        openVideoModal={toggleVideoModal}
-        title={title}
-        price={price}
-        discount={discount}
-      />
+    <>
+      <section id="root-page">
+        {/* GAME BANNER SECTION */}
+        <VideoBanner
+          coverImage={coverImage}
+          coverImageSmall={coverImageSmall}
+          windowWidth={windowWidth}
+          openVideoModal={toggleVideoModal}
+          title={title}
+          price={price}
+          discount={discount}
+        />
 
-      {windowWidth < 576 && (
-        <PurchaseCardContainer>
-          <PurchaseGameCard
-            gameTitle={title}
-            gamePrice={price}
-            gameDiscount={discount}
+        {windowWidth < 576 && (
+          <PurchaseCardContainer>
+            <PurchaseGameCard
+              gameTitle={title}
+              gamePrice={price}
+              gameDiscount={discount}
+            />
+          </PurchaseCardContainer>
+        )}
+
+        <Wrapper>
+          {/* GAME TITLE AND RATING */}
+          <GameTitleCardContainer>
+            <GameTitleContainer>
+              <GameTitle>{title}</GameTitle>
+              <GameTitleRating>Rating: {averageRating}/5</GameTitleRating>
+            </GameTitleContainer>
+          </GameTitleCardContainer>
+
+          {/* GAME GALLERY */}
+          <ImgGallery>
+            {thumbnails.map((img, i) => (
+              <ImgContainer key={img}>
+                <button type="button" onClick={() => openImgModal(i)}>
+                  <Img src={img} alt={`A thumbnail for ${title}`} key={img} />
+                </button>
+              </ImgContainer>
+            ))}
+          </ImgGallery>
+
+          {/* DESCRIPTION AND SPECS */}
+          <GameDetails
+            description={description}
+            genre={genre}
+            releaseDate={releaseDate}
+            company={company}
+            operatingSystems={operatingSystems}
           />
-        </PurchaseCardContainer>
-      )}
 
-      <Wrapper>
-        {/* GAME TITLE AND RATING */}
-        <GameTitleCardContainer>
-          <GameTitleContainer>
-            <GameTitle>{title}</GameTitle>
-            <GameTitleRating>Rating: {averageRating}/5</GameTitleRating>
-          </GameTitleContainer>
-        </GameTitleCardContainer>
-
-        {/* GAME GALLERY */}
-        <ImgGallery>
-          {thumbnails.map((img, i) => (
-            <ImgContainer key={img}>
-              <button type="button" onClick={() => openImgModal(i)}>
-                <Img src={img} alt={`A thumbnail for ${title}`} key={img} />
-              </button>
-            </ImgContainer>
-          ))}
-        </ImgGallery>
-
-        {/* DESCRIPTION AND SPECS */}
-        <GameDetails
-          description={description}
-          genre={genre}
-          releaseDate={releaseDate}
-          company={company}
-          operatingSystems={operatingSystems}
-        />
-
-        {/* REVIEWS */}
-        <ReviewProvider>
-          <Reviews user={user} gameId={id} />
-        </ReviewProvider>
-      </Wrapper>
-
-      {/* GALLERY MODAL */}
-      {isGalleryOpen && windowWidth > 576 && (
-        <GalleryModal
-          closeModal={closeModal}
-          thumbnails={thumbnails}
-          galleryImages={galleryImages}
-          index={imgIndex}
-          gameTitle={title}
-        />
-      )}
+          {/* REVIEWS */}
+          <ReviewProvider>
+            <Reviews user={user} gameId={id} />
+          </ReviewProvider>
+        </Wrapper>
+      </section>
 
       {/* VIDEO MODAL */}
       {isVideoModalOpen && (
@@ -192,7 +183,17 @@ const GamePage = ({ game }) => {
           />
         </Modal>
       )}
-    </section>
+      {/* GALLERY MODAL */}
+      {isGalleryOpen && windowWidth > 576 && (
+        <GalleryModal
+          closeModal={closeModal}
+          thumbnails={thumbnails}
+          galleryImages={galleryImages}
+          index={imgIndex}
+          gameTitle={title}
+        />
+      )}
+    </>
   );
 };
 
