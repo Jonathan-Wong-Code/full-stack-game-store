@@ -10,7 +10,8 @@ import {
   RightNav,
   StyledLink,
   LeftInnerNav,
-  Button
+  Button,
+  ItemNumber
 } from './css';
 
 import { selectAuthUser } from '../../selectors/auth';
@@ -19,12 +20,13 @@ import { startLogout } from '../../actions/auth';
 import Icon from '../Icon';
 import { CartLink } from '../../assets/icons';
 
+import { selectCartItems } from '../../selectors/cart';
 /* eslint-disable */
 
 const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = !!useSelector(selectAuthUser);
-
+  const cartItems = useSelector(selectCartItems);
   return (
     <HeaderSection id="header">
       <Nav>
@@ -56,6 +58,11 @@ const Header = () => {
           <li>
             <Link href="/cart" as="/cart" passHref>
               <StyledLink>
+                <span className="screen-reader-only">
+                  Link to Cart Page. Cart currently has {cartItems.length}
+                  items.
+                </span>
+                <ItemNumber numItems={cartItems.length} />
                 <Icon>
                   <CartLink />
                 </Icon>

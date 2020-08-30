@@ -63,7 +63,7 @@ export const startCheckLoggedIn = () => async dispatch => {
 
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    console.log(error);
+    dispatch(logout());
   } finally {
     dispatch(loadingEnded());
   }

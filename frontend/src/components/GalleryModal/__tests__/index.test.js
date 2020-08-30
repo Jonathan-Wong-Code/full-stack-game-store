@@ -8,9 +8,19 @@ import GalleryModal from '..';
 
 const closeModal = jest.fn();
 
+beforeEach(() => jest.clearAllMocks());
+
 describe('GalleryModal', () => {
   it('renders initial Modal that can be closed.', () => {
-    renderTheme(<GalleryModal {...mockData} closeModal={closeModal} />);
+    renderTheme(
+      <>
+        <div id="header">HEADER</div>
+        <div id="root-page">
+          <h2>root page</h2>
+        </div>
+        <GalleryModal {...mockData} closeModal={closeModal} />
+      </>
+    );
     const closeButton = screen.getByRole('button', { name: '✕' });
 
     fireEvent.click(closeButton);
@@ -18,7 +28,15 @@ describe('GalleryModal', () => {
   });
 
   it('renders the correct image and styles as the images change via clicking arrows', () => {
-    renderTheme(<GalleryModal {...mockData} closeModal={closeModal} />);
+    renderTheme(
+      <>
+        <div id="header">HEADER</div>
+        <div id="root-page">
+          <h2>root page</h2>
+        </div>
+        <GalleryModal {...mockData} closeModal={closeModal} />
+      </>
+    );
     const mainImage = screen.getByRole('img', {
       name: 'Gameplay from Anno 1800'
     });
@@ -61,7 +79,15 @@ describe('GalleryModal', () => {
   });
 
   it('should display the correct image when the preview image is clicked', () => {
-    renderTheme(<GalleryModal {...mockData} closeModal={closeModal} />);
+    renderTheme(
+      <>
+        <div id="header">HEADER</div>
+        <div id="root-page">
+          <h2>root page</h2>
+        </div>
+        <GalleryModal {...mockData} closeModal={closeModal} />
+      </>
+    );
     const mainImage = screen.getByRole('img', {
       name: 'Gameplay from Anno 1800'
     });

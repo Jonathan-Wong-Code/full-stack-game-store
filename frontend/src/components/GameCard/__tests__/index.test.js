@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
-import { renderTheme } from '../../../utils/testUtils';
+import { renderAllProviders } from '../../../utils/testUtils';
 import GameCard from '../index';
 
 const mockData = {
@@ -13,7 +13,7 @@ const mockData = {
 
 describe('<GameCard>', () => {
   it('renders a GameCard', () => {
-    renderTheme(<GameCard {...mockData} />);
+    renderAllProviders(<GameCard {...mockData} />);
 
     const buyButton = screen.getByRole('button', {
       name: 'Click to add test-title to cart'

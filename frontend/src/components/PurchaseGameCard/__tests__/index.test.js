@@ -10,6 +10,8 @@ describe('<PurchaseGameCard>', () => {
         gamePrice={60}
         gameDiscount={20}
         gameTitle="World of Warcraft"
+        gameId="test id"
+        gameImage="test image"
       />
     );
   });

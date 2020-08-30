@@ -64,8 +64,28 @@ export const RightNav = styled.ul`
 export const StyledLink = styled.a`
   margin-right: ${spacing[6]};
   cursor: pointer;
+  position: relative;
 `;
 
 export const Button = styled.button`
   color: inherit;
+`;
+
+export const ItemNumber = styled.span`
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 12px;
+  background: ${({ theme }) => theme.primaryColor};
+  height: 20px;
+  width: 20px;
+  display: flex;
+  border-radius: 50%;
+  font-weight: ${({ theme }) => theme.typeWeight.bold};
+
+  &::before {
+    content: '${({ numItems }) => numItems}';
+    display: block;
+    margin: auto;
+  }
 `;
