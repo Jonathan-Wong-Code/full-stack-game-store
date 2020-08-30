@@ -7,21 +7,22 @@ import { ModalBackground, ModalBody, CloseButton } from './css';
 const Modal = ({ children, closeModal }) => {
   useEffect(() => {
     const dialog = document.getElementById('modal-dialog');
-
-    Array.from(document.getElementById('root-page')).forEach(child => {
+    Array.from(document.getElementById('root-page').children).forEach(child => {
       if (child !== dialog) {
         child.inert = true;
       }
     });
-
     document.getElementById('header').inert = true;
-    Array.from(document.getElementById('root-page')).forEach(child => {
-      if (child !== dialog) {
-        child.inert = false;
-      }
-    });
+
     return () => {
       document.getElementById('header').inert = false;
+      Array.from(document.getElementById('root-page').children).forEach(
+        child => {
+          if (child !== dialog) {
+            child.inert = false;
+          }
+        }
+      );
     };
   }, []);
 

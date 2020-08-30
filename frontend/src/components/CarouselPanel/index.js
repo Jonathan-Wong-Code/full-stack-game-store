@@ -1,5 +1,6 @@
 import React from 'react';
 import { bool, string, number } from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   Container,
@@ -12,6 +13,8 @@ import {
 } from './css';
 
 import { Cart } from '../../assets/icons';
+import { selectCartItems } from '../../selectors/cart';
+import { addCartItem } from '../../actions/cart';
 
 import PriceInfo from '../PriceInfo';
 
@@ -27,15 +30,35 @@ const CarouselPanel = ({
   buttonText,
   textColorLight,
   gameTitle,
-  tabIndex
+  tabIndex,
+  gameId
 }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
+  const addToCart = () => {
+    dispatch(
+      addCartItem({
+        title: gameTitle,
+        price: gamePrice - gameDiscount,
+        originalPrice: gamePrice,
+        image: gameImage,
+        id: gameId
+      })
+    );
+  };
+
+  const isInCart = cartItems.some(item => item.id === gameId);
+
   const renderButtons = isAddToCart =>
     isAddToCart ? (
       <SecondaryBtnWithIcon
         Icon={Cart}
-        buttonText={buttonText}
+        buttonText={isInCart ? 'Added to Cart!' : buttonText}
         variants={['large', 'fullWidth']}
         tabIndex={tabIndex}
+        handleClick={addToCart}
+        disabled={isInCart}
       />
     ) : (
       <PrimaryButton>{buttonText}</PrimaryButton>
@@ -76,7 +99,8 @@ CarouselPanel.propTypes = {
   isAddToCart: bool,
   promoText: string,
   textColorLight: bool,
-  tabIndex: number
+  tabIndex: number,
+  gameId: string.isRequired
 };
 
 CarouselPanel.defaultProps = {

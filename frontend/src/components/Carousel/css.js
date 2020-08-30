@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints } from '../../../theme/breakpoints';
 export const CarouselContainer = styled.section`
   position: relative;
-  height: 470px;
+  height: 600px;
   width: 100vw;
 
   @media screen and (min-width: ${breakpoints[0]}px) {

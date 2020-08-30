@@ -120,6 +120,7 @@ const GamePage = ({ game }) => {
           title={title}
           price={price}
           discount={discount}
+          gameId={id}
         />
 
         {windowWidth < 576 && (
@@ -128,6 +129,8 @@ const GamePage = ({ game }) => {
               gameTitle={title}
               gamePrice={price}
               gameDiscount={discount}
+              gameId={id}
+              gameImage={coverImageSmall}
             />
           </PurchaseCardContainer>
         )}

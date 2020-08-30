@@ -1,5 +1,7 @@
 import { green, purple, neutral, black, white, red } from './colors';
+import { typeWeight, typeScale } from './typography';
 import { breakpoints } from './breakpoints';
+import spacing from './spacing';
 
 export const defaultTheme = {
   primaryColor: purple[200],
@@ -22,5 +24,8 @@ export const defaultTheme = {
   black,
   white,
   dividerColor: neutral[300],
-  breakpoints
+  breakpoints,
+  spacing,
+  typeWeight,
+  typeScale
 };

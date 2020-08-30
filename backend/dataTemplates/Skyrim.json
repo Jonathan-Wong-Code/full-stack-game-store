@@ -11,5 +11,7 @@
   "discount": 30,
   "genre": ["RPG"],
   "isFeatured": false,
-  "isFrontPage": true
+  "isFrontPage": true,
+  "promoText": "Enter Skyrim",
+  "youtubeTrailerLink": "https://www.youtube.com/watch?v=JSRtYpNRoN0"
 }

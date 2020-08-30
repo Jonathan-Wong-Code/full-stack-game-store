@@ -11,5 +11,7 @@
   "discount": 20,
   "genre": ["FPS"],
   "isFeatured": true,
-  "isFrontPage": true
+  "isFrontPage": true,
+  "promoText": "Join the battle!",
+  "youtubeTrailerLink": "https://www.youtube.com/embed/bH1lHCirCGI"
 }

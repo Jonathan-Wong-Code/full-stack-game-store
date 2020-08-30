@@ -11,7 +11,8 @@ const VideoBanner = ({
   openVideoModal,
   title,
   price,
-  discount
+  discount,
+  gameId
 }) => {
   return (
     <GameBanner
@@ -28,6 +29,8 @@ const VideoBanner = ({
                 gameTitle={title}
                 gamePrice={price}
                 gameDiscount={discount}
+                gameId={gameId}
+                gameImage={coverImageSmall}
               />
             </GameCardContainer>
           </>
@@ -44,6 +47,7 @@ VideoBanner.propTypes = {
   openVideoModal: func.isRequired,
   title: string.isRequired,
   price: number.isRequired,
+  gameId: string.isRequired,
   discount: number
 };
 

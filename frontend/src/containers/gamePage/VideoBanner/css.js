@@ -15,7 +15,7 @@ export const GameBanner = styled.section`
     background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), 
     url('${({ desktopImage }) => desktopImage}');
 
-    height: 600px;
+    height: 800px;
   }
 `;
 

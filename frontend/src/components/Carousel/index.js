@@ -196,6 +196,7 @@ const Carousel = ({ slides }) => {
               textColorLight
               gameTitle={game.title}
               tabIndex={i === 2 ? 0 : -1}
+              gameId={game.id}
             />
           ))}
         </CarouselContent>

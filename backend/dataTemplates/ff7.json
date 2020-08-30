@@ -9,6 +9,8 @@
 
   "price": 30,
   "genre": ["RPG"],
-  "isFeatured": false,
-  "isFrontPage": true
+  "isFeatured": true,
+  "isFrontPage": true,
+  "promoText": "Buy now!",
+  "youtubeTrailerLink": "https://www.youtube.com/embed/ERgrFVhL-n4"
 }

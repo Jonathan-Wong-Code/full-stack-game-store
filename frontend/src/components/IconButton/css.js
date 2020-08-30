@@ -25,8 +25,10 @@ export const Button = styled.button`
     background-color: ${({ theme }) => theme.primaryLight};
   }
 
-  &:disabled {
+  &:disabled,
+  &:hover:disabled {
     background-color: ${({ theme }) => theme.disabledColor};
+    cursor: auto;
   }
 
   ${applyStyleModifiers(BUTTON_MODIFIERS)};

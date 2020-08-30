@@ -52,7 +52,7 @@ exports.resizeGameImages = async (req, res, next) => {
   if (req.files.imageCover) {
     // CoverImage
     const imageCover = await sharp(req.files.imageCover[0].buffer)
-      .resize(2000, 1333) // 3/2 ratio.
+      .resize(1980, 1080) // 3/2 ratio.
       .toFormat('jpeg')
       .jpeg({ quality: 90 })
       .toBuffer();

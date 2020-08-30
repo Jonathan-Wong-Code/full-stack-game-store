@@ -10,5 +10,7 @@
   "price": 40,
   "genre": ["Action", "RPG"],
   "isFeatured": false,
-  "isFrontPage": true
+  "isFrontPage": true,
+  "promoText": "The ARPG is here!",
+  "youtubeTrailerLink": "https://www.youtube.com/embed/HH_sGQRSpzo"
 }

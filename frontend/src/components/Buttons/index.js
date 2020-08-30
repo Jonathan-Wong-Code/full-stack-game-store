@@ -41,12 +41,6 @@ export const BaseButton = styled.button`
   padding: ${spacing[3]};
 
   transition: background-color 0.2s linear, color 0.2s linear;
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.disabledColor};
-    color: ${({ theme }) => theme.textInverted};
-    border: ${({ theme }) => `1px solid ${theme.disabledColor}`};
-  }
 `;
 
 const PrimaryBaseButton = styled(BaseButton)`
@@ -56,6 +50,13 @@ const PrimaryBaseButton = styled(BaseButton)`
   &:active {
     color: ${({ theme }) => theme.textInverted};
     background-color: ${({ theme }) => theme.primaryLight};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.disabledColor};
+    color: ${({ theme }) => theme.textInverted};
+    border: ${({ theme }) => `1px solid ${theme.disabledColor}`};
+    cursor: auto;
   }
 `;
 
@@ -80,6 +81,14 @@ const SecondaryBaseButton = styled(BaseButton)`
     color: ${({ theme }) => theme.textInverted};
     border: 1px solid ${({ theme }) => theme.secondaryLight};
     background-color: ${({ theme }) => theme.secondaryLight};
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    cursor: auto;
+    background-color: ${({ theme }) => theme.disabledColor};
+    color: ${({ theme }) => theme.textInverted};
+    border: ${({ theme }) => `1px solid ${theme.disabledColor}`};
   }
 `;
 

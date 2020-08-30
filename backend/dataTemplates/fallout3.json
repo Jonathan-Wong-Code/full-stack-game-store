@@ -11,5 +11,7 @@
   "discount": 20,
   "genre": ["RPG", "Action"],
   "isFeatured": true,
-  "isFrontPage": true
+  "isFrontPage": true,
+  "promoText": "Enter the wasteland",
+  "youtubeTrailerLink": "https://www.youtube.com/embed/iYZpR51XgW0"
 }

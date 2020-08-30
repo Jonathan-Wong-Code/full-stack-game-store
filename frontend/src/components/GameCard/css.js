@@ -20,7 +20,6 @@ export const Container = styled.div`
   height: 100%;
 
   box-shadow: 0px 0px 31px -15px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
   background-color: ${({ theme }) => theme.contentBackground};
 
   ${applyStyleModifiers(CONTAINER_MODIFIERS)};
@@ -71,8 +70,5 @@ export const Img = styled.img`
   display: block;
   object-fit: cover;
   object-position: center top;
-`;
-
-export const GameCardLink = styled.a`
-  height: 100%;
+  cursor: pointer;
 `;

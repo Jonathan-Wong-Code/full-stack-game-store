@@ -16,6 +16,9 @@ import {
 import { selectAuthUser } from '../../selectors/auth';
 import { startLogout } from '../../actions/auth';
 
+import Icon from '../Icon';
+import { CartLink } from '../../assets/icons';
+
 /* eslint-disable */
 
 const Header = () => {
@@ -50,6 +53,15 @@ const Header = () => {
         </LeftNav>
 
         <RightNav>
+          <li>
+            <Link href="/cart" as="/cart" passHref>
+              <StyledLink>
+                <Icon>
+                  <CartLink />
+                </Icon>
+              </StyledLink>
+            </Link>
+          </li>
           {!isLoggedIn ? (
             <>
               <li>

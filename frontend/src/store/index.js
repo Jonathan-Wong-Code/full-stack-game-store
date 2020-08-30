@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
@@ -33,8 +35,8 @@ export const initializeStore = preloadedState => {
 };
 
 export function configureStore(initialState) {
-  // const store = useMemo(() => initializeStore(initialState), [initialState]);
-  // const store = useMemo(() => initializeStore(initialState), [initialState]);
-  const store = initializeStore(initialState);
+  /* eslint-disable */
+  const store = useMemo(() => initializeStore(initialState), [initialState]);
+
   return store;
 }

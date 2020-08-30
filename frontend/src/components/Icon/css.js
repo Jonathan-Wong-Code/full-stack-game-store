@@ -31,6 +31,5 @@ export const IconStyles = styled.div`
     padding: ${spacing[1]};
     fill: ${({ iconColor, theme }) => iconColor || theme.textInverted};
   }
-  padding: 3px;
   ${applyStyleModifiers(ICON_MODIFIERS)}
 `;

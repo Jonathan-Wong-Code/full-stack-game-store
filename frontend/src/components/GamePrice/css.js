@@ -8,7 +8,7 @@ export const Prices = styled.div`
   margin-left: ${({ isLarge, gameDiscount }) =>
     isLarge && gameDiscount > 0 ? spacing[7] : null};
 
-  display: inline-block;
+  display: block;
 `;
 
 export const OriginalGamePrice = styled.p`
@@ -23,6 +23,8 @@ export const OriginalGamePrice = styled.p`
 export const FinalGamePrice = styled.div`
   font-size: ${({ isLarge }) =>
     isLarge ? typeScale.header2 : typeScale.paragraph};
+
+  display: flex;
 
   @media screen and (min-width: ${breakpoints[2]}px) {
     font-size: ${typeScale.header1};

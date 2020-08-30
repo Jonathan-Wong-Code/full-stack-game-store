@@ -17,7 +17,7 @@ export const Logo = styled.h1`
   border-radius: 5px;
 
   color: ${({ theme }) => theme.primaryColor};
-  background-color: ${({ theme }) => theme.contentBackgroundLight};
+  background-color: ${({ theme }) => theme.white};
 
   cursor: pointer;
 `;
@@ -58,6 +58,7 @@ export const LeftInnerNav = styled.ul`
 
 export const RightNav = styled.ul`
   display: flex;
+  align-items: center;
 `;
 
 export const StyledLink = styled.a`

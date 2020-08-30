@@ -10,5 +10,7 @@
   "price": 80,
   "genre": ["Simulation"],
   "isFeatured": true,
-  "isFrontPage": true
+  "isFrontPage": true,
+  "promoText": "Adventure awaits!",
+  "youtubeTrailerLink": "https://www.youtube.com/embed/5KdE0p2joJw"
 }

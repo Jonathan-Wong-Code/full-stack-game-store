@@ -11,5 +11,7 @@
   "discount": 30,
   "genre": ["RPG", "Action"],
   "isFeatured": false,
-  "isFrontPage": true
+  "isFrontPage": true,
+  "promoText": "The Legend Continues",
+  "youtubeTrailerLink": "https://www.youtube.com/embed/XHrskkHf958"
 }

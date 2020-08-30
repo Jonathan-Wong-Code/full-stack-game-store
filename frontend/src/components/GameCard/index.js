@@ -1,12 +1,12 @@
 import React from 'react';
 import { number, string } from 'prop-types';
 import Link from 'next/link';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addCartItem } from '../../actions/cart';
 import { Cart } from '../../assets/icons';
-
+import { selectCartItems } from '../../selectors/cart';
 import {
   Container,
-  GameCardLink,
   GameInformation,
   GameTitle,
   PriceInformation,
@@ -18,6 +18,8 @@ import IconButton from '../IconButton';
 
 import { formatPercentage } from '../../utils/utils';
 import PriceInfo from '../PriceInfo';
+// Done for next link
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
 const GameCard = ({
   gameDiscount,
@@ -26,41 +28,63 @@ const GameCard = ({
   imgSource,
   gameId
 }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
   const discount = gameDiscount
     ? formatPercentage(gameDiscount, gamePrice)
     : undefined;
+
+  const onAddItemClick = e => {
+    e.stopPropagation();
+    dispatch(
+      addCartItem({
+        title: gameTitle,
+        price: gamePrice - gameDiscount,
+        originalPrice: gamePrice,
+        image: imgSource,
+        id: gameId
+      })
+    );
+  };
+
   return (
-    <Link href={`/games/${gameId}`} as={`/games/${gameId}`} passHref>
-      <GameCardLink>
-        <Container aria-labelledby="game-title">
+    <Container aria-labelledby="game-title">
+      <Link
+        href={`/games/[gameId]?=${gameId}`}
+        as={`/games/${gameId}`}
+        passHref
+        tabIndex={0}
+        role="link"
+      >
+        <a>
           <ImgContainer>
             <Img src={imgSource} alt={`A promotional image for ${gameTitle}`} />
           </ImgContainer>
+        </a>
+      </Link>
 
-          <GameInformation aria-label="Game information">
-            <GameTitle id="game-title">{gameTitle}</GameTitle>
+      <GameInformation aria-label="Game information">
+        <GameTitle id="game-title">{gameTitle}</GameTitle>
 
-            <PriceInformation>
-              <PriceInfo
-                gamePrice={gamePrice}
-                discount={discount}
-                gameDiscount={gameDiscount}
-                gameTitle={gameTitle}
-              />
+        <PriceInformation>
+          <PriceInfo
+            gamePrice={gamePrice}
+            discount={discount}
+            gameDiscount={gameDiscount}
+            gameTitle={gameTitle}
+          />
 
-              <IconButton
-                description={`Click to add ${gameTitle} to cart`}
-                Icon={Cart}
-                variants="secondary"
-                onClick={e => {
-                  e.stopPropagation();
-                }}
-              />
-            </PriceInformation>
-          </GameInformation>
-        </Container>
-      </GameCardLink>
-    </Link>
+          <IconButton
+            description={`Click to add ${gameTitle} to cart`}
+            Icon={Cart}
+            variants="secondary"
+            onClick={onAddItemClick}
+            disabled={cartItems.some(item => item.id === gameId)}
+          />
+        </PriceInformation>
+      </GameInformation>
+    </Container>
   );
 };
 
