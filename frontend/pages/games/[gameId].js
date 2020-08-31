@@ -32,7 +32,7 @@ import { ReviewProvider } from '../../src/containers/gamePage/Reviews/context';
 // SET STATIC PATHS
 export async function getStaticPaths() {
   const response = await axios.get(
-    'http://localhost:5000/api/v1/games?fields=id'
+    'http://localhost:5000/api/v1/games?fields=title'
   );
 
   const paths = response.data.games.map(game => ({

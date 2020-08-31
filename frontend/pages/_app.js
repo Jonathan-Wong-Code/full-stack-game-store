@@ -1,10 +1,11 @@
 // import App from 'next/app'
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { object, func } from 'prop-types';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'wicg-inert';
+import ReactGa from 'react-ga';
 
 import { ThemeProvider } from 'styled-components';
 import { defaultTheme } from '../theme/themes';
@@ -15,9 +16,12 @@ import { configureStore } from '../src/store';
 import { GlobalStyle } from '../theme/Global';
 import Layout from '../src/components/Layout';
 import RouteListener from '../src/components/RouteListener';
-
 function MyApp({ Component, pageProps }) {
   const { store, persistor } = configureStore(pageProps.initialReduxState);
+
+  useEffect(() => {
+    ReactGa.initialize(process.env.NEXT_PUBLIC_ANALYTICS_ID);
+  }, []);
 
   return (
     <>
