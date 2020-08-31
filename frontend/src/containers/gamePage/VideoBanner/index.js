@@ -43,7 +43,7 @@ const VideoBanner = ({
 VideoBanner.propTypes = {
   coverImage: string.isRequired,
   coverImageSmall: string,
-  windowWidth: number.isRequired,
+  windowWidth: number,
   openVideoModal: func.isRequired,
   title: string.isRequired,
   price: number.isRequired,
@@ -53,7 +53,8 @@ VideoBanner.propTypes = {
 
 VideoBanner.defaultProps = {
   coverImageSmall: '',
-  discount: 0
+  discount: 0,
+  windowWidth: 1024
 };
 
 export default VideoBanner;

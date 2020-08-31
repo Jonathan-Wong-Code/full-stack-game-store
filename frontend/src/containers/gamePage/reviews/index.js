@@ -41,6 +41,8 @@ const Reviews = ({ user, gameId }) => {
           url: `http://localhost:5000/api/v1/games/${gameId}/reviews?sort=${sortBy}&limit=${limit}&page=${page}${ratingStr}`,
           withCredentials: true
         });
+
+        console.log(response.data);
         const { reviews, noUserReview, numTotalReviews } = response.data;
         setReviews(reviews, numTotalReviews, noUserReview);
       } catch (error) {

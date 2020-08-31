@@ -1,16 +1,30 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
+import storage from 'redux-persist/lib/storage';
+
+import { persistStore, persistReducer } from 'redux-persist';
+
 import reducers from '../reducers';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['auth']
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 let store;
 
 function initStore(initialState) {
-  return createStore(
-    reducers,
+  const store = createStore(
+    persistedReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
+
+  return store;
 }
 
 export const initializeStore = preloadedState => {
@@ -32,10 +46,11 @@ export const initializeStore = preloadedState => {
   return _store;
 };
 
-export function configureStore(initialState) {
+export function configureStore(initialState = {}) {
   /* eslint-disable */
   // const store = useMemo(() => initializeStore(initialState), [initialState]);
   const store = initializeStore(initialState, [initialState]);
+  const persistor = persistStore(store);
 
-  return store;
+  return { store, persistor };
 }

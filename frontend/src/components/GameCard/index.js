@@ -54,8 +54,6 @@ const GameCard = ({
         href={`/games/[gameId]?=${gameId}`}
         as={`/games/${gameId}`}
         passHref
-        tabIndex={0}
-        role="link"
       >
         <a>
           <ImgContainer>

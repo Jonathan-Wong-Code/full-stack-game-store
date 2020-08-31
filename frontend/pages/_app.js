@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import { object, func } from 'prop-types';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import 'wicg-inert';
 
 import { ThemeProvider } from 'styled-components';
@@ -16,7 +17,7 @@ import Layout from '../src/components/Layout';
 import RouteListener from '../src/components/RouteListener';
 
 function MyApp({ Component, pageProps }) {
-  const store = configureStore(pageProps.initialReduxState);
+  const { store, persistor } = configureStore(pageProps.initialReduxState);
 
   return (
     <>
@@ -29,12 +30,14 @@ function MyApp({ Component, pageProps }) {
       <ThemeContextProvider theme={defaultTheme}>
         <ThemeProvider theme={defaultTheme}>
           <Provider store={store}>
-            <GlobalStyle />
-            <Layout>
-              <RouteListener>
-                <Component {...pageProps} />
-              </RouteListener>
-            </Layout>
+            <PersistGate loading={null} persistor={persistor}>
+              <GlobalStyle />
+              <Layout>
+                <RouteListener>
+                  <Component {...pageProps} />
+                </RouteListener>
+              </Layout>
+            </PersistGate>
           </Provider>
         </ThemeProvider>
       </ThemeContextProvider>

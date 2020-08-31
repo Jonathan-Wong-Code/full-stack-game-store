@@ -53,7 +53,7 @@ exports.getAllReviewsPerGame = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     reviews,
-    numTotalReviews: stats[0].numReviews,
+    numTotalReviews: stats[0] ? stats[0].numReviews : 0,
     noUserReview: req.user ? !myReview : false,
   });
 });
