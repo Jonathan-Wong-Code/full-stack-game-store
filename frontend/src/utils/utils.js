@@ -1,9 +1,8 @@
 import { Provider } from 'react-redux';
 import React from 'react';
-import reducers from '../reducers';
-import { configureStore } from '../store';
 import { createStore } from 'redux';
-import { object, node } from 'prop-types';
+import { node } from 'prop-types';
+import reducers from '../reducers';
 
 export const formatPricing = (price, decimals) => {
   const formatter = new Intl.NumberFormat('en-US', {

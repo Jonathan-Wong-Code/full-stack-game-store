@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
+
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectAuthUser } from '../../selectors/auth';
 
 const RouteListener = ({ children }) => {
   const router = useRouter();
+  console.log(router);
   const { pathname } = router;
   const isLoggedIn = useSelector(selectAuthUser);
 
@@ -22,6 +25,11 @@ const RouteListener = ({ children }) => {
         break;
     }
   }
+
+  useEffect(() => {
+    // Analytics here
+    console.log(router.asPath);
+  }, [pathname]);
 
   return children;
 };

@@ -32,7 +32,9 @@ const ItemPreview = ({ title, price, originalPrice, image, id }) => {
       </GameTitle>
       <Prices className="prices">
         {hasDiscount && (
-          <OriginalPrice>{formatPricing(originalPrice)}</OriginalPrice>
+          <OriginalPrice data-testid="item-preview-original-price">
+            {formatPricing(originalPrice)}
+          </OriginalPrice>
         )}
         <p>{formatPricing(price)}</p>
       </Prices>

@@ -1,0 +1,26 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import ItemPreview from './index';
+
+<Meta title="Design System|Components" component={ItemPreview} />
+
+# GameCard Component
+
+## Usage
+
+The ItemPreview is used to show the preview of the game to be bought. It includes the image, price, a remove button, and the prices.
+
+<Preview withToolBar>
+  <Story name="ItemPreview">
+    <ItemPreview
+      originalPrice={20}
+      title="Fallout 3"
+      price={60}
+      image="https://www.retromags.com/applications/core/interface/imageproxy/imageproxy.php?img=https://www.slowdown.vg/images/Fallout-3.jpg&key=1f48366a2299af9586a93bd371e404ea4e92f88496b5252d821ea2ab171a6261"
+      id="gameID123"
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={ItemPreview} />

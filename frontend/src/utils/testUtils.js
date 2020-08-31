@@ -12,7 +12,7 @@ export const renderTheme = ui => {
 };
 
 export const renderAllProviders = (ui, contextState = {}, reduxState = {}) => {
-  const store = configureStore(reduxState);
+  const { store } = configureStore(reduxState);
 
   return render(
     <ThemeProvider theme={defaultTheme}>
