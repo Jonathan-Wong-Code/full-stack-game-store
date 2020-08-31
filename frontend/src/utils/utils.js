@@ -1,7 +1,9 @@
 import { Provider } from 'react-redux';
 import React from 'react';
-
+import reducers from '../reducers';
 import { configureStore } from '../store';
+import { createStore } from 'redux';
+import { object, node } from 'prop-types';
 
 export const formatPricing = (price, decimals) => {
   const formatter = new Intl.NumberFormat('en-US', {
@@ -20,15 +22,14 @@ export const renderArrayText = array => {
   return array.map((text, i) => ` ${text}${i === array.length - 1 ? '' : ','}`);
 };
 
-// STORYBOOK
+// STORYBOOK PROVIDER
 
-const store = configureStore();
+export const ProviderWrapper = ({ story }) => {
+  const store = createStore(reducers);
 
-export const ProviderWrapper = ({ children }) => {
-  const { store } = configureStore();
-  return <Provider store={store}>{children}</Provider>;
+  return <Provider store={store}>{story}</Provider>;
 };
 
-export const WithProvider = story => (
-  <ProviderWrapper store={store}>{story()}</ProviderWrapper>
-);
+ProviderWrapper.propTypes = {
+  story: node.isRequired
+};
