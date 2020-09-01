@@ -2,6 +2,8 @@ import React from 'react';
 import { number, string } from 'prop-types';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
+import ReactGa from 'react-ga';
+
 import { addCartItem } from '../../actions/cart';
 import { Cart } from '../../assets/icons';
 import { selectCartItems } from '../../selectors/cart';
@@ -37,6 +39,12 @@ const GameCard = ({
 
   const onAddItemClick = e => {
     e.stopPropagation();
+
+    ReactGa.event({
+      category: 'Add to Cart Button',
+      action: `Added ${gameTitle} to cart from game card.`
+    });
+
     dispatch(
       addCartItem({
         title: gameTitle,
@@ -51,8 +59,8 @@ const GameCard = ({
   return (
     <Container aria-labelledby="game-title">
       <Link
-        href={`/games/[gameId]?=${gameId}`}
-        as={`/games/${gameId}`}
+        href="/games/[gameId]"
+        as={`/games/${gameId}?title=${gameTitle}`}
         passHref
       >
         <a>

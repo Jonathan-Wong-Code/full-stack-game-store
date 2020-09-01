@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { string, number } from 'prop-types';
+import ReactGa from 'react-ga';
 
 import { deleteCartItem } from '../../actions/cart';
 
@@ -19,6 +20,15 @@ const ItemPreview = ({ title, price, originalPrice, image, id }) => {
   const dispatch = useDispatch();
 
   const hasDiscount = price !== originalPrice;
+
+  const onRemoveClick = id => {
+    ReactGa.event({
+      category: 'Remove from Cart Button',
+      action: `Removed ${title} from cart`
+    });
+    dispatch(deleteCartItem(id));
+  };
+
   return (
     <CartItemContainer>
       <ImgContainer className="imgContainer">
@@ -26,9 +36,7 @@ const ItemPreview = ({ title, price, originalPrice, image, id }) => {
       </ImgContainer>
       <GameTitle>
         <H3>{title}</H3>
-        <RemoveButton onClick={() => dispatch(deleteCartItem(id))}>
-          remove
-        </RemoveButton>
+        <RemoveButton onClick={() => onRemoveClick(id)}>remove</RemoveButton>
       </GameTitle>
       <Prices className="prices">
         {hasDiscount && (

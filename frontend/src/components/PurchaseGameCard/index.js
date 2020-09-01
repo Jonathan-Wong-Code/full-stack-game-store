@@ -1,6 +1,7 @@
 import React from 'react';
 import { string, number } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import ReactGa from 'react-ga';
 
 import { Container, ButtonContainer } from './css';
 import PriceInfo from '../PriceInfo';
@@ -10,9 +11,9 @@ import ScreenReaderOnly from '../ScreenReaderOnly';
 
 import { selectCartItems } from '../../selectors/cart';
 import { addCartItem } from '../../actions/cart';
+
 const PurchaseGameCard = props => {
   const dispatch = useDispatch();
-
   const {
     gamePrice = 60,
     gameDiscount = 40,
@@ -23,6 +24,11 @@ const PurchaseGameCard = props => {
   const cartItems = useSelector(selectCartItems);
 
   const handleAddCartItem = () => {
+    ReactGa.event({
+      category: 'Add to Cart Button',
+      action: `Added ${gameTitle} to cart from game page`
+    });
+
     dispatch(
       addCartItem({
         title: gameTitle,

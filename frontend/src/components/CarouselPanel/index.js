@@ -1,6 +1,7 @@
 import React from 'react';
 import { bool, string, number } from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import ReactGa from 'react-ga';
 
 import {
   Container,
@@ -37,6 +38,10 @@ const CarouselPanel = ({
   const cartItems = useSelector(selectCartItems);
 
   const addToCart = () => {
+    ReactGa.event({
+      category: 'Add to Cart Button',
+      action: `Added ${gameTitle} to cart from Carousel Panel`
+    });
     dispatch(
       addCartItem({
         title: gameTitle,
