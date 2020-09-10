@@ -1,7 +1,13 @@
 import React from 'react';
+import EditProfile from '../src/containers/editProfilePage';
 import { Wrapper } from '../src/components/Wrapper';
-const EditProfile = () => {
-  return <Wrapper>Edit Profile</Wrapper>;
+
+const EditProfilePage = () => {
+  return (
+    <Wrapper>
+      <EditProfile />
+    </Wrapper>
+  );
 };
 
-export default EditProfile;
+export default EditProfilePage;
