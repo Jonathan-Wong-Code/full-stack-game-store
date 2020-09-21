@@ -23,7 +23,6 @@ exports.uploadSinglePhoto = upload.single('photo');
 exports.resizeSinglePhoto = (width, height) => {
   return catchAsync(async (req, res, next) => {
     if (!req.file) return next();
-
     const image = await sharp(req.file.buffer)
       .resize(width, height)
       .toFormat('jpeg')

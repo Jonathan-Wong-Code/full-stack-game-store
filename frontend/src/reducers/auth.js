@@ -4,7 +4,8 @@ import {
   loginLoading,
   clearLoginError,
   logout,
-  loadingEnded
+  loadingEnded,
+  updateMe
 } from '../actions/auth';
 
 const initialState = {
@@ -53,6 +54,11 @@ const authReducer = (state = initialState, action) => {
         error: null,
         user: null
       };
+
+    case updateMe().type: {
+      console.log(action.payload);
+      return { ...state, user: action.payload, loading: false, error: null };
+    }
 
     default:
       return state;

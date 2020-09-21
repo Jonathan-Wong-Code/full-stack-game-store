@@ -1,21 +1,16 @@
 import React from 'react';
-
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 import { PrimaryButton } from '../../components/Buttons';
 
 import { H2 } from '../../components/Tyopgrahy';
-import {
-  StyledForm,
-  StyledSection,
-  InnerSection,
-  ErrorMsg
-} from '../../components/AuthForm';
-import { Img, ImgContainer, FileInput } from './css';
+import { StyledForm, InnerSection, ErrorMsg } from '../../components/AuthForm';
+import { Img, ImgContainer, FileInput, Section } from './css';
 import { Input } from '../../components/Input';
-import { selectAuthUser } from '../../selectors/auth';
+import { selectAuthUser, selectAuthLoading } from '../../selectors/auth';
+import { updateUser } from '../../actions/auth';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,6 +28,8 @@ const validationSchema = Yup.object().shape({
 
 const EditProfile = () => {
   const user = useSelector(selectAuthUser);
+  const loading = useSelector(selectAuthLoading);
+  const dispatch = useDispatch();
   if (!user) return null;
 
   return (
@@ -45,12 +42,18 @@ const EditProfile = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={values => {
-        console.log(values);
+        const { name, email, photoFile } = values;
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('photo', photoFile);
+        dispatch(updateUser(formData));
       }}
     >
       {({ errors, touched, setValues, values }) => {
         const onFileChange = e => {
           const file = e.currentTarget.files[0];
+          file.current = e.target.files[0];
 
           const fileReader = new FileReader();
           fileReader.onload = () => {
@@ -77,7 +80,7 @@ const EditProfile = () => {
         };
 
         return (
-          <StyledSection aria-labelledby="header">
+          <Section>
             <InnerSection>
               <H2 id="header">
                 Edit profile
@@ -117,11 +120,12 @@ const EditProfile = () => {
                   {errors.email && touched.email && (
                     <ErrorMsg>{errors.email}</ErrorMsg>
                   )}
+                  {loading && <p>Uploading changes...</p>}
                 </>
                 <PrimaryButton type="submit">Submit</PrimaryButton>
               </StyledForm>
             </InnerSection>
-          </StyledSection>
+          </Section>
         );
       }}
     </Formik>

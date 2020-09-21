@@ -8,14 +8,16 @@ export const {
   loginLoading,
   clearLoginError,
   logout,
-  loadingEnded
+  loadingEnded,
+  updateMe
 } = createActions(
   'LOGIN_SUCCESS',
   'LOGIN_ERROR',
   'LOGIN_LOADING',
   'CLEAR_LOGIN_ERROR',
   'LOGOUT',
-  'LOADING_ENDED'
+  'LOADING_ENDED',
+  'UPDATE_ME'
 );
 
 export const startLogin = data => async dispatch => {
@@ -93,8 +95,28 @@ export const startLogout = () => async dispatch => {
     });
 
     dispatch(logout());
+    Router.push('/');
   } catch (err) {
     console.log(err.response);
     window.alert('error', 'Error logging out! Try again.');
+  }
+};
+
+export const updateUser = data => async dispatch => {
+  dispatch(loginLoading());
+
+  try {
+    const response = await axios({
+      method: 'PATCH',
+      url: 'http://localhost:5000/api/v1/users/updateMe',
+      withCredentials: true,
+      data
+    });
+
+    dispatch(updateMe(response.data.user));
+
+    Router.push('/profile');
+  } catch (error) {
+    dispatch(loginError(error.response.data.message));
   }
 };

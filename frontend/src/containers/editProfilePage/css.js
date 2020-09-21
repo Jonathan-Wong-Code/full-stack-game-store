@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Section = styled.section`
+  margin-top: ${({ theme }) => theme.spacing[9]};
+`;
+
 export const Img = styled.img`
   border-radius: 50%;
   height: 100%;
@@ -19,6 +23,4 @@ export const FileInput = styled.input`
   font-weight: 700;
   line-height: 1.3;
   padding: 1rem 0;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  border-radius: 10px;
 `;
