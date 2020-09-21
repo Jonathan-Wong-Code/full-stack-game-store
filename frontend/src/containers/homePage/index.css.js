@@ -12,10 +12,10 @@ export const GridContainer = styled(Wrapper)`
 `;
 
 export const GameCardSection = styled.section`
-  padding: ${spacing[7]} ${spacing[5]};
+  padding: ${spacing[7]} 0;
 
   @media screen and (min-width: ${breakpoints[0]}px) {
-    padding: ${spacing[9]} ${spacing[6]};
+    padding: ${spacing[9]} 0;
   }
 `;
 

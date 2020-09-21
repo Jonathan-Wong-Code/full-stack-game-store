@@ -12,7 +12,8 @@ import {
   Prices,
   OriginalPrice,
   GameTitle,
-  RemoveButton
+  RemoveButton,
+  Img
 } from './css';
 import { formatPricing } from '../../utils/utils';
 
@@ -31,14 +32,15 @@ const ItemPreview = ({ title, price, originalPrice, image, id }) => {
 
   return (
     <CartItemContainer>
-      <ImgContainer className="imgContainer">
-        <img src={image} alt={`Thumbnail of ${title}`} />
+      <ImgContainer>
+        <Img src={image} alt={`Thumbnail of ${title}`} />
       </ImgContainer>
       <GameTitle>
         <H3>{title}</H3>
         <RemoveButton onClick={() => onRemoveClick(id)}>remove</RemoveButton>
       </GameTitle>
-      <Prices className="prices">
+
+      <Prices>
         {hasDiscount && (
           <OriginalPrice data-testid="item-preview-original-price">
             {formatPricing(originalPrice)}

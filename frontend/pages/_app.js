@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { object, func } from 'prop-types';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import 'wicg-inert';
 import ReactGa from 'react-ga';
 
@@ -16,8 +15,9 @@ import { configureStore } from '../src/store';
 import { GlobalStyle } from '../theme/Global';
 import Layout from '../src/components/Layout';
 import RouteListener from '../src/components/RouteListener';
+
 function MyApp({ Component, pageProps }) {
-  const { store, persistor } = configureStore(pageProps.initialReduxState);
+  const { store } = configureStore(pageProps.initialReduxState);
 
   useEffect(() => {
     ReactGa.initialize(process.env.NEXT_PUBLIC_ANALYTICS_ID);
@@ -34,14 +34,12 @@ function MyApp({ Component, pageProps }) {
       <ThemeContextProvider theme={defaultTheme}>
         <ThemeProvider theme={defaultTheme}>
           <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <GlobalStyle />
-              <Layout>
-                <RouteListener>
-                  <Component {...pageProps} />
-                </RouteListener>
-              </Layout>
-            </PersistGate>
+            <GlobalStyle />
+            <Layout>
+              <RouteListener>
+                <Component {...pageProps} />
+              </RouteListener>
+            </Layout>
           </Provider>
         </ThemeProvider>
       </ThemeContextProvider>

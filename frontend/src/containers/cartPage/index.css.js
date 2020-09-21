@@ -13,10 +13,15 @@ export const OrderSummary = styled.section`
 
 export const TotalsBar = styled.div`
   display: flex;
-  justify-content: flex-end;
-  font-weight: ${({ theme }) => theme.typeWeight.bold};
+  justify-content: center;
   padding: ${({ theme }) => theme.spacing[6]} 0;
-  padding-right: ${({ theme }) => theme.spacing[6]};
+
+  font-weight: ${({ theme }) => theme.typeWeight.bold};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[0]}px) {
+    justify-content: flex-end;
+    padding-right: ${({ theme }) => theme.spacing[6]};
+  }
 `;
 
 export const CheckoutContainer = styled.div`

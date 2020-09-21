@@ -1,25 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-import storage from 'redux-persist/lib/storage';
-
-import { persistStore, persistReducer } from 'redux-persist';
 
 import reducers from '../reducers';
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['auth']
-};
-
-const persistedReducer = persistReducer(persistConfig, reducers);
 
 let store;
 
 function initStore(initialState) {
   const store = createStore(
-    persistedReducer,
+    reducers,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
@@ -50,7 +39,6 @@ export function configureStore(initialState = {}) {
   /* eslint-disable */
   // const store = useMemo(() => initializeStore(initialState), [initialState]);
   const store = initializeStore(initialState, [initialState]);
-  const persistor = persistStore(store);
 
-  return { store, persistor };
+  return { store };
 }

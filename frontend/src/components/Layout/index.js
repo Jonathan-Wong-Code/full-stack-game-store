@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { node } from 'prop-types';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { startCheckLoggedIn } from '../../actions/auth';
+import { getCartItems } from '../../actions/cart';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -14,6 +14,7 @@ const Layout = ({ children }) => {
   const isLoading = useSelector(selectAuthLoading);
   useEffect(() => {
     dispatch(startCheckLoggedIn());
+    dispatch(getCartItems());
   }, []);
 
   if (isLoading) return null;
