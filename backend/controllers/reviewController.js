@@ -48,6 +48,7 @@ exports.getAllReviewsPerGame = catchAsync(async (req, res, next) => {
 
   const myReview = await Review.findOne({
     user: req.user ? req.user._id : null,
+    game: req.user ? req.params.gameId : null,
   });
 
   res.status(200).json({

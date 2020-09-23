@@ -42,13 +42,8 @@ const Header = () => {
 
           <LeftInnerNav>
             <li>
-              <Link href="/store" as="/store" passHref>
-                <StyledLink>Store</StyledLink>
-              </Link>
-            </li>
-            <li>
               <Link href="/" as="/" passHref>
-                <StyledLink>Search All</StyledLink>
+                <StyledLink>Home</StyledLink>
               </Link>
             </li>
           </LeftInnerNav>

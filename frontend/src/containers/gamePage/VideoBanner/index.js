@@ -21,19 +21,17 @@ const VideoBanner = ({
       mobileImage={coverImageSmall}
     >
       <InnerBanner>
+        <PlayButton onClick={openVideoModal} />
         {windowWidth > 576 && (
-          <>
-            <PlayButton onClick={openVideoModal} />
-            <GameCardContainer>
-              <PurchaseGameCard
-                gameTitle={title}
-                gamePrice={price}
-                gameDiscount={discount}
-                gameId={gameId}
-                gameImage={coverImageSmall}
-              />
-            </GameCardContainer>
-          </>
+          <GameCardContainer>
+            <PurchaseGameCard
+              gameTitle={title}
+              gamePrice={price}
+              gameDiscount={discount}
+              gameId={gameId}
+              gameImage={coverImageSmall}
+            />
+          </GameCardContainer>
         )}
       </InnerBanner>
     </GameBanner>

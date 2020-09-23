@@ -24,6 +24,7 @@ import PurchaseGameCard from '../../src/components/PurchaseGameCard';
 import { Wrapper } from '../../src/components/Wrapper';
 
 import useWindowWidth from '../../src/hooks/useWindowWidth';
+import useTheme from '../../src/hooks/useTheme';
 import useSetState from '../../src/hooks/useSetState';
 import useModal from '../../src/hooks/useModal';
 import Modal from '../../src/components/Modal';
@@ -68,6 +69,8 @@ const GamePage = ({ game }) => {
 
     imgIndex: 0
   });
+
+  const theme = useTheme();
 
   const user = useSelector(selectAuthUser);
   const { windowWidth } = useWindowWidth();
@@ -181,13 +184,13 @@ const GamePage = ({ game }) => {
             allow="autoplay; encrypted-media"
             allowFullScreen
             title="video"
-            width="560"
+            width={windowWidth > theme.breakpoints[0] ? '560' : windowWidth}
             height="315"
           />
         </Modal>
       )}
       {/* GALLERY MODAL */}
-      {isGalleryOpen && windowWidth > 576 && (
+      {isGalleryOpen && (
         <GalleryModal
           closeModal={closeModal}
           thumbnails={thumbnails}

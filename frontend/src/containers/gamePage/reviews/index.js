@@ -42,7 +42,6 @@ const Reviews = ({ user, gameId }) => {
           withCredentials: true
         });
 
-        console.log(response.data);
         const { reviews, noUserReview, numTotalReviews } = response.data;
         setReviews(reviews, numTotalReviews, noUserReview);
       } catch (error) {

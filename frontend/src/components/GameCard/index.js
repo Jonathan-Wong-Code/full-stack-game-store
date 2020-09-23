@@ -58,11 +58,7 @@ const GameCard = ({
 
   return (
     <Container aria-labelledby="game-title">
-      <Link
-        href="/games/[gameId]"
-        as={`/games/${gameId}?title=${gameTitle}`}
-        passHref
-      >
+      <Link href="/games/[gameId]" as={`/games/${gameId}`} passHref>
         <a>
           <ImgContainer>
             <Img src={imgSource} alt={`A promotional image for ${gameTitle}`} />
