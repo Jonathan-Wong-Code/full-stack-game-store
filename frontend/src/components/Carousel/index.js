@@ -1,14 +1,18 @@
 import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import { array } from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import { useSwipeable } from 'react-swipeable';
 
 import useSetState from '../../hooks/useSetState';
 import { CarouselContainer, CarouselContent } from './css';
 import CarouselPanel from '../CarouselPanel';
 import Arrow from '../CenteredArrow';
 import Dots from './Dots';
+import useTheme from '../../hooks/useTheme';
 
 const Carousel = ({ slides }) => {
+  const theme = useTheme();
+
   const firstSlide = slides[0];
   const secondSlide = slides[1];
   const thirdSlide = slides[2];
@@ -156,22 +160,35 @@ const Carousel = ({ slides }) => {
       translate: isMobile() ? windowWidth * 2 : windowWidth * 0.7 * 2
     });
   };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
+
   if (!renderedSlides) return null;
   return (
     <>
-      <CarouselContainer>
-        <Arrow
-          direction="left"
-          handleClick={prevSlide}
-          left="25px"
-          description="Previous"
-        />
-        <Arrow
-          direction="right"
-          handleClick={nextSlide}
-          right="41px"
-          description="Next"
-        />
+      <CarouselContainer {...handlers}>
+        {windowWidth > theme.breakpoints[2] && (
+          <>
+            <Arrow
+              direction="left"
+              handleClick={prevSlide}
+              left="25px"
+              description="Previous"
+            />
+            <Arrow
+              direction="right"
+              handleClick={nextSlide}
+              right="41px"
+              description="Next"
+            />
+          </>
+        )}
+
         <CarouselContent
           translate={translate}
           transition={transition}

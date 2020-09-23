@@ -72,9 +72,11 @@ export const LeftSide = styled.div`
 
 export const RightSide = styled.div`
   width: 100%;
-  display: ${({ gameDiscount }) => (gameDiscount === 0 ? 'flex' : 'block')};
+  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  align-content: center;
 
   @media screen and (min-width: ${breakpoints[0]}px) {
     display: flex;
