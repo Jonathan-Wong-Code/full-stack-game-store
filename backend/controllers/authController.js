@@ -48,7 +48,13 @@ exports.signup = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).populate({
+    path: 'wishlist',
+    populate: 'game',
+  });
+
+  user.wishlist = user && user.wishlist.map((item) => item.game);
+
   if (!email || !password) {
     return next(new AppError('Please provide email and password!', 400));
   }
@@ -135,7 +141,14 @@ exports.checkLoggedIn = catchAsync(async (req, res, next) => {
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  const user = await User.findById(decoded.id);
+  const user = await User.findById(decoded.id).populate({
+    path: 'wishlist',
+    populate: 'game',
+    select: 'game',
+  });
+
+  user.wishlist = user && user.wishlist.map((item) => item.game);
+
   if (!user) {
     return next(new AppError('No user found please login', 401));
   }

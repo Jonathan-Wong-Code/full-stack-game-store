@@ -5,13 +5,20 @@ import ReactGa from 'react-ga';
 
 import { Container, ButtonContainer } from './css';
 import PriceInfo from '../PriceInfo';
-import { Cart, HeartUnfilled } from '../../assets/icons';
+import { Cart, HeartUnfilled, HeartFilled } from '../../assets/icons';
 import { PrimaryBtnWithIcon, SecondaryBtnWithIcon } from '../ButtonWithIcons';
 import ScreenReaderOnly from '../ScreenReaderOnly';
 
 import { selectCartItems } from '../../selectors/cart';
-import { addCartItem } from '../../actions/cart';
-
+import { addItemToCart } from '../../actions/cart';
+import {
+  addItemToWishlist,
+  removeItemFromWishlist
+} from '../../actions/wishlist';
+import {
+  selectAuthUserWishlist,
+  selectAuthLoading
+} from '../../selectors/auth';
 const PurchaseGameCard = props => {
   const dispatch = useDispatch();
   const {
@@ -21,7 +28,10 @@ const PurchaseGameCard = props => {
     gameId,
     gameImage
   } = props;
+  const loading = useSelector(selectAuthLoading);
+
   const cartItems = useSelector(selectCartItems);
+  const wishlist = useSelector(selectAuthUserWishlist);
 
   const handleAddCartItem = () => {
     ReactGa.event({
@@ -30,7 +40,7 @@ const PurchaseGameCard = props => {
     });
 
     dispatch(
-      addCartItem({
+      addItemToCart({
         title: gameTitle,
         price: gamePrice - gameDiscount,
         originalPrice: gamePrice,
@@ -38,10 +48,31 @@ const PurchaseGameCard = props => {
         id: gameId
       })
     );
+
+    dispatch(removeItemFromWishlist(gameId));
+  };
+
+  const handleAddWishlist = () => {
+    ReactGa.event({
+      category: 'Add to Wishlist Button',
+      action: `Added ${gameTitle} to cart from the wishlist`
+    });
+
+    dispatch(addItemToWishlist(gameId));
+  };
+
+  const handleRemoveFromWishlist = () => {
+    ReactGa.event({
+      category: 'Remove from Wishlist Button',
+      action: `Removed ${gameTitle} to cart from the wishlist`
+    });
+
+    dispatch(removeItemFromWishlist(gameId));
   };
 
   const gameIsInCart = cartItems.some(item => item.id === gameId);
-
+  const gameIsInWishlist =
+    wishlist && wishlist.some(item => item.id === gameId);
   return (
     <Container aria-labelledby="purchase-game-information">
       <ScreenReaderOnly>
@@ -65,10 +96,13 @@ const PurchaseGameCard = props => {
         />
         {!gameIsInCart && (
           <PrimaryBtnWithIcon
-            Icon={HeartUnfilled}
+            disabled={loading}
+            Icon={gameIsInWishlist ? HeartUnfilled : HeartFilled}
             primaryIcon
-            buttonText="Add to Wishlist"
-            handleClick={() => {}}
+            buttonText={gameIsInWishlist ? 'Wishlisted!' : 'Add to Wishlist'}
+            handleClick={
+              gameIsInWishlist ? handleRemoveFromWishlist : handleAddWishlist
+            }
           />
         )}
       </ButtonContainer>

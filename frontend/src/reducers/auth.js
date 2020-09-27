@@ -8,8 +8,12 @@ import {
   updateMe
 } from '../actions/auth';
 
+import { addToWishlist, removeFromWishlist } from '../actions/wishlist';
+
 const initialState = {
-  user: null,
+  user: {
+    wishlist: []
+  },
   loading: false,
   error: null
 };
@@ -55,9 +59,34 @@ const authReducer = (state = initialState, action) => {
         user: null
       };
 
-    case updateMe().type: {
-      console.log(action.payload);
-      return { ...state, user: action.payload, loading: false, error: null };
+    case updateMe().type:
+      return {
+        ...state,
+        user: { ...state.user, ...action.payload },
+        loading: false,
+        error: null
+      };
+
+    case addToWishlist().type: {
+      const currentWishlist = state.user.wishlist || [];
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          wishlist: [...currentWishlist, action.payload]
+        },
+        loading: false
+      };
+    }
+
+    case removeFromWishlist().type: {
+      const newWishlist = state.user.wishlist.filter(
+        item => item.id !== action.payload
+      );
+
+      return {
+        user: { ...state.user, wishlist: newWishlist, loading: false }
+      };
     }
 
     default:

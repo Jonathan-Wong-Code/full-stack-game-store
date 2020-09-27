@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+// import Router from 'next/router';
 
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -44,8 +45,9 @@ const Login = () => {
     return () => dispatch(clearLoginError());
   }, []);
 
-  const onSubmit = values => {
-    compose(dispatch, startLogin)(values);
+  const onSubmit = async values => {
+    await compose(dispatch, startLogin)(values);
+    // Router.push('/');
   };
 
   return (

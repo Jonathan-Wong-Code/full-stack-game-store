@@ -1,9 +1,9 @@
 import React from 'react';
+
 import { fireEvent, screen } from '@testing-library/react';
 import { renderAllProviders } from '../../../utils/testUtils';
 import ItemPreview from '..';
 import { deleteCartItem } from '../../../actions/cart';
-
 const mockDispatch = jest.fn();
 
 jest.mock('react-redux', () => ({

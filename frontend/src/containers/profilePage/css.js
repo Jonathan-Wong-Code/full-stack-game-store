@@ -45,3 +45,10 @@ export const StyledLink = styled.a`
   font-weight: ${({ theme }) => theme.typeWeight.bold};
   text-align: center;
 `;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 24px;
+  justify-items: center;
+`;

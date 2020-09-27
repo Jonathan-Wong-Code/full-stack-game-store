@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactGa from 'react-ga';
 
-import { addCartItem } from '../../actions/cart';
+import { addItemToCart } from '../../actions/cart';
 import { Cart } from '../../assets/icons';
 import { selectCartItems } from '../../selectors/cart';
 import {
@@ -46,7 +46,7 @@ const GameCard = ({
     });
 
     dispatch(
-      addCartItem({
+      addItemToCart({
         title: gameTitle,
         price: gamePrice - gameDiscount,
         originalPrice: gamePrice,

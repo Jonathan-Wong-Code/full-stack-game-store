@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { array } from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
 import Head from 'next/head';
 
 import Carousel from '../../src/components/Carousel';
@@ -52,7 +51,7 @@ function Homepage({ featuredGames, games }) {
           </SectionHeading>
           <GridContainer>
             {games.map(game => (
-              <li key={uuidv4()}>
+              <li key={game.id}>
                 <GameCard
                   gameDiscount={game.discount}
                   gameTitle={game.title}

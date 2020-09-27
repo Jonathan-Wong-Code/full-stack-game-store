@@ -14,6 +14,6 @@ router.use(protect);
 
 router.route('/').post(addGameToWishlist).get(getMyWishlist);
 
-router.route('/:id').delete(removeGameFromWishlist);
+router.route('/:gameId').delete(removeGameFromWishlist);
 
 module.exports = router;

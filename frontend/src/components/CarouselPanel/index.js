@@ -15,7 +15,7 @@ import {
 
 import { Cart } from '../../assets/icons';
 import { selectCartItems } from '../../selectors/cart';
-import { addCartItem } from '../../actions/cart';
+import { addItemToCart } from '../../actions/cart';
 
 import PriceInfo from '../PriceInfo';
 
@@ -43,7 +43,7 @@ const CarouselPanel = ({
       action: `Added ${gameTitle} to cart from Carousel Panel`
     });
     dispatch(
-      addCartItem({
+      addItemToCart({
         title: gameTitle,
         price: gamePrice - gameDiscount,
         originalPrice: gamePrice,

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { screen, fireEvent } from '@testing-library/react';
 import { renderAllProviders } from '../../../utils/testUtils';
 import PurchaseGameCard from '..';

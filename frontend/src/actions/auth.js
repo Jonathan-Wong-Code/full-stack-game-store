@@ -1,6 +1,5 @@
 import { createActions } from 'redux-actions';
 import axios from 'axios';
-import Router from 'next/router';
 
 export const {
   loginSuccess,
@@ -9,7 +8,8 @@ export const {
   clearLoginError,
   logout,
   loadingEnded,
-  updateMe
+  updateMe,
+  updateMyWishlist
 } = createActions(
   'LOGIN_SUCCESS',
   'LOGIN_ERROR',
@@ -17,7 +17,8 @@ export const {
   'CLEAR_LOGIN_ERROR',
   'LOGOUT',
   'LOADING_ENDED',
-  'UPDATE_ME'
+  'UPDATE_ME',
+  'UPDATE_MY_WISHLIST'
 );
 
 export const startLogin = data => async dispatch => {
@@ -31,7 +32,6 @@ export const startLogin = data => async dispatch => {
       data
     });
     dispatch(loginSuccess(response.data.user));
-    Router.push('/');
   } catch (error) {
     dispatch(loginError(error.response.data.message));
   }
@@ -48,7 +48,6 @@ export const startResetPassword = (data, token) => async dispatch => {
     });
 
     dispatch(loginSuccess(response.data.user));
-    Router.push('/');
   } catch (error) {
     dispatch(loginError(error.response.data.message));
   }
@@ -95,10 +94,8 @@ export const startLogout = () => async dispatch => {
     });
 
     dispatch(logout());
-    Router.push('/');
   } catch (err) {
     console.log(err.response);
-    window.alert('error', 'Error logging out! Try again.');
   }
 };
 
@@ -114,8 +111,6 @@ export const updateUser = data => async dispatch => {
     });
 
     dispatch(updateMe(response.data.user));
-
-    Router.push('/profile');
   } catch (error) {
     dispatch(loginError(error.response.data.message));
   }

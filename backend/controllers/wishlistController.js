@@ -1,16 +1,16 @@
 const catchAsync = require('../utils/catchAsync');
 const Wishlist = require('../models/wishlistModel');
+const Game = require('../models/gameModel');
 
 exports.addGameToWishlist = catchAsync(async (req, res, next) => {
   if (!req.body.user) req.body.user = req.user.id;
 
-  const game = await Wishlist.create(req.body);
+  const wishlistItem = await Wishlist.create(req.body);
+  const game = await Game.findById(wishlistItem.game);
 
   res.status(201).json({
     status: 'success',
-    data: {
-      game,
-    },
+    wishlistItem: game,
   });
 });
 
