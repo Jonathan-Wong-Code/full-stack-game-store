@@ -9,7 +9,11 @@ import { H2 } from '../../components/Tyopgrahy';
 import { StyledForm, InnerSection, ErrorMsg } from '../../components/AuthForm';
 import { Img, ImgContainer, FileInput, Section } from './css';
 import { Input } from '../../components/Input';
-import { selectAuthUser, selectAuthLoading } from '../../selectors/auth';
+import {
+  selectAuthUser,
+  selectAuthLoading,
+  selectAuthError
+} from '../../selectors/auth';
 import { updateUser } from '../../actions/auth';
 
 const validationSchema = Yup.object().shape({
@@ -27,9 +31,11 @@ const validationSchema = Yup.object().shape({
 });
 
 const EditProfile = () => {
+  const apiError = useSelector(selectAuthError);
   const user = useSelector(selectAuthUser);
   const loading = useSelector(selectAuthLoading);
   const dispatch = useDispatch();
+
   if (!user) return null;
 
   return (
@@ -41,16 +47,16 @@ const EditProfile = () => {
         photoFile: null
       }}
       validationSchema={validationSchema}
-      onSubmit={values => {
+      onSubmit={async values => {
         const { name, email, photoFile } = values;
         const formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);
         formData.append('photo', photoFile);
-        dispatch(updateUser(formData));
+        await dispatch(updateUser(formData));
       }}
     >
-      {({ errors, touched, setValues, values }) => {
+      {({ errors, touched, setValues, values, isSubmitting }) => {
         const onFileChange = e => {
           const file = e.currentTarget.files[0];
           file.current = e.target.files[0];
@@ -122,7 +128,10 @@ const EditProfile = () => {
                   )}
                   {loading && <p>Uploading changes...</p>}
                 </>
-                <PrimaryButton type="submit">Submit</PrimaryButton>
+                <PrimaryButton type="submit" disabled={isSubmitting}>
+                  Submit{isSubmitting ? 'ting' : ''}
+                </PrimaryButton>
+                {apiError && !loading && <ErrorMsg>{apiError}</ErrorMsg>}
               </StyledForm>
             </InnerSection>
           </Section>

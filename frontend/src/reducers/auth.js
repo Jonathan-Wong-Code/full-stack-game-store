@@ -14,7 +14,7 @@ const initialState = {
   user: {
     wishlist: []
   },
-  loading: false,
+  loading: true,
   error: null
 };
 

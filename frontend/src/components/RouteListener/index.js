@@ -23,18 +23,24 @@ const RouteListener = ({ children }) => {
         case '/forgotPassword':
           router.push('/');
           break;
+
+        case '/resetPassword/[resetToken]':
+          router.push('/');
+          break;
+
         default:
           break;
       }
     }
-  }, []);
+  }, [pathname, isLoggedIn]);
 
   useEffect(() => {
     // Analytics here
     if (
       pathname !== '/login' ||
       pathname !== '/signup' ||
-      pathname !== '/forgotPassword'
+      pathname !== '/forgotPassword' ||
+      pathname !== '/resetPassword/[resetToken]'
     ) {
       ReactGa.pageview(router.asPath);
     }

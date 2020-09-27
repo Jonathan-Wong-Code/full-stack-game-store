@@ -1,5 +1,6 @@
 import { createActions } from 'redux-actions';
 import axios from 'axios';
+import Router from 'next/router';
 
 export const {
   loginSuccess,
@@ -22,8 +23,6 @@ export const {
 );
 
 export const startLogin = data => async dispatch => {
-  dispatch(loginLoading());
-
   try {
     const response = await axios({
       method: 'POST',
@@ -38,7 +37,6 @@ export const startLogin = data => async dispatch => {
 };
 
 export const startResetPassword = (data, token) => async dispatch => {
-  dispatch(loginLoading());
   try {
     const response = await axios({
       method: 'POST',
@@ -54,7 +52,6 @@ export const startResetPassword = (data, token) => async dispatch => {
 };
 
 export const startCheckLoggedIn = () => async dispatch => {
-  dispatch(loginLoading());
   try {
     const response = await axios({
       method: 'POST',
@@ -71,7 +68,6 @@ export const startCheckLoggedIn = () => async dispatch => {
 };
 
 export const startSignup = data => async dispatch => {
-  dispatch(loginLoading());
   try {
     const response = await axios({
       method: 'POST',
@@ -99,9 +95,23 @@ export const startLogout = () => async dispatch => {
   }
 };
 
-export const updateUser = data => async dispatch => {
-  dispatch(loginLoading());
+export const startPasswordUpdate = data => async dispatch => {
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: 'http://localhost:5000/api/v1/users/updatePassword',
+      withCredentials: true,
+      data
+    });
+    dispatch(updateMe(response.data.user));
+    return true;
+  } catch (error) {
+    dispatch(loginError(error.response.data.message));
+  }
+};
 
+// UPDATING
+export const updateUser = data => async dispatch => {
   try {
     const response = await axios({
       method: 'PATCH',
@@ -111,6 +121,7 @@ export const updateUser = data => async dispatch => {
     });
 
     dispatch(updateMe(response.data.user));
+    Router.push('/profile');
   } catch (error) {
     dispatch(loginError(error.response.data.message));
   }

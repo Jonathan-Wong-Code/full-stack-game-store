@@ -59,7 +59,7 @@ const Login = () => {
       validationSchema={validationSchema}
       onSubmit={values => onSubmit(values)}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <StyledSection aria-labelledby="login-header">
           <InnerSection>
             <H2 id="login-header">
@@ -100,8 +100,9 @@ const Login = () => {
                 )}
               </>
 
-              {loginLoading && <p>Logging in...</p>}
-              <PrimaryButton>Login</PrimaryButton>
+              <PrimaryButton disabled={isSubmitting}>
+                {isSubmitting ? 'Logging in...' : 'Login'}
+              </PrimaryButton>
               {loginError && !loginLoading && <ErrorMsg>{loginError}</ErrorMsg>}
             </StyledForm>
 

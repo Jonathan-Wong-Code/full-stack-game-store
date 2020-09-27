@@ -2,7 +2,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 import { useRouter } from 'next/router';
-import { string, shape } from 'prop-types';
+import { string, shape, bool } from 'prop-types';
 
 import { useDispatch } from 'react-redux';
 import { compose } from 'redux';
@@ -20,7 +20,7 @@ import { Input } from '../../src/components/Input';
 
 import { startResetPassword } from '../../src/actions/auth';
 
-const ResetPassword = ({ values }) => {
+const ResetPassword = ({ values, isSubmitting }) => {
   const dispatch = useDispatch();
 
   const {
@@ -65,7 +65,9 @@ const ResetPassword = ({ values }) => {
             id="reset-pass-password-confirm"
             placeholder="Confirm Password"
           />
-          <PrimaryButton>Reset Password</PrimaryButton>
+          <PrimaryButton disabled={isSubmitting}>
+            Reset {isSubmitting ? 'ting' : ''} Password
+          </PrimaryButton>
         </StyledForm>
       </InnerSection>
     </StyledSection>
@@ -76,7 +78,8 @@ ResetPassword.propTypes = {
   values: shape({
     updatedPassword: string,
     updatedPasswordConfirm: string
-  })
+  }),
+  isSubmitting: bool.isRequired
 };
 
 ResetPassword.defaultProps = {

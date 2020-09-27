@@ -64,7 +64,7 @@ const Signup = () => {
         onSubmit(values);
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <StyledSection aria-labelledby="forgot-password-header">
           <InnerSection>
             <H2 id="forgot-password-header">
@@ -130,8 +130,9 @@ const Signup = () => {
                   )}
               </>
 
-              <PrimaryButton>Submit</PrimaryButton>
-              {loginLoading && <p>Signing up...</p>}
+              <PrimaryButton disabled={isSubmitting}>
+                {isSubmitting ? 'Signing up...' : 'Signup'}
+              </PrimaryButton>
               {loginError && !loginLoading && (
                 <ErrorMsg apiError>{loginError}</ErrorMsg>
               )}
