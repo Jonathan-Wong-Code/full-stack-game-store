@@ -14,7 +14,7 @@ import {
 
 export async function getStaticProps() {
   const response = await axios.get(
-    `${NEXT_PUBLIC_API_URL}/api/v1/games?fields=title,averageRating,cardPhoto,price,discount,coverImage,coverImageSmall,isFeatured,promoText&isFrontPage=true`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/games?fields=title,averageRating,cardPhoto,price,discount,coverImage,coverImageSmall,isFeatured,promoText&isFrontPage=true`
   );
 
   const { games } = response.data;
