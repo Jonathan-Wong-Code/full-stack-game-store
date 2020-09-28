@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import axios from 'axios';
 
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 import { PrimaryButton } from '../../src/components/Buttons';
 import { H2 } from '../../src/components/Tyopgrahy';
@@ -29,6 +29,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ForgotPassword = () => {
+  const { router } = useRouter();
   const [error, setError] = useState();
   const onSubmit = async ({ email }) => {
     try {
@@ -40,7 +41,7 @@ const ForgotPassword = () => {
     } catch (error) {
       setError('Something went wrong! Try again later.');
     } finally {
-      Router.push('/password-reset-sent');
+      router.push('/password-reset-sent');
     }
   };
 
