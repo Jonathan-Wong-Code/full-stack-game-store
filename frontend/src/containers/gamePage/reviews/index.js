@@ -38,7 +38,7 @@ const Reviews = ({ user, gameId }) => {
         const ratingStr = Number(rating) === 0 ? '' : `&rating=${rating}`;
         const response = await axios({
           method: 'GET',
-          url: `http://localhost:5000/api/v1/games/${gameId}/reviews?sort=${sortBy}&limit=${limit}&page=${page}${ratingStr}`,
+          url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/games/${gameId}/reviews?sort=${sortBy}&limit=${limit}&page=${page}${ratingStr}`,
           withCredentials: true
         });
 

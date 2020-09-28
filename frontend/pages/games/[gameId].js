@@ -33,7 +33,7 @@ import { ReviewProvider } from '../../src/containers/gamePage/reviews/context';
 // SET STATIC PATHS
 export async function getStaticPaths() {
   const response = await axios.get(
-    'http://localhost:5000/api/v1/games?fields=title'
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/games?fields=title`
   );
 
   const paths = response.data.games.map(game => ({
@@ -50,7 +50,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const response = await axios({
     method: 'GET',
-    url: `http://localhost:5000/api/v1/games/${context.params.gameId}`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/games/${context.params.gameId}`,
     withCredentials: true
   });
 
