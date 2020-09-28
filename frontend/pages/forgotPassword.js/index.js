@@ -34,7 +34,7 @@ const ForgotPassword = () => {
     try {
       await axios({
         method: 'POST',
-        url: 'http://localhost:5000/api/v1/users/forgotPassword',
+        url: `${process.env.NEXT_PUBLIC_API_KEY}/api/v1/users/forgotPassword`,
         data: { email }
       });
     } catch (error) {

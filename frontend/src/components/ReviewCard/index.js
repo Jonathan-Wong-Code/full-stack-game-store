@@ -63,7 +63,7 @@ const ReviewCard = ({
     try {
       await axios({
         method: 'POST',
-        url: `http://localhost:5000/api/v1/reviews/${reviewId}/likes`,
+        url: `${process.env.NEXT_PUBLIC_API_KEY}/api/v1/reviews/${reviewId}/likes`,
         data: { review: reviewId },
         withCredentials: true
       });
@@ -83,7 +83,7 @@ const ReviewCard = ({
     try {
       await axios({
         method: 'POST',
-        url: `http://localhost:5000/api/v1/reviews/${reviewId}/dislikes`,
+        url: `${process.env.NEXT_PUBLIC_API_KEY}/api/v1/reviews/${reviewId}/dislikes`,
         data: { review: reviewId },
         withCredentials: true
       });
