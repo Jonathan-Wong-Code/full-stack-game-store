@@ -6,7 +6,7 @@ Technologies used:
 
 Frontend: React/Redux/React Storybook/Context/Styled-components/Formik
 
-Backend: Node/Express/Cloudinary
+Backend: Node/Express/Cloudinary/MongoDB/Mongoose
 
 Full Authorization flow including signup/login/password resetting with persistent login.
 
