@@ -16,9 +16,9 @@ import {
   PurchaseCardContainer
 } from '../../src/containers/gamePage/index.css';
 
-import VideoBanner from '../../src/containers/gamePage/VideoBanner';
-import GameDetails from '../../src/containers/gamePage/GameDetails';
-import Reviews from '../../src/containers/gamePage/Reviews';
+import VideoBanner from '../../src/containers/gamePage/videoBanner';
+import GameDetails from '../../src/containers/gamePage/gameDetails';
+import Reviews from '../../src/containers/gamePage/reviews';
 import GalleryModal from '../../src/components/GalleryModal';
 import PurchaseGameCard from '../../src/components/PurchaseGameCard';
 import { Wrapper } from '../../src/components/Wrapper';
@@ -28,7 +28,7 @@ import useTheme from '../../src/hooks/useTheme';
 import useSetState from '../../src/hooks/useSetState';
 import useModal from '../../src/hooks/useModal';
 import Modal from '../../src/components/Modal';
-import { ReviewProvider } from '../../src/containers/gamePage/Reviews/context';
+import { ReviewProvider } from '../../src/containers/gamePage/reviews/context';
 
 // SET STATIC PATHS
 export async function getStaticPaths() {
@@ -74,6 +74,7 @@ const GamePage = ({ game }) => {
 
   const user = useSelector(selectAuthUser);
   const { windowWidth } = useWindowWidth();
+
   const videoRef = useRef(null);
 
   const {
