@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import axios from 'axios';
@@ -18,7 +18,6 @@ import {
 } from '../../src/components/AuthForm';
 
 import { Input } from '../../src/components/Input';
-import useSetState from '../../src/hooks/useSetState';
 
 // Done becuse of next/link requires a tag.
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -30,12 +29,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const ForgotPassword = () => {
-  const [{ loading }, setState] = useSetState({
-    loading: false
-  });
-
+  const [error, setError] = useState();
   const onSubmit = async ({ email }) => {
-    setState({ loading: true });
     try {
       await axios({
         method: 'POST',
@@ -43,9 +38,8 @@ const ForgotPassword = () => {
         data: { email }
       });
     } catch (error) {
-      // Fail silently
+      setError('Something went wrong! Try again later.');
     } finally {
-      setState({ loading: false });
       Router.push('/password-reset-sent');
     }
   };
@@ -58,7 +52,7 @@ const ForgotPassword = () => {
       validationSchema={validationSchema}
       onSubmit={values => onSubmit(values)}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <StyledSection aria-labelledby="forgot-password-header">
           <InnerSection>
             <H2 id="forgot-password-header">
@@ -74,12 +68,14 @@ const ForgotPassword = () => {
               </label>
               <Input name="email" id="forgot-pass-email" placeholder="Email" />
 
-              {errors.email && touched.email && !loading && (
+              {errors.email && touched.email && (
                 <ErrorMsg>{errors.email}</ErrorMsg>
               )}
 
-              <PrimaryButton>Submit</PrimaryButton>
-              {loading && <p>Sending email...</p>}
+              <PrimaryButton disabled={isSubmitting}>
+                Submit{isSubmitting ? 'ting...' : ''}
+              </PrimaryButton>
+              {error && <ErrorMsg>{error}</ErrorMsg>}
             </StyledForm>
 
             <Links className="links">

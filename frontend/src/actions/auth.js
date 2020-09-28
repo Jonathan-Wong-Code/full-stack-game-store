@@ -4,18 +4,14 @@ import Router from 'next/router';
 
 export const {
   loginSuccess,
-  loginError,
   loginLoading,
-  clearLoginError,
   logout,
   loadingEnded,
   updateMe,
   updateMyWishlist
 } = createActions(
   'LOGIN_SUCCESS',
-  'LOGIN_ERROR',
   'LOGIN_LOADING',
-  'CLEAR_LOGIN_ERROR',
   'LOGOUT',
   'LOADING_ENDED',
   'UPDATE_ME',
@@ -32,7 +28,7 @@ export const startLogin = data => async dispatch => {
     });
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    dispatch(loginError(error.response.data.message));
+    return error.response.data.message;
   }
 };
 
@@ -47,7 +43,7 @@ export const startResetPassword = (data, token) => async dispatch => {
 
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    dispatch(loginError(error.response.data.message));
+    return error.response.data.message;
   }
 };
 
@@ -61,8 +57,6 @@ export const startCheckLoggedIn = () => async dispatch => {
 
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    dispatch(logout());
-  } finally {
     dispatch(loadingEnded());
   }
 };
@@ -77,7 +71,7 @@ export const startSignup = data => async dispatch => {
     });
     dispatch(loginSuccess(response.data.user));
   } catch (error) {
-    dispatch(loginError(error.response.data.message));
+    return error.response.data.message;
   }
 };
 
@@ -104,9 +98,8 @@ export const startPasswordUpdate = data => async dispatch => {
       data
     });
     dispatch(updateMe(response.data.user));
-    return true;
   } catch (error) {
-    dispatch(loginError(error.response.data.message));
+    return error.response.data.message;
   }
 };
 
@@ -123,6 +116,6 @@ export const updateUser = data => async dispatch => {
     dispatch(updateMe(response.data.user));
     Router.push('/profile');
   } catch (error) {
-    dispatch(loginError(error.response.data.message));
+    return error.response.data.message;
   }
 };

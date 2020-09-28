@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { node } from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { startCheckLoggedIn } from '../../actions/auth';
 import { getCartItems } from '../../actions/cart';
 
 import Header from '../Header';
 import Footer from '../Footer';
 import { Content, Main } from './css';
-import { selectAuthLoading } from '../../selectors/auth';
 
 const Layout = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectAuthLoading);
+
   useEffect(() => {
-    dispatch(startCheckLoggedIn());
+    const checkLoggedIn = async () => {
+      await dispatch(startCheckLoggedIn());
+      setLoading(false);
+    };
+
     dispatch(getCartItems());
+    checkLoggedIn();
   }, []);
 
-  if (isLoading) return null;
+  if (loading) return null;
 
   return (
     <>

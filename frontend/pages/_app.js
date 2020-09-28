@@ -35,11 +35,11 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={defaultTheme}>
           <Provider store={store}>
             <GlobalStyle />
-            <Layout>
-              <RouteListener>
+            <RouteListener>
+              <Layout>
                 <Component {...pageProps} />
-              </RouteListener>
-            </Layout>
+              </Layout>
+            </RouteListener>
           </Provider>
         </ThemeProvider>
       </ThemeContextProvider>

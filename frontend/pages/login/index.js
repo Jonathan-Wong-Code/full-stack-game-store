@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 // import Router from 'next/router';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { compose } from 'redux';
 
 import Link from 'next/link';
 import { PrimaryButton } from '../../src/components/Buttons';
@@ -19,8 +18,7 @@ import {
 } from '../../src/components/AuthForm';
 import { Input } from '../../src/components/Input';
 
-import { startLogin, clearLoginError } from '../../src/actions/auth';
-import { selectAuthError, selectAuthLoading } from '../../src/selectors/auth';
+import { startLogin } from '../../src/actions/auth';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -36,18 +34,12 @@ const validationSchema = Yup.object().shape({
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 const Login = () => {
+  const [formError, setFormError] = useState();
   const dispatch = useDispatch();
 
-  const loginError = useSelector(selectAuthError);
-  const loginLoading = useSelector(selectAuthLoading);
-
-  useEffect(() => {
-    return () => dispatch(clearLoginError());
-  }, []);
-
   const onSubmit = async values => {
-    await compose(dispatch, startLogin)(values);
-    // Router.push('/');
+    const error = await dispatch(startLogin(values));
+    setFormError(error);
   };
 
   return (
@@ -80,7 +72,7 @@ const Login = () => {
                   id="login-email"
                   placeholder="Email"
                 />
-                {errors.email && touched.email && !loginLoading && (
+                {errors.email && touched.email && (
                   <ErrorMsg>{errors.email}</ErrorMsg>
                 )}
               </>
@@ -95,7 +87,7 @@ const Login = () => {
                   placeholder="Password"
                   id="login-password"
                 />
-                {errors.password && touched.password && !loginLoading && (
+                {errors.password && touched.password && (
                   <ErrorMsg>{errors.password}</ErrorMsg>
                 )}
               </>
@@ -103,7 +95,7 @@ const Login = () => {
               <PrimaryButton disabled={isSubmitting}>
                 {isSubmitting ? 'Logging in...' : 'Login'}
               </PrimaryButton>
-              {loginError && !loginLoading && <ErrorMsg>{loginError}</ErrorMsg>}
+              {formError && <ErrorMsg>{formError}</ErrorMsg>}
             </StyledForm>
 
             <Links className="links">

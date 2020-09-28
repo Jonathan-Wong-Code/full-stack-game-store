@@ -10,7 +10,6 @@ const RouteListener = ({ children }) => {
   const router = useRouter();
   const { pathname } = router;
   const isLoggedIn = useSelector(selectAuthUser);
-
   useEffect(() => {
     if (isLoggedIn) {
       switch (pathname) {
@@ -21,10 +20,6 @@ const RouteListener = ({ children }) => {
           router.push('/');
           break;
         case '/forgotPassword':
-          router.push('/');
-          break;
-
-        case '/resetPassword/[resetToken]':
           router.push('/');
           break;
 

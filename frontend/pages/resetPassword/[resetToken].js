@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
-import { withFormik } from 'formik';
+import { Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { string, shape, bool } from 'prop-types';
 
 import { useDispatch } from 'react-redux';
-import { compose } from 'redux';
 
 import { PrimaryButton } from '../../src/components/Buttons';
 import { H2 } from '../../src/components/Tyopgrahy';
@@ -13,24 +11,31 @@ import { H2 } from '../../src/components/Tyopgrahy';
 import {
   StyledForm,
   StyledSection,
-  InnerSection
+  InnerSection,
+  ErrorMsg
 } from '../../src/components/AuthForm';
 
 import { Input } from '../../src/components/Input';
 
 import { startResetPassword } from '../../src/actions/auth';
 
-const ResetPassword = ({ values, isSubmitting }) => {
+const validationSchema = Yup.object().shape({
+  updatedPassword: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required'),
+
+  updatedPasswordConfirm: Yup.string()
+    .min(8, 'Must be at least 8 characters')
+    .required('Please confirm password')
+});
+
+const ResetPassword = () => {
+  const [formError, setFormError] = useState();
   const dispatch = useDispatch();
 
   const {
     query: { resetToken }
   } = useRouter();
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    compose(dispatch, startResetPassword)(values, resetToken);
-  };
 
   return (
     <StyledSection aria-labelledby="reset-password-header">
@@ -41,67 +46,71 @@ const ResetPassword = ({ values, isSubmitting }) => {
             Enter your password and then confirm it by typing it in again:
           </span>
         </H2>
+        <Formik
+          initialValues={{
+            updatedPassword: '',
+            updatedPasswordConfirm: ''
+          }}
+          validationSchema={validationSchema}
+          onSubmit={async values => {
+            const error = await dispatch(
+              startResetPassword(values, resetToken)
+            );
+            if (error) {
+              setFormError(error);
+            }
+          }}
+        >
+          {({ errors, touched, isSubmitting }) => {
+            return (
+              <StyledForm>
+                <>
+                  <label
+                    htmlFor="reset-pass-password"
+                    className="screen-reader-only"
+                  >
+                    New Password:
+                  </label>
+                  <Input
+                    type="password"
+                    name="updatedPassword"
+                    id="reset-pass-password"
+                    placeholder="New Password"
+                  />
+                  {errors.updatedPassword && touched.updatedPassword && (
+                    <ErrorMsg>{errors.updatedPassword}</ErrorMsg>
+                  )}
+                </>
 
-        <StyledForm onSubmit={onSubmit}>
-          <label htmlFor="reset-pass-password" className="screen-reader-only">
-            New Password:
-          </label>
-          <Input
-            type="password"
-            name="updatedPassword"
-            id="reset-pass-password"
-            placeholder="New Password"
-          />
-
-          <label
-            htmlFor="reset-pass-password-confirm"
-            className="screen-reader-only"
-          >
-            Confirm New Password:
-          </label>
-          <Input
-            type="password"
-            name="updatedPasswordConfirm"
-            id="reset-pass-password-confirm"
-            placeholder="Confirm Password"
-          />
-          <PrimaryButton disabled={isSubmitting}>
-            Reset {isSubmitting ? 'ting' : ''} Password
-          </PrimaryButton>
-        </StyledForm>
+                <>
+                  <label
+                    htmlFor="reset-pass-password-confirm"
+                    className="screen-reader-only"
+                  >
+                    Confirm New Password:
+                  </label>
+                  <Input
+                    type="password"
+                    name="updatedPasswordConfirm"
+                    id="reset-pass-password-confirm"
+                    placeholder="Confirm Password"
+                  />
+                  {errors.updatedPasswordConfirm &&
+                    touched.updatedPasswordConfirm && (
+                      <ErrorMsg>{errors.updatedPasswordConfirm}</ErrorMsg>
+                    )}
+                </>
+                <PrimaryButton disabled={isSubmitting} type="submit">
+                  Reset {isSubmitting ? 'ting' : ''} Password
+                </PrimaryButton>
+                {formError && <ErrorMsg>{formError}</ErrorMsg>}
+              </StyledForm>
+            );
+          }}
+        </Formik>
       </InnerSection>
     </StyledSection>
   );
 };
 
-ResetPassword.propTypes = {
-  values: shape({
-    updatedPassword: string,
-    updatedPasswordConfirm: string
-  }),
-  isSubmitting: bool.isRequired
-};
-
-ResetPassword.defaultProps = {
-  values: shape({
-    updatedPasswordConfirm: '',
-    updatedPassword: ''
-  })
-};
-
-export default withFormik({
-  mapPropsToValues: () => ({
-    updatedPassword: '',
-    updatedPasswordConfirm: ''
-  }),
-
-  validationSchema: Yup.object().shape({
-    password: Yup.string()
-      .min(8, 'Password must be at least 8 characters')
-      .required('Password is required'),
-
-    passwordConfirm: Yup.string()
-      .min(8, 'Must be at least 8 characters')
-      .required('Password is required')
-  })
-})(ResetPassword);
+export default ResetPassword;

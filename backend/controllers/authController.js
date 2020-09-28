@@ -135,7 +135,7 @@ exports.checkLoggedIn = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
 
-  if (!token) {
+  if (!req.cookies.jwt) {
     return next(new AppError('Invalid token please login', 401));
   }
 
@@ -147,7 +147,9 @@ exports.checkLoggedIn = catchAsync(async (req, res, next) => {
     select: 'game',
   });
 
-  user.wishlist = user && user.wishlist.map((item) => item.game);
+  if (user) {
+    user.wishlist = user && user.wishlist.map((item) => item.game);
+  }
 
   if (!user) {
     return next(new AppError('No user found please login', 401));

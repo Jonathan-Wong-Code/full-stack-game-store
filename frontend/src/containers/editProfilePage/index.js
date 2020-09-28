@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -9,11 +9,7 @@ import { H2 } from '../../components/Tyopgrahy';
 import { StyledForm, InnerSection, ErrorMsg } from '../../components/AuthForm';
 import { Img, ImgContainer, FileInput, Section } from './css';
 import { Input } from '../../components/Input';
-import {
-  selectAuthUser,
-  selectAuthLoading,
-  selectAuthError
-} from '../../selectors/auth';
+import { selectAuthUser } from '../../selectors/auth';
 import { updateUser } from '../../actions/auth';
 
 const validationSchema = Yup.object().shape({
@@ -31,9 +27,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const EditProfile = () => {
-  const apiError = useSelector(selectAuthError);
+  const [formError, setFormError] = useState();
   const user = useSelector(selectAuthUser);
-  const loading = useSelector(selectAuthLoading);
   const dispatch = useDispatch();
 
   if (!user) return null;
@@ -53,7 +48,10 @@ const EditProfile = () => {
         formData.append('name', name);
         formData.append('email', email);
         formData.append('photo', photoFile);
-        await dispatch(updateUser(formData));
+        const error = await dispatch(updateUser(formData));
+        if (error) {
+          setFormError(error);
+        }
       }}
     >
       {({ errors, touched, setValues, values, isSubmitting }) => {
@@ -99,15 +97,15 @@ const EditProfile = () => {
                 />
               </ImgContainer>
 
-              <label htmlFor="photo">Upload New Photo</label>
-              <FileInput
-                type="file"
-                accept="image/*"
-                id="photo"
-                name="photo"
-                onChange={onFileChange}
-              />
               <StyledForm>
+                <label htmlFor="photo">Upload New Photo</label>
+                <FileInput
+                  type="file"
+                  accept="image/*"
+                  id="photo"
+                  name="photo"
+                  onChange={onFileChange}
+                />
                 <>
                   <label htmlFor="name">Name:</label>
                   <Input type="text" name="name" id="name" placeholder="Name" />
@@ -126,12 +124,11 @@ const EditProfile = () => {
                   {errors.email && touched.email && (
                     <ErrorMsg>{errors.email}</ErrorMsg>
                   )}
-                  {loading && <p>Uploading changes...</p>}
                 </>
                 <PrimaryButton type="submit" disabled={isSubmitting}>
                   Submit{isSubmitting ? 'ting' : ''}
                 </PrimaryButton>
-                {apiError && !loading && <ErrorMsg>{apiError}</ErrorMsg>}
+                {formError && <ErrorMsg>{formError}</ErrorMsg>}
               </StyledForm>
             </InnerSection>
           </Section>

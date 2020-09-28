@@ -1,8 +1,6 @@
 import {
   loginSuccess,
-  loginError,
   loginLoading,
-  clearLoginError,
   logout,
   loadingEnded,
   updateMe
@@ -11,10 +9,8 @@ import {
 import { addToWishlist, removeFromWishlist } from '../actions/wishlist';
 
 const initialState = {
-  user: {
-    wishlist: []
-  },
-  loading: true,
+  user: null,
+  loading: false,
   error: null
 };
 
@@ -24,36 +20,22 @@ const authReducer = (state = initialState, action) => {
       return { ...state, user: action.payload, loading: false, error: null };
     }
 
-    case loginError().type: {
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-        user: null
-      };
-    }
-
     case loginLoading().type:
       return {
         ...state,
         loading: true
       };
 
-    case clearLoginError().type:
-      return {
-        ...state,
-        loading: false,
-        error: null
-      };
-
-    case loadingEnded().type:
+    case loadingEnded().type: {
       return {
         ...state,
         loading: false
       };
+    }
 
     case logout().type:
       return {
+        ...state,
         loading: false,
         error: null,
         user: null

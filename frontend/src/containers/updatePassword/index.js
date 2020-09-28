@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { StyledForm, InnerSection, ErrorMsg } from '../../components/AuthForm';
@@ -8,7 +8,6 @@ import { H2 } from '../../components/Tyopgrahy';
 import { Section } from './css';
 import { PrimaryButton } from '../../components/Buttons';
 import { startPasswordUpdate } from '../../actions/auth';
-import { selectAuthError, selectAuthLoading } from '../../selectors/auth';
 
 const validationSchema = Yup.object().shape({
   currentPassword: Yup.string()
@@ -17,19 +16,19 @@ const validationSchema = Yup.object().shape({
 
   updatedPassword: Yup.string()
     .trim()
+    .min(8, 'Password must be at least 8 characters')
     .required('Updated password is required'),
 
   updatedPasswordConfirm: Yup.string()
     .trim()
-    .required('Passwords do not much.')
+    .required('Please confirm password.')
 });
 
 const UpdatePassword = () => {
+  const [formError, setFormError] = useState();
   const [successful, setSuccessful] = useState();
 
   const dispatch = useDispatch();
-  const loading = useSelector(selectAuthLoading);
-  const apiError = useSelector(selectAuthError);
 
   return (
     <Section>
@@ -46,8 +45,12 @@ const UpdatePassword = () => {
           }}
           validationSchema={validationSchema}
           onSubmit={async values => {
-            const success = await dispatch(startPasswordUpdate(values));
-            setSuccessful(success);
+            const error = await dispatch(startPasswordUpdate(values));
+            if (error) {
+              setFormError(error);
+            } else {
+              setSuccessful(true);
+            }
           }}
         >
           {({ errors, touched, isSubmitting }) => {
@@ -98,7 +101,7 @@ const UpdatePassword = () => {
                 <PrimaryButton type="submit" disabled={isSubmitting}>
                   Submit{isSubmitting ? 'ting' : ''}
                 </PrimaryButton>
-                {apiError && !loading && <ErrorMsg>{apiError}</ErrorMsg>}
+                {formError && <ErrorMsg>{formError}</ErrorMsg>}
               </StyledForm>
             );
           }}
