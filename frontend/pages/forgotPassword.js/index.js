@@ -34,7 +34,7 @@ const ForgotPassword = () => {
     try {
       await axios({
         method: 'POST',
-        url: `${process.env.NEXT_PUBLIC_API_KEY}/api/v1/users/forgotPassword`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/forgotPassword`,
         data: { email }
       });
     } catch (error) {
