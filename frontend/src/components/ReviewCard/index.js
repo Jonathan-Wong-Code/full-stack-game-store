@@ -23,7 +23,7 @@ import { PrimaryButton } from '../Buttons';
 import UserProfile from '../UserProfile';
 import useSetState from '../../hooks/useSetState';
 
-import { useReviewDispatch } from '../../containers/gamePage/Reviews/context';
+import { useReviewDispatch } from '../../containers/gamePage/reviews/context';
 
 import GameReviewForm from '../GameReviewForm';
 

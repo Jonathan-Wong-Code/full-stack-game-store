@@ -24,7 +24,7 @@ import { AccordionContext } from '../Accordion';
 import {
   useReviewDispatch,
   useReviewState
-} from '../../containers/gamePage/Reviews/context';
+} from '../../containers/gamePage/reviews/context';
 
 const validationSchema = Yup.object().shape({
   description: Yup.string()
