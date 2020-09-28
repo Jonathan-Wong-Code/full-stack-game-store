@@ -1,6 +1,5 @@
 import { createActions } from 'redux-actions';
 import axios from 'axios';
-import { loginLoading } from './auth';
 
 export const { addToWishlist, removeFromWishlist } = createActions(
   'ADD_TO_WISHLIST',
@@ -8,11 +7,10 @@ export const { addToWishlist, removeFromWishlist } = createActions(
 );
 
 export const addItemToWishlist = gameId => async dispatch => {
-  // dispatch(loginLoading());
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/v1/wishlist',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/wishlist`,
       withCredentials: true,
       data: {
         game: gameId
@@ -26,11 +24,10 @@ export const addItemToWishlist = gameId => async dispatch => {
 };
 
 export const removeItemFromWishlist = gameId => async dispatch => {
-  // dispatch(loginLoading());
   try {
     await axios({
       method: 'DELETE',
-      url: `http://localhost:5000/api/v1/wishlist/${gameId}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/wishlist/${gameId}`,
       withCredentials: true
     });
 

@@ -126,7 +126,7 @@ export const useReviewDispatch = () => {
     try {
       const response = await axios({
         method: 'POST',
-        url: `http://localhost:5000/api/v1/games/${gameId}/reviews`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/games/${gameId}/reviews`,
         withCredentials: true,
         data
       });
@@ -154,7 +154,7 @@ export const useReviewDispatch = () => {
     try {
       await axios({
         method: 'DELETE',
-        url: `http://localhost:5000/api/v1/reviews/${reviewId}`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/reviews/${reviewId}`,
         withCredentials: true
       });
 
@@ -171,7 +171,7 @@ export const useReviewDispatch = () => {
     try {
       const response = await axios({
         method: 'PATCH',
-        url: `http://localhost:5000/api/v1/reviews/${reviewId}`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/reviews/${reviewId}`,
         withCredentials: true,
         data
       });

@@ -22,7 +22,7 @@ export const startLogin = data => async dispatch => {
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/v1/users/login',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/login`,
       withCredentials: true,
       data
     });
@@ -36,7 +36,7 @@ export const startResetPassword = (data, token) => async dispatch => {
   try {
     const response = await axios({
       method: 'POST',
-      url: `http://localhost:5000/api/v1/users/resetPassword/${token}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/resetPassword/${token}`,
       withCredentials: true,
       data
     });
@@ -51,7 +51,7 @@ export const startCheckLoggedIn = () => async dispatch => {
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/v1/users/checkLoggedIn',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/checkLoggedIn`,
       withCredentials: true
     });
 
@@ -65,7 +65,7 @@ export const startSignup = data => async dispatch => {
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/v1/users/signup',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/signup`,
       withCredentials: true,
       data
     });
@@ -79,7 +79,7 @@ export const startLogout = () => async dispatch => {
   try {
     await axios({
       method: 'GET',
-      url: 'http://localhost:5000/api/v1/users/logout',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/logout`,
       withCredentials: true
     });
 
@@ -93,7 +93,7 @@ export const startPasswordUpdate = data => async dispatch => {
   try {
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/v1/users/updatePassword',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/updatePassword`,
       withCredentials: true,
       data
     });
@@ -108,7 +108,7 @@ export const updateUser = data => async dispatch => {
   try {
     const response = await axios({
       method: 'PATCH',
-      url: 'http://localhost:5000/api/v1/users/updateMe',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/updateMe`,
       withCredentials: true,
       data
     });

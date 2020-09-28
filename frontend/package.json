@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "NODE_ENV=production next start",
     "test": "jest --watchAll",
     "storybook": "NODE_ENV=dev start-storybook -p 6006",

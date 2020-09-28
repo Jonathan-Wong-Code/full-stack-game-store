@@ -19,7 +19,7 @@ export const addItemToCart = game => async (dispatch, getState) => {
     try {
       await axios({
         method: 'DELETE',
-        url: `http://localhost:5000/api/v1/wishlist/${game.id}`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/wishlist/${game.id}`,
         withCredentials: true
       });
 
