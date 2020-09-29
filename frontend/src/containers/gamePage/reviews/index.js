@@ -45,7 +45,7 @@ const Reviews = ({ user, gameId }) => {
         const { reviews, noUserReview, numTotalReviews } = response.data;
         setReviews(reviews, numTotalReviews, noUserReview);
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
       }
     };
     getReviews();
@@ -56,12 +56,13 @@ const Reviews = ({ user, gameId }) => {
   };
 
   const totalNumPages = Math.ceil(numTotalReviews / limit);
+
   return (
     <Section aria-labelledby="reviews-subheading">
       <ReviewHeading id="reviews-subheading">User reviews</ReviewHeading>
 
       {/* REVIEW FORM */}
-      {noUserReview && !!user && (
+      {noUserReview && user && (
         <div>
           <Accordion title="+Add Your Review">
             <GameReviewForm

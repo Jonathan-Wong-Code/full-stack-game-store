@@ -40,7 +40,7 @@ export const HeaderSection = styled.header`
 export const Nav = styled.nav`
   max-width: 1170px;
   width: 100%;
-
+  padding: 0 ${({ theme }) => theme.spacing[5]};
   margin: 0 auto;
 
   display: flex;

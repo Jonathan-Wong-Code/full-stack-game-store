@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ForgotPassword = () => {
-  const { router } = useRouter();
+  const router = useRouter();
   const [error, setError] = useState();
   const onSubmit = async ({ email }) => {
     try {
@@ -38,10 +38,9 @@ const ForgotPassword = () => {
         url: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/forgotPassword`,
         data: { email }
       });
+      router.push('/password-reset-sent');
     } catch (error) {
       setError('Something went wrong! Try again later.');
-    } finally {
-      router.push('/password-reset-sent');
     }
   };
 

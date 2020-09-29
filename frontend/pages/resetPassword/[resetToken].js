@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 
 import { PrimaryButton } from '../../src/components/Buttons';
 import { H2 } from '../../src/components/Tyopgrahy';
-
 import {
   StyledForm,
   StyledSection,
@@ -32,6 +31,7 @@ const validationSchema = Yup.object().shape({
 const ResetPassword = () => {
   const [formError, setFormError] = useState();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const {
     query: { resetToken }
@@ -58,6 +58,8 @@ const ResetPassword = () => {
             );
             if (error) {
               setFormError(error);
+            } else {
+              router.push('/');
             }
           }}
         >

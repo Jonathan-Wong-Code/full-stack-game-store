@@ -11,11 +11,9 @@ export const { addCartItem, deleteCartItem, getCartItems } = createActions(
 
 // Remove item from wishlist if it is being added to cart.
 export const addItemToCart = game => async (dispatch, getState) => {
-  const {
-    user: { wishlist }
-  } = getState().auth;
+  const { user } = getState().auth;
 
-  if (wishlist.some(item => item.id === game.id)) {
+  if (user && user.wishlist.some(item => item.id === game.id)) {
     try {
       await axios({
         method: 'DELETE',
