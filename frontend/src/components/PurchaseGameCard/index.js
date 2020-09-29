@@ -17,8 +17,10 @@ import {
 } from '../../actions/wishlist';
 import {
   selectAuthUserWishlist,
-  selectAuthLoading
+  selectAuthLoading,
+  selectAuthUser
 } from '../../selectors/auth';
+
 const PurchaseGameCard = props => {
   const dispatch = useDispatch();
   const {
@@ -32,6 +34,7 @@ const PurchaseGameCard = props => {
 
   const cartItems = useSelector(selectCartItems);
   const wishlist = useSelector(selectAuthUserWishlist);
+  const user = useSelector(selectAuthUser);
 
   const handleAddCartItem = () => {
     ReactGa.event({
@@ -94,7 +97,7 @@ const PurchaseGameCard = props => {
           handleClick={handleAddCartItem}
           disabled={gameIsInCart}
         />
-        {!gameIsInCart && (
+        {!gameIsInCart && user && (
           <PrimaryBtnWithIcon
             disabled={loading}
             Icon={gameIsInWishlist ? HeartUnfilled : HeartFilled}
