@@ -7,8 +7,7 @@ import { breakpoints } from '../../../theme/breakpoints';
 export const Logo = styled.h1`
   font-size: ${typeScale.header1};
   font-weight: ${typeWeight.bold};
-
-  display: inline-block;
+  display: none;
 
   padding: ${spacing[1]};
   margin: 0;
@@ -20,10 +19,13 @@ export const Logo = styled.h1`
   background-color: ${({ theme }) => theme.white};
 
   cursor: pointer;
+
+  @media screen and (min-width: ${breakpoints[0]}px) {
+    display: inline-block;
+  }
 `;
 
 export const HeaderSection = styled.header`
-  display: none;
   width: 100%;
 
   background-color: ${({ theme }) => theme.darkGrey};

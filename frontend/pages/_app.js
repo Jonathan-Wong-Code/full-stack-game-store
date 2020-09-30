@@ -36,9 +36,7 @@ function MyApp({ Component, pageProps }) {
           <Provider store={store}>
             <GlobalStyle />
             <Layout>
-              <RouteListener>
-                <Component {...pageProps} />
-              </RouteListener>
+              <Component {...pageProps} />
             </Layout>
           </Provider>
         </ThemeProvider>

@@ -3,7 +3,7 @@ import { node } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { startCheckLoggedIn } from '../../actions/auth';
 import { getCartItems } from '../../actions/cart';
-
+import RouteListener from '../RouteListener';
 import Header from '../Header';
 import Footer from '../Footer';
 import { Content, Main } from './css';
@@ -26,15 +26,17 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Content>
-        <div
-          style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
-        >
-          <Header />
-          <Main>{children}</Main>
-        </div>
-      </Content>
-      <Footer />
+      <RouteListener>
+        <Content>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <Header />
+            <Main>{children}</Main>
+          </div>
+        </Content>
+        <Footer />
+      </RouteListener>
     </>
   );
 };
