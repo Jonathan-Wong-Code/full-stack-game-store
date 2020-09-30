@@ -22,16 +22,16 @@ const RouteListener = ({ children }) => {
         default:
           break;
       }
-      if (!isLoggedIn) {
-        switch (pathname) {
-          case '/profile':
-          case '/edit-profile':
-          case '/updatePassword':
-            router.push('/');
-            break;
-          default:
-            break;
-        }
+    }
+    if (!isLoggedIn) {
+      switch (pathname) {
+        case '/profile':
+        case '/edit-profile':
+        case '/updatePassword':
+          router.push('/');
+          break;
+        default:
+          break;
       }
     }
   }, [pathname, isLoggedIn]);
