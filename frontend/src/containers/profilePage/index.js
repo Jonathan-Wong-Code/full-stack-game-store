@@ -31,6 +31,9 @@ const Profile = () => {
           <Link href="/edit-profile" as="/edit-profile">
             <StyledLink>Edit Profile</StyledLink>
           </Link>
+          <Link href="/updatePassword" as="/updatePassword">
+            <StyledLink>Update Password</StyledLink>
+          </Link>
         </Content>
       </Section>
       {user.wishlist?.length > 0 && (

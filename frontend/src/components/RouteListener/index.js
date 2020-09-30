@@ -16,7 +16,7 @@ const RouteListener = ({ children }) => {
         case '/login':
         case '/signup':
         case '/forgotPassword':
-        case '/resetPassword':
+        case '/resetPassword/[resetToken]':
           router.push('/');
           break;
         default:

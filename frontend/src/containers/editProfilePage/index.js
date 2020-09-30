@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-
+import Link from 'next/link';
 import { PrimaryButton } from '../../components/Buttons';
 
 import { H2 } from '../../components/Tyopgrahy';
-import { StyledForm, InnerSection, ErrorMsg } from '../../components/AuthForm';
+import {
+  StyledForm,
+  InnerSection,
+  ErrorMsg,
+  Links
+} from '../../components/AuthForm';
 import { Img, ImgContainer, FileInput, Section } from './css';
 import { Input } from '../../components/Input';
 import { selectAuthUser } from '../../selectors/auth';
@@ -130,6 +135,16 @@ const EditProfile = () => {
                 </PrimaryButton>
                 {formError && <ErrorMsg>{formError}</ErrorMsg>}
               </StyledForm>
+              {/* eslint-disable jsx-a11y/anchor-is-valid */}
+
+              <Links className="links">
+                <Link href="/updatePassword" as="/updatePassword">
+                  <a>Update password</a>
+                </Link>
+                <Link href="/profile" as="/profile">
+                  <a>Back to profile</a>
+                </Link>
+              </Links>
             </InnerSection>
           </Section>
         );

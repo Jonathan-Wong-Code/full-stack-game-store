@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { StyledForm, InnerSection, ErrorMsg } from '../../components/AuthForm';
+import {
+  StyledForm,
+  InnerSection,
+  ErrorMsg,
+  Links
+} from '../../components/AuthForm';
 import { Input } from '../../components/Input';
 import { H2 } from '../../components/Tyopgrahy';
 import { Section } from './css';
@@ -55,54 +61,65 @@ const UpdatePassword = () => {
         >
           {({ errors, touched, isSubmitting }) => {
             return (
-              <StyledForm>
-                <>
-                  <label htmlFor="current-password">Current Password:</label>
-                  <Input
-                    type="text"
-                    name="currentPassword"
-                    id="current-password"
-                    placeholder="Current Password"
-                  />
-                  {errors.currentPassword && touched.currentPassword && (
-                    <ErrorMsg>{errors.currentPassword}</ErrorMsg>
-                  )}
-                </>
-                <>
-                  <label htmlFor="updated-password">Updated Password:</label>
-                  <Input
-                    type="text"
-                    name="updatedPassword"
-                    id="updated-password"
-                    placeholder="Updated Password"
-                  />
-                  {errors.updatedPassword && touched.updatedPassword && (
-                    <ErrorMsg>{errors.updatedPassword}</ErrorMsg>
-                  )}
-                </>
-                <>
-                  <label htmlFor="updated-password-confirm">
-                    Confirm Password:
-                  </label>
-                  <Input
-                    type="text"
-                    name="updatedPasswordConfirm"
-                    id="updated-password-confirm"
-                    placeholder="Confirm Password"
-                  />
-                  {errors.updatedPasswordConfirm &&
-                    touched.updatedPasswordConfirm && (
-                      <ErrorMsg>{errors.updatedPasswordConfirm}</ErrorMsg>
+              <>
+                <StyledForm>
+                  <>
+                    <label htmlFor="current-password">Current Password:</label>
+                    <Input
+                      type="text"
+                      name="currentPassword"
+                      id="current-password"
+                      placeholder="Current Password"
+                    />
+                    {errors.currentPassword && touched.currentPassword && (
+                      <ErrorMsg>{errors.currentPassword}</ErrorMsg>
                     )}
-                </>
-                {isSubmitting && <p>Uploading changes...</p>}
-                {successful && <p>Password updated!</p>}
+                  </>
+                  <>
+                    <label htmlFor="updated-password">Updated Password:</label>
+                    <Input
+                      type="text"
+                      name="updatedPassword"
+                      id="updated-password"
+                      placeholder="Updated Password"
+                    />
+                    {errors.updatedPassword && touched.updatedPassword && (
+                      <ErrorMsg>{errors.updatedPassword}</ErrorMsg>
+                    )}
+                  </>
+                  <>
+                    <label htmlFor="updated-password-confirm">
+                      Confirm Password:
+                    </label>
+                    <Input
+                      type="text"
+                      name="updatedPasswordConfirm"
+                      id="updated-password-confirm"
+                      placeholder="Confirm Password"
+                    />
+                    {errors.updatedPasswordConfirm &&
+                      touched.updatedPasswordConfirm && (
+                        <ErrorMsg>{errors.updatedPasswordConfirm}</ErrorMsg>
+                      )}
+                  </>
+                  {isSubmitting && <p>Uploading changes...</p>}
+                  {successful && <p>Password updated!</p>}
 
-                <PrimaryButton type="submit" disabled={isSubmitting}>
-                  Submit{isSubmitting ? 'ting' : ''}
-                </PrimaryButton>
-                {formError && <ErrorMsg>{formError}</ErrorMsg>}
-              </StyledForm>
+                  <PrimaryButton type="submit" disabled={isSubmitting}>
+                    Submit{isSubmitting ? 'ting' : ''}
+                  </PrimaryButton>
+                  {formError && <ErrorMsg>{formError}</ErrorMsg>}
+                </StyledForm>
+                {/* eslint-disable jsx-a11y/anchor-is-valid */}
+                <Links className="links">
+                  <Link href="/edit-profile" as="/edit-profile">
+                    <a>Edit profile</a>
+                  </Link>
+                  <Link href="/profile" as="/profile">
+                    <a>Back to profile</a>
+                  </Link>
+                </Links>
+              </>
             );
           }}
         </Formik>
