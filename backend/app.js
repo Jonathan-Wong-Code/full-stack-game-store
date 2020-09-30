@@ -25,7 +25,7 @@ app.enable('trust proxy');
 
 app.use(
   cors({
-    origin: 'https://full-stack-game-app.vercel.app',
+    origin: 'http://localhost:3000',
     credentials: true,
   })
 );

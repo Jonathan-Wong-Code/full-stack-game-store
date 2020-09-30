@@ -15,7 +15,7 @@ const createSendToken = (user, res, statusCode, req) => {
 
   const jwtOptions = {
     httpOnly: true,
-    sameSite: 'None',
+    // sameSite: 'None',
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
